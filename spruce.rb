@@ -2,8 +2,8 @@ require "language/go"
 
 class Spruce < Formula
   homepage "https://github.com/geofffranks/spruce"
-  url "https://github.com/geofffranks/spruce/archive/v1.0.1.tar.gz"
-  sha256 "9dcde303012ffdbaa25406620244997ddc2c89e3a14188bc7e9ef926905d8ff5"
+  url "https://github.com/geofffranks/spruce/archive/v1.0.3.tar.gz"
+  sha256 "567e41e0fae659c72c382b846ad3073a30b1386a3a256c864983a826cb4c7485"
 
   head "https://github.com/geofffranks/spruce.git", :branch => "master"
 
