@@ -5,7 +5,7 @@ class Spruce < Formula
 
   version = "v1.1.0" # CI Managed
   url "https://github.com/geofffranks/spruce/releases/download/#{version}/spruce-darwin-amd64"
-  sha256 "8ea821ae0a408ccba4c1a058f528031c0b0b236cb96c837237d2bf7862064591" # CI Managed
+  sha256 "1d9f13f2a0b6c130d295e1ab2fac3be972078967fe6086b0e0427eec552c6cdb" # CI Managed
 
   def install
     FileUtils.mv("spruce-darwin-amd64", "spruce")
