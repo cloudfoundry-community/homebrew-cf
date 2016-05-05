@@ -3,10 +3,10 @@ require "FileUtils"
 class Spruce < Formula
   homepage "https://github.com/geofffranks/spruce"
 
-  v = "v1.1.2" # CI Managed
+  v = "v1.2.1" # CI Managed
   url "https://github.com/geofffranks/spruce/releases/download/#{v}/spruce-darwin-amd64"
   version v
-  sha256 "494a1c00aa112b571e948313530ad74a40e150ab82fafd9891ff1bcc9bf9be81" # CI Managed
+  sha256 "08987db5c74deab2e36554b3f8eb4557c30417e7aeedd0e3179e1c5fc9a9a2f1" # CI Managed
 
   def install
     FileUtils.mv("spruce-darwin-amd64", "spruce")
