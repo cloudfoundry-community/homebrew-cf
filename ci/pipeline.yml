@@ -47,7 +47,6 @@ jobs:
         params:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          VERSION_FROM: safe/version
           BINARY: "safe-darwin-amd64"
     - put: homebrew
       params:
@@ -81,7 +80,6 @@ jobs:
         params:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          VERSION_FROM: spruce/version
           BINARY: "spruce-darwin-amd64"
     - put: homebrew
       params:

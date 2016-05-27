@@ -25,8 +25,6 @@ function auto_sed() {
   fi
 }
 
-
-
 echo ">> Retrieving version + sha256 metadata"
 
 VERSION=$(cat recipe/version)
