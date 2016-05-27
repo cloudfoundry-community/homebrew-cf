@@ -18,6 +18,7 @@ groups:
   jobs:
   - spruce
   - safe
+  - genesis
 
 jobs:
   - name: safe
@@ -48,6 +49,39 @@ jobs:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
           BINARY: "safe-darwin-amd64"
+    - put: homebrew
+      params:
+        repository: pushme/homebrew
+        rebase: true
+
+  - name: genesis
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: genesis
+        resource: genesis
+        trigger: true
+    - task: update-homebrew
+      config:
+        platform: linux
+        image: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: genesis
+          path: recipe
+        outputs:
+        - name: pushme
+        run:
+          path: "homebrew/ci/scripts/update-homebrew.sh"
+          args:
+          - genesis.rb
+        params:
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          BINARY: "genesis"
     - put: homebrew
       params:
         repository: pushme/homebrew
@@ -106,4 +140,11 @@ resources:
   source:
     user: jhunt
     repository: safe
+    access_token: (( grab meta.github.access_token ))
+
+- name: genesis
+  type: github-release
+  source:
+    user: starkandwayne
+    repository: genesis
     access_token: (( grab meta.github.access_token ))
