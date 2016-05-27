@@ -26,6 +26,10 @@ function auto_sed() {
 }
 
 
+ls -l
+ls -l homebrew
+ls -l spruce
+
 echo ">> Retrieving version + sha256 metadata"
 
 # VERSION_FROM indicates what file contains the version of binary that needs to be
