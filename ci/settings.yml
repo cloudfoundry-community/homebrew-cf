@@ -1,0 +1,10 @@
+---
+meta:
+  github:
+    owner: starkandwayne
+    repo: homebrew-cf
+    private_key: (( vault "secret/pipelines/homebrew/github:private" ))
+    access_token: (( vault "secret/pipelines/homebrew/github:access_token" ))
+
+  name: homebrew-recipes
+  target: sw

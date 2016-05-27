@@ -1,0 +1,111 @@
+---
+meta:
+  name:     (( param "Please name your pipeline" ))
+  pipeline: (( grab meta.name ))
+  target:   (( param "Please identify the name of the target Concourse CI" ))
+  image:    "docker:///starkandwayne/concourse"
+
+  github:
+    uri:          (( concat "git@github.com:" meta.github.owner "/" meta.github.repo ))
+    owner:        (( param "Please specify the name of the user / organization that owns the Github repository" ))
+    repo:         (( param "Please specify the name of the Github repository" ))
+    branch:       master
+    private_key:  (( param "Please generate an SSH Deployment Key for this repo and specify it here" ))
+    access_token: (( param "Please generate a Personal Access Token and specify it here (read-only for repos, to avoid rate limiting)" ))
+
+groups:
+- name: (( grab meta.name ))
+  jobs:
+  - spruce
+  - safe
+
+jobs:
+  - name: safe
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: safe
+        resource: safe
+        trigger: true
+    - task: update-homebrew
+      config:
+        platform: linux
+        image: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: safe
+          path: recipe
+        outputs:
+        - name: pushme
+        run:
+          path: "homebrew/ci/scripts/update-homebrew.sh"
+          args:
+          - safe.rb
+        params:
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          VERSION_FROM: safe/version
+          BINARY: "safe-darwin-amd64"
+    - put: homebrew
+      params:
+        repository: pushme/homebrew
+        rebase: true
+
+  - name: spruce
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: spruce
+        resource: spruce
+        trigger: true
+    - task: update-homebrew
+      config:
+        platform: linux
+        image: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: spruce
+          path: recipe
+        outputs:
+        - name: pushme
+        run:
+          path: "homebrew/ci/scripts/update-homebrew.sh"
+          args:
+          - spruce.rb
+        params:
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          VERSION_FROM: spruce/version
+          BINARY: "spruce-darwin-amd64"
+    - put: homebrew
+      params:
+        repository: pushme/homebrew
+        rebase: true
+
+resources:
+- name: homebrew
+  type: git
+  source:
+    uri: (( grab meta.github.uri ))
+    branch: (( grab meta.github.branch ))
+    private_key : (( grab meta.github.private_key ))
+
+- name: spruce
+  type: github-release
+  source:
+    user: geofffranks
+    repository: spruce
+    access_token: (( grab meta.github.access_token ))
+
+- name: safe
+  type: github-release
+  source:
+    user: jhunt
+    repository: safe
+    access_token: (( grab meta.github.access_token ))
