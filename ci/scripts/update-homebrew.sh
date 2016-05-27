@@ -26,27 +26,12 @@ function auto_sed() {
 }
 
 
-ls -l
-ls -l homebrew
-ls -l spruce
 
 echo ">> Retrieving version + sha256 metadata"
 
-# VERSION_FROM indicates what file contains the version of binary that needs to be
-# placed in the homebrew formula
-if [[ -z "${VERSION_FROM}" ]]; then
-  echo >&2 "No VERSION_FROM env var is specified. This is required to update homebrew"
-  exit 1
-fi
-if [[ ! -f ${VERSION_FROM} ]]; then
-  echo >&2 "No VERSION env var specified, and ${VERSION_FROM} file not found"
-  echo >&2 "  (from cwd $PWD)"
-  exit 1
-fi
-
-VERSION=$(cat ${VERSION_FROM})
+VERSION=$(cat recipe/version)
 if [[ -z "${VERSION:-}" ]]; then
-  echo >&2 "VERSION not found in ${VERSION_FROM}"
+  echo >&2 "VERSION not found in `recipe/version`"
   exit 1
 fi
 
