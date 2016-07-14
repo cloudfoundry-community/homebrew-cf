@@ -6,7 +6,7 @@ class Genesis < Formula
   v = "v1.5.2" # CI Managed
   url "https://github.com/starkandwayne/genesis/releases/download/#{v}/genesis"
   version v
-  sha256 "2fb1ac8011ff9efcce05708961e1c10c8317c4e6aaa4bc1f04d58f0c2bd6c7d6" # CI Managed
+  sha256 "b89166c45a7022debf1c6157e971af6b5ac5345bee7f3353194d3e8f3188edb6" # CI Managed
 
   def install
     bin.install "genesis"
