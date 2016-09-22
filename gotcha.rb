@@ -3,7 +3,7 @@ require "FileUtils"
 class Gotcha < Formula
   homepage "https://github.com/starkandwayne/gotcha"
 
-  v = "v1.1.2" # CI Managed
+  v = "v0.1.0" # CI Managed
   url "https://github.com/starkandwayne/gotcha/releases/download/#{v}/gotcha-darwin-amd64"
   version v
   sha256 "494a1c00aa112b571e948313530ad74a40e150ab82fafd9891ff1bcc9bf9be81" # CI Managed
