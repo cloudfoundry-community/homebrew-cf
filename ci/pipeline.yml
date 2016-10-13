@@ -19,6 +19,7 @@ groups:
   - spruce
   - safe
   - genesis
+  - bosh2
 
 jobs:
   - name: safe
