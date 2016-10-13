@@ -20,6 +20,7 @@ groups:
   - safe
   - genesis
   - bosh2
+  - bosh-init
 
 jobs:
   - name: safe
@@ -154,6 +155,39 @@ jobs:
         repository: pushme/homebrew
         rebase: true
 
+  - name: bosh-init
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: bosh-init
+        resource: bosh-init
+        trigger: true
+    - task: update-homebrew
+      config:
+        platform: linux
+        image: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: bosh-init
+          path: recipe
+        outputs:
+        - name: pushme
+        run:
+          path: "homebrew/ci/scripts/update-homebrew.sh"
+          args:
+          - bosh-init.rb
+        params:
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          BINARY: "bosh-cli-*-darwin-amd64"
+    - put: homebrew
+      params:
+        repository: pushme/homebrew
+        rebase: true
+
 resources:
 - name: homebrew
   type: git
@@ -188,4 +222,11 @@ resources:
   source:
     user: cloudfoundry
     repository: bosh-cli
+    access_token: (( grab meta.github.access_token ))
+
+- name: bosh-init
+  type: github-release
+  source:
+    user: cloudfoundry
+    repository: bosh-init
     access_token: (( grab meta.github.access_token ))
