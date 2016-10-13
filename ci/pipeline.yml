@@ -120,6 +120,39 @@ jobs:
         repository: pushme/homebrew
         rebase: true
 
+  - name: bosh2
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: bosh2
+        resource: bosh2
+        trigger: true
+    - task: update-homebrew
+      config:
+        platform: linux
+        image: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: bosh2
+          path: recipe
+        outputs:
+        - name: pushme
+        run:
+          path: "homebrew/ci/scripts/update-homebrew.sh"
+          args:
+          - bosh2-cli.rb
+        params:
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          BINARY: "bosh-cli-*-darwin-amd64"
+    - put: homebrew
+      params:
+        repository: pushme/homebrew
+        rebase: true
+
 resources:
 - name: homebrew
   type: git
@@ -148,3 +181,9 @@ resources:
     user: starkandwayne
     repository: genesis
     access_token: (( grab meta.github.access_token ))
+
+- name: bosh2
+  type: github-release
+  source:
+    user: cloudfoundry
+    respository: bosh-cli
