@@ -144,7 +144,7 @@ jobs:
         run:
           path: "homebrew/ci/scripts/update-homebrew.sh"
           args:
-          - bosh2-cli.rb
+          - bosh2.rb
         params:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
@@ -187,4 +187,5 @@ resources:
   type: github-release
   source:
     user: cloudfoundry
-    respository: bosh-cli
+    repository: bosh-cli
+    access_token: (( grab meta.github.access_token ))
