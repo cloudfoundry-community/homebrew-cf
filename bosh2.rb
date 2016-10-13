@@ -9,7 +9,8 @@ class Bosh2 < Formula
   sha256 "" # CI Managed
 
   def install
-    FileUtils.mv("bosh-cli-#{v}-darwin-amd64", "bosh2")
+    verNum = v.sub "v", ""
+    FileUtils.mv("bosh-cli-#{verNum}-darwin-amd64", "bosh2")
     bin.install "bosh2"
   end
 
