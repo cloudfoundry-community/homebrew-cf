@@ -182,7 +182,7 @@ jobs:
         params:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          BINARY: "bosh-cli-*-darwin-amd64"
+          BINARY: "bosh-init-*-darwin-amd64"
     - put: homebrew
       params:
         repository: pushme/homebrew
