@@ -17,6 +17,7 @@ groups:
 - name: (( grab meta.name ))
   jobs:
   - spruce
+  - shield
   - safe
   - genesis
   - bosh2
@@ -122,6 +123,39 @@ jobs:
         repository: pushme/homebrew
         rebase: true
 
+  - name: shield
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: shield
+        resource: shield
+        trigger: true
+    - task: update-homebrew
+      config:
+        platform: linux
+        image: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: shield
+          path: recipe
+        outputs:
+        - name: pushme
+        run:
+          path: "homebrew/ci/scripts/update-homebrew.sh"
+          args:
+          - shield.rb
+        params:
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          BINARY: "shield-darwin-amd64"
+    - put: homebrew
+      params:
+        repository: pushme/homebrew
+        rebase: true
+
   - name: bosh2
     public: true
     serial: true
@@ -201,6 +235,13 @@ resources:
   source:
     user: geofffranks
     repository: spruce
+    access_token: (( grab meta.github.access_token ))
+
+- name: shield
+  type: github-release
+  source:
+    user: starkandwayne
+    repository: shield
     access_token: (( grab meta.github.access_token ))
 
 - name: safe
