@@ -3,7 +3,7 @@ require "FileUtils"
 class BoshInit < Formula
   homepage "https://github.com/cloudfoundry/bosh-init"
 
-  v = "v0.0.99" # CI Managed
+  v = "v0.0.100" # CI Managed
   # remove v from version number
   @@verNum = v.sub "v", "" 
   url "https://s3.amazonaws.com/bosh-init-artifacts/bosh-init-#{@@verNum}-darwin-amd64"
