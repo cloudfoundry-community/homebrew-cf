@@ -19,6 +19,7 @@ groups:
   - spruce
   - shield
   - safe
+  - gotcha
   - genesis
   - bosh2
   - bosh-init
@@ -52,6 +53,39 @@ jobs:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
           BINARY: "safe-darwin-amd64"
+    - put: homebrew
+      params:
+        repository: pushme/homebrew
+        rebase: true
+
+  - name: gotcha
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: gotcha
+        resource: gotcha
+        trigger: true
+    - task: update-homebrew
+      config:
+        platform: linux
+        image: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: gotcha
+          path: recipe
+        outputs:
+        - name: pushme
+        run:
+          path: "homebrew/ci/scripts/update-homebrew.sh"
+          args:
+          - gotcha.rb
+        params:
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          BINARY: "gotcha-darwin-amd64"
     - put: homebrew
       params:
         repository: pushme/homebrew
@@ -249,6 +283,13 @@ resources:
   source:
     user: starkandwayne
     repository: safe
+    access_token: (( grab meta.github.access_token ))
+
+- name: gotcha
+  type: github-release
+  source:
+    user: starkandwayne
+    repository: gotcha
     access_token: (( grab meta.github.access_token ))
 
 - name: genesis
