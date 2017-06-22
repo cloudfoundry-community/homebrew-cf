@@ -3,7 +3,7 @@ require "FileUtils"
 class Bosh2 < Formula
   homepage "https://github.com/cloudfoundry/bosh-cli"
 
-  v = "v2.0.22" # CI Managed
+  v = "v2.0.25" # CI Managed
   # remove v from version number
   @@verNum = v.sub "v", "" 
   url "https://s3.amazonaws.com/bosh-cli-artifacts/bosh-cli-#{@@verNum}-darwin-amd64"
