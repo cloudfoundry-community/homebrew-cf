@@ -3,7 +3,10 @@ meta:
   name:     (( param "Please name your pipeline" ))
   pipeline: (( grab meta.name ))
   target:   (( param "Please identify the name of the target Concourse CI" ))
-  image:    "docker:///starkandwayne/concourse"
+  image:
+    type: docker-image
+    source:
+      repository: starkandwayne/concourse
 
   github:
     uri:          (( concat "git@github.com:" meta.github.owner "/" meta.github.repo ))
@@ -38,7 +41,7 @@ jobs:
     - task: update-homebrew
       config:
         platform: linux
-        rootfs_uri: (( grab meta.image ))
+        image_resource: (( grab meta.image ))
         inputs:
         - name: homebrew
         - name: safe
@@ -71,7 +74,7 @@ jobs:
     - task: update-homebrew
       config:
         platform: linux
-        rootfs_uri: (( grab meta.image ))
+        image_resource: (( grab meta.image ))
         inputs:
         - name: homebrew
         - name: gotcha
@@ -104,7 +107,7 @@ jobs:
     - task: update-homebrew
       config:
         platform: linux
-        rootfs_uri: (( grab meta.image ))
+        image_resource: (( grab meta.image ))
         inputs:
         - name: homebrew
         - name: genesis
@@ -137,7 +140,7 @@ jobs:
     - task: update-homebrew
       config:
         platform: linux
-        rootfs_uri: (( grab meta.image ))
+        image_resource: (( grab meta.image ))
         inputs:
         - name: homebrew
         - name: spruce
@@ -170,7 +173,7 @@ jobs:
     - task: update-homebrew
       config:
         platform: linux
-        rootfs_uri: (( grab meta.image ))
+        image_resource: (( grab meta.image ))
         inputs:
         - name: homebrew
         - name: shield
@@ -203,7 +206,7 @@ jobs:
     - task: update-homebrew
       config:
         platform: linux
-        rootfs_uri: (( grab meta.image ))
+        image_resource: (( grab meta.image ))
         inputs:
         - name: homebrew
         - name: bosh2
@@ -236,7 +239,7 @@ jobs:
     - task: update-homebrew
       config:
         platform: linux
-        rootfs_uri: (( grab meta.image ))
+        image_resource: (( grab meta.image ))
         inputs:
         - name: homebrew
         - name: bosh-init
