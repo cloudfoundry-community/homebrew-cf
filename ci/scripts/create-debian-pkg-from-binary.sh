@@ -30,3 +30,5 @@ fpm -s dir -t deb -n "${NAME:?required}" -v "${VERSION}" \
   --deb-use-file-permissions \
   --deb-no-default-config-files \
   recipe/${IN_BINARY}=/usr/bin/${OUT_BINARY}
+
+mv "${NAME}_${VERSION}_amd64.deb" ${REPO_OUT}/
