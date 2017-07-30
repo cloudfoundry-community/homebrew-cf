@@ -3,9 +3,6 @@
 set -e
 [ -n "$DEBUG" ] && set -x
 
-formula=$1
-shift
-
 #
 # ci/scripts/create-debian-pkg-from-binary.sh - Create .deb package
 #
@@ -14,7 +11,7 @@ shift
 
 echo ">> Retrieving version metadata"
 
-VERSION=${cat recipe/version}
+VERSION=$(cat recipe/version)
 if [[ -z "${VERSION:-}" ]]; then
   echo >&2 "VERSION not found in `recipe/version`"
   exit 1
