@@ -36,7 +36,7 @@ apt-get install safe
 apt-get install shield
 apt-get install bosh-cli
 apt-get install vault
-apt-get install genesis # also installs spruce, safe, vault, bosh-cli
+apt-get install genesis # also installs spruce, safe, vault, bosh-cli, git
 ```
 
 NOTE: The `vault` package was manually created by https://gist.github.com/drnic/c03bf5929c7da3421e3978058845512b. The CI pipeline needs a way to detect and fetch latest Vault CLI downloads.
