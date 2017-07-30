@@ -22,3 +22,19 @@ $ brew install gotcha
 
 Coming soon:
 - [cloudfoundry-utils](https://github.com/starkandwayne/cloudfoundry-utils)
+
+## Debian packages
+
+This project automatically packages several CLI binaries as Debian packages. To install:
+
+```
+echo "deb [trusted=yes] https://starkandwayne-debian-apt.s3.amazonaws.com stable main" > /etc/apt/sources.list.d/starkandwayne.list
+apt-get update
+apt-get install spruce
+apt-get install gotcha
+apt-get install safe
+apt-get install shield
+apt-get install bosh-cli
+apt-get install vault
+apt-get install genesis # also installs spruce, safe, vault, bosh-cli
+```
