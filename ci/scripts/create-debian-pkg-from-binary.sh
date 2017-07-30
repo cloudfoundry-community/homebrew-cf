@@ -31,4 +31,16 @@ fpm -s dir -t deb -n "${NAME:?required}" -v "${VERSION}" \
   --deb-no-default-config-files \
   recipe/${IN_BINARY}=/usr/bin/${OUT_BINARY}
 
-mv "${NAME}_${VERSION}_amd64.deb" ${REPO_OUT}/
+DEBIAN_FILE="${NAME}_${VERSION}_amd64.deb"
+
+if [[ ! -x deb-s3 ]]; then
+  gem install deb-s3 --no-ri --no-rdoc
+fi
+
+mkdir ~/.aws
+cat > ~/.aws/credentials <<EOF
+[default]
+aws_access_key_id = ${AWS_ACCESS_KEY:?required}
+aws_secret_access_key = ${AWS_SECRET_KEY:?required}
+EOF
+deb-s3 upload "${DEBIAN_FILE}" --bucket "${RELEASE_BUCKET}"

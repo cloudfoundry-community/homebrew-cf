@@ -6,5 +6,10 @@ meta:
     private_key: (( vault "secret/pipelines/homebrew/github:private" ))
     access_token: (( vault "secret/pipelines/homebrew/github:access_token" ))
 
+  debian:
+    s3_bucket: starkandwayne-debian-apt
+    aws_access_key: (( vault "secret/pipelines/homebrew/aws:aws_access_key" ))
+    aws_secret_key: (( vault "secret/pipelines/homebrew/aws:aws_secret_key" ))
+
   name: homebrew-recipes
   target: sw
