@@ -7,6 +7,11 @@ meta:
     type: docker-image
     source:
       repository: starkandwayne/concourse
+  image-golang:
+    type: docker-image
+    source:
+      repository: starkandwayne/concourse-go
+      tag: 1.8
 
   github:
     uri:          (( concat "git@github.com:" meta.github.owner "/" meta.github.repo ))
@@ -37,6 +42,7 @@ groups:
   - bosh2-homebrew
   - bosh-cli-debian
   - bosh-init-homebrew
+  - certstrap-debian
 - name: homebrew
   jobs:
   - spruce-homebrew
@@ -54,6 +60,7 @@ groups:
   - gotcha-debian
   - genesis-debian
   - bosh-cli-debian
+  - certstrap-debian
 
 jobs:
   - name: safe-debian
@@ -505,6 +512,73 @@ jobs:
         repository: pushme/homebrew
         rebase: true
 
+  - name: certstrap-debian
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: certstrap
+        resource: certstrap
+        trigger: true
+        params: { include_source_tarball: true }
+    - task: compile-certstrap
+      config:
+        platform: linux
+        image_resource: (( grab meta.image-golang ))
+        inputs:
+        - name: homebrew
+        - name: certstrap
+          path: recipe
+        outputs:
+        - name: build
+        run:
+          path: sh
+          args:
+          - -exc
+          - |
+            mkdir -p unpack
+            tar xfs recipe/*.tar.gz -C unpack
+            export GOPATH=$PWD/build
+            export PATH=$PATH:$GOPATH/bin
+            mkdir -p $GOPATH/src/github.com/square/certstrap
+            cp -r unpack/*-certstrap-*/* $GOPATH/src/github.com/square/certstrap
+            go install github.com/square/certstrap
+
+            cp $GOPATH/bin/certstrap build/certstrap
+            cp recipe/version build/version
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: buildme
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: build
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY: certstrap
+          OUT_BINARY: certstrap
+          NAME: certstrap
+          LICENSE: Apache2
+          DESCRIPTION: Tools to bootstrap CAs, certificate requests, and signed certificates
+          URL: https://github.com/square/certstrap
+          MAINTAINERS: https://github.com/square/certstrap/graphs/contributors
+          VENDOR: Square
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+
+
 resources:
 - name: homebrew
   type: git
@@ -566,4 +640,11 @@ resources:
   source:
     user: cloudfoundry
     repository: bosh-init
+    access_token: (( grab meta.github.access_token ))
+
+- name: certstrap
+  type: github-release
+  source:
+    user: square
+    repository: certstrap
     access_token: (( grab meta.github.access_token ))
