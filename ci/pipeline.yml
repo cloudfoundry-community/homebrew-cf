@@ -27,11 +27,13 @@ groups:
   - spruce-homebrew
   - spruce-debian
   - shield-homebrew
+  - shield-debian
   - safe-homebrew
   - safe-debian
   - gotcha-homebrew
   - genesis-homebrew
   - bosh2-homebrew
+  - bosh-cli-debian
   - bosh-init-homebrew
 - name: homebrew
   jobs:
@@ -45,7 +47,9 @@ groups:
 - name: debian
   jobs:
   - spruce-debian
+  - shield-debian
   - safe-debian
+  - bosh-cli-debian
 
 jobs:
   - name: safe-debian
@@ -252,6 +256,42 @@ jobs:
         repository: pushme/homebrew
         rebase: true
 
+  - name: shield-debian
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: shield
+        resource: shield
+        trigger: true
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: shield
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY: "shield-linux-amd64"
+          OUT_BINARY: shield
+          NAME: shield
+          LICENSE: MIT
+          DESCRIPTION: CLI to SHIELD Backup/Restore Director
+          URL: https://github.com/starkandwayne/shield
+          MAINTAINERS: https://github.com/starkandwayne/shield/graphs/contributors
+          VENDOR: "Stark & Wayne"
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+
   - name: shield-homebrew
     public: true
     serial: true
@@ -284,6 +324,42 @@ jobs:
       params:
         repository: pushme/homebrew
         rebase: true
+
+  - name: bosh-cli-debian
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: bosh-cli
+        resource: bosh-cli-linux
+        trigger: true
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: bosh-cli
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY: "bosh-cli-*-linux-amd64"
+          OUT_BINARY: bosh
+          NAME: bosh-cli
+          LICENSE: Apache2
+          DESCRIPTION: Interact with BOSH director
+          URL: https://bosh.io/docs/cli-v2.html
+          MAINTAINERS: https://github.com/cloudfoundry/bosh-cli/graphs/contributors
+          VENDOR: "Cloud Foundry Foundation"
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
 
   - name: bosh2-homebrew
     public: true
@@ -400,6 +476,12 @@ resources:
     user: cloudfoundry
     repository: bosh-cli
     access_token: (( grab meta.github.access_token ))
+
+- name: bosh-cli-linux
+  type: s3
+  source:
+    bucket: bosh-cli-artifacts
+    regexp: bosh-cli-(.*)-linux-amd64
 
 - name: bosh-init
   type: github-release
