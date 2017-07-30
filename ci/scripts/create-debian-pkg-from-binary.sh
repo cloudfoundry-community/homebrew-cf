@@ -22,6 +22,7 @@ if [[ ! -x fpm ]]; then
   gem install fpm --no-ri --no-rdoc
 fi
 cp recipe/${IN_BINARY} recipe/${OUT_BINARY}
+chmod +x recipe/${OUT_BINARY}
 fpm -s dir -t deb -n "${NAME:?required}" -v "${VERSION}" \
   --provides "${OUT_BINARY}" \
   --vendor "${VENDOR:-Unknown}" \
