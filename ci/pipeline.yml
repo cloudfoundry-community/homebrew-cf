@@ -22,6 +22,7 @@ groups:
   - spruce-homebrew
   - shield-homebrew
   - safe-homebrew
+  - safe-debian
   - gotcha-homebrew
   - genesis-homebrew
   - bosh2-homebrew
@@ -35,8 +36,47 @@ groups:
   - genesis-homebrew
   - bosh2-homebrew
   - bosh-init-homebrew
+- name: debian
+  jobs:
+  - safe-debian
 
 jobs:
+  - name: safe-debian
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: safe
+        resource: safe
+        trigger: true
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: safe
+          path: recipe
+        outputs:
+        - name: pushme
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+          args: []
+        params:
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY: "safe-darwin-amd64"
+          OUT_BINARY: safe
+          NAME: safe
+          LICENSE: MIT
+          DESCRIPTION: Vault CLI
+          URL: https://github.com/starkandwayne/safe
+          MAINTAINERS: https://github.com/starkandwayne/safe/graphs/contributors
+          VENDOR: "Stark & Wayne LLC"
+          RELEASE_BUCKET: starkandwayne-debian-apt
+
   - name: safe-homebrew
     public: true
     serial: true
