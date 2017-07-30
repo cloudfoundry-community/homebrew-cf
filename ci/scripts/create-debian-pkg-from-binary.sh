@@ -20,13 +20,13 @@ fi
 if [[ ! -x fpm ]]; then
   gem install fpm --no-ri --no-rdoc
 fi
-fpm -s dir -t deb -n ${NAME:?required} -v ${VERSION} \
-  --provides ${NAME} \
-  --vendor ${VENDOR:-Unknown} \
-  --license ${LICENSE:-Unknown} \
-  -m ${MAINTAINERS:-Unknown} \
-  --description ${DESCRIPTION:-Unknown} \
-  --url ${URL:-Unknown} \
+fpm -s dir -t deb -n "${NAME:?required}" -v "${VERSION}" \
+  --provides "${NAME}" \
+  --vendor "${VENDOR:-Unknown}" \
+  --license "${LICENSE:-Unknown}" \
+  -m "${MAINTAINERS:-Unknown}" \
+  --description "${DESCRIPTION:-Unknown}" \
+  --url "${URL:-Unknown}" \
   --deb-use-file-permissions \
   --deb-no-default-config-files \
   recipe/${IN_BINARY}=/usr/bin/${OUT_BINARY}
