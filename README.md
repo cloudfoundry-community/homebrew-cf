@@ -40,3 +40,9 @@ apt-get install genesis # also installs spruce, safe, vault, bosh-cli
 ```
 
 NOTE: The `vault` package was manually created by https://gist.github.com/drnic/c03bf5929c7da3421e3978058845512b. The CI pipeline needs a way to detect and fetch latest Vault CLI downloads.
+
+To update the static site's index.html, run:
+
+```
+aws s3 sync apt/ s3://apt.starkandwayne.com/
+```
