@@ -21,6 +21,7 @@ echo ">> Creating Debian package"
 if [[ ! -x fpm ]]; then
   gem install fpm --no-ri --no-rdoc
 fi
+cp recipe/${IN_BINARY} recipe/${OUT_BINARY}
 fpm -s dir -t deb -n "${NAME:?required}" -v "${VERSION}" \
   --provides "${NAME}" \
   --vendor "${VENDOR:-Unknown}" \
@@ -30,7 +31,7 @@ fpm -s dir -t deb -n "${NAME:?required}" -v "${VERSION}" \
   --url "${URL:-Unknown}" \
   --deb-use-file-permissions \
   --deb-no-default-config-files \
-  recipe/${IN_BINARY}=/usr/bin/${OUT_BINARY}
+  recipe/${OUT_BINARY}=/usr/bin/${OUT_BINARY}
 
 DEBIAN_FILE="${NAME}_${VERSION}_amd64.deb"
 
