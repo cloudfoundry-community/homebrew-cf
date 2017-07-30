@@ -19,16 +19,25 @@ meta:
 groups:
 - name: (( grab meta.name ))
   jobs:
-  - spruce
-  - shield
-  - safe
-  - gotcha
-  - genesis
-  - bosh2
-  - bosh-init
+  - spruce-homebrew
+  - shield-homebrew
+  - safe-homebrew
+  - gotcha-homebrew
+  - genesis-homebrew
+  - bosh2-homebrew
+  - bosh-init-homebrew
+- name: homebrew
+  jobs:
+  - spruce-homebrew
+  - shield-homebrew
+  - safe-homebrew
+  - gotcha-homebrew
+  - genesis-homebrew
+  - bosh2-homebrew
+  - bosh-init-homebrew
 
 jobs:
-  - name: safe
+  - name: safe-homebrew
     public: true
     serial: true
     plan:
@@ -61,7 +70,7 @@ jobs:
         repository: pushme/homebrew
         rebase: true
 
-  - name: gotcha
+  - name: gotcha-homebrew
     public: true
     serial: true
     plan:
@@ -94,7 +103,7 @@ jobs:
         repository: pushme/homebrew
         rebase: true
 
-  - name: genesis
+  - name: genesis-homebrew
     public: true
     serial: true
     plan:
@@ -127,7 +136,7 @@ jobs:
         repository: pushme/homebrew
         rebase: true
 
-  - name: spruce
+  - name: spruce-homebrew
     public: true
     serial: true
     plan:
@@ -160,7 +169,7 @@ jobs:
         repository: pushme/homebrew
         rebase: true
 
-  - name: shield
+  - name: shield-homebrew
     public: true
     serial: true
     plan:
@@ -193,7 +202,7 @@ jobs:
         repository: pushme/homebrew
         rebase: true
 
-  - name: bosh2
+  - name: bosh2-homebrew
     public: true
     serial: true
     plan:
@@ -226,7 +235,7 @@ jobs:
         repository: pushme/homebrew
         rebase: true
 
-  - name: bosh-init
+  - name: bosh-init-homebrew
     public: true
     serial: true
     plan:
