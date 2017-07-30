@@ -65,9 +65,10 @@ jobs:
           path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
           args: []
         params:
+          DEBUG: 1
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          IN_BINARY: "safe-darwin-amd64"
+          IN_BINARY: "safe-linux-amd64"
           OUT_BINARY: safe
           NAME: safe
           LICENSE: MIT
