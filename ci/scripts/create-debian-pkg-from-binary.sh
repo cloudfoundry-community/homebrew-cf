@@ -31,7 +31,7 @@ fpm -s dir -t deb -n "${NAME:?required}" -v "${VERSION}" \
   --description "${DESCRIPTION:-Unknown}" \
   --url "${URL:-Unknown}" \
   --deb-use-file-permissions \
-  --deb-no-default-config-files \
+  --deb-no-default-config-files ${FPM_FLAGS:-} \
   recipe/${OUT_BINARY}=/usr/bin/${OUT_BINARY}
 
 DEBIAN_FILE="${NAME}_${VERSION}_amd64.deb"
