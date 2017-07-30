@@ -17,6 +17,7 @@ if [[ -z "${VERSION:-}" ]]; then
   exit 1
 fi
 
+echo ">> Creating Debian package"
 if [[ ! -x fpm ]]; then
   gem install fpm --no-ri --no-rdoc
 fi
@@ -33,6 +34,7 @@ fpm -s dir -t deb -n "${NAME:?required}" -v "${VERSION}" \
 
 DEBIAN_FILE="${NAME}_${VERSION}_amd64.deb"
 
+echo ">> Uploading Debian package to APT repository"
 if [[ ! -x deb-s3 ]]; then
   gem install deb-s3 --no-ri --no-rdoc
 fi
