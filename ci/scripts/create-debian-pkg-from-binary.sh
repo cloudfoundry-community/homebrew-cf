@@ -23,7 +23,7 @@ if [[ ! -x fpm ]]; then
 fi
 cp recipe/${IN_BINARY} recipe/${OUT_BINARY}
 fpm -s dir -t deb -n "${NAME:?required}" -v "${VERSION}" \
-  --provides "${NAME}" \
+  --provides "${OUT_BINARY}" \
   --vendor "${VENDOR:-Unknown}" \
   --license "${LICENSE:-Unknown}" \
   -m "${MAINTAINERS:-Unknown}" \
