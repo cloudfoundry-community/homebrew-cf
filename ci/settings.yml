@@ -7,7 +7,7 @@ meta:
     access_token: (( vault "secret/pipelines/homebrew/github:access_token" ))
 
   debian:
-    s3_bucket: starkandwayne-debian-apt
+    s3_bucket: apt.starkandwayne.com
     aws_access_key: (( vault "secret/pipelines/homebrew/aws:aws_access_key" ))
     aws_secret_key: (( vault "secret/pipelines/homebrew/aws:aws_secret_key" ))
 

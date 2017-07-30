@@ -28,7 +28,7 @@ Coming soon:
 This project automatically packages several CLI binaries as Debian packages. To install:
 
 ```
-echo "deb [trusted=yes] https://starkandwayne-debian-apt.s3.amazonaws.com stable main" > /etc/apt/sources.list.d/starkandwayne.list
+echo "deb [trusted=yes] https://apt.starkandwayne.com.s3.amazonaws.com stable main" > /etc/apt/sources.list.d/starkandwayne.list
 apt-get update
 apt-get install spruce
 apt-get install gotcha
