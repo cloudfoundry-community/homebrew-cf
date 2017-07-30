@@ -229,7 +229,7 @@ jobs:
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
-          FPM_FLAGS: --deb-recommends bosh-cli --deb-recommends safe --deb-recommends spruce --deb-recommends vault --deb-recommends git
+          FPM_FLAGS: --deb-recommends bosh-cli --deb-recommends safe --deb-recommends spruce --deb-recommends vault --deb-recommends git --deb-recommends perl
 
 
   - name: genesis-homebrew
