@@ -19,9 +19,11 @@ fi
 # strip any non numbers; https://github.com/stedolan/jq/releases tag is "jq-1.5"
 VERSION=$(echo $VERSION | sed "s/^[a-z\-]*//")
 
-echo ">> Setup GPG key"
+echo ">> Setup GPG public key"
 gpg --import certs/public.key
+echo ">> Setup GPG private key"
 gpg --allow-secret-key-import --import certs/private.key
+echo ">> List keys"
 gpg --list-secret-keys
 
 echo ">> Creating Debian package"
