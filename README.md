@@ -35,7 +35,6 @@ apt-get install spruce
 apt-get install safe
 apt-get install bosh-cli
 apt-get install vault
-<<<<<<< HEAD
 apt-get install genesis # also installs spruce, safe, vault, bosh-cli, git, perl
 
 apt-get install gotcha
@@ -46,9 +45,6 @@ apt-get install credhub-cli
 apt-get install cf-cli
 apt-get install jq
 apt-get install sipcalc
-=======
-apt-get install genesis # also installs spruce, safe, vault, bosh-cli, git
->>>>>>> include git as dependency of genesis
 ```
 
 NOTE: The `vault` package was manually created by https://gist.github.com/drnic/c03bf5929c7da3421e3978058845512b. The CI pipeline needs a way to detect and fetch latest Vault CLI downloads.
