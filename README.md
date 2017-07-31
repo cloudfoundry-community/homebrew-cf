@@ -30,13 +30,18 @@ This project automatically packages several CLI binaries as Debian packages. To 
 ```
 echo "deb [trusted=yes] https://apt.starkandwayne.com stable main" > /etc/apt/sources.list.d/starkandwayne.list
 apt-get update
+
 apt-get install spruce
-apt-get install gotcha
 apt-get install safe
-apt-get install shield
 apt-get install bosh-cli
 apt-get install vault
-apt-get install genesis # also installs spruce, safe, vault, bosh-cli, git
+apt-get install genesis # also installs spruce, safe, vault, bosh-cli, git, perl
+
+apt-get install gotcha
+apt-get install shield
+
+apt-get install certstrap
+apt-get install credhub
 ```
 
 NOTE: The `vault` package was manually created by https://gist.github.com/drnic/c03bf5929c7da3421e3978058845512b. The CI pipeline needs a way to detect and fetch latest Vault CLI downloads.
