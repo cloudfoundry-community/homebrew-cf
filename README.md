@@ -57,4 +57,5 @@ To update the static site's index.html, run:
 
 ```
 aws s3 sync apt/ s3://apt.starkandwayne.com/
+aws s3 sync yum/ s3://yum.starkandwayne.com/
 ```
