@@ -6,13 +6,18 @@
   <h1>Stark &amp; Wayne APT repository</h1>
   <pre>echo "deb [trusted=yes] https://apt.starkandwayne.com stable main" > /etc/apt/sources.list.d/starkandwayne.list
 apt-get update
+
 apt-get install spruce
-apt-get install gotcha
 apt-get install safe
-apt-get install shield
 apt-get install bosh-cli
 apt-get install vault
+apt-get install genesis # also installs spruce, safe, vault, bosh-cli, git, perl
+
+apt-get install gotcha
+apt-get install shield
+
 apt-get install certstrap
-apt-get install genesis # also installs spruce, safe, vault, bosh-cli, git, perl</pre>
+apt-get install credhub
+</pre>
 </body>
 </html>

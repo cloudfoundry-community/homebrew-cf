@@ -42,6 +42,7 @@ groups:
   - bosh2-homebrew
   - bosh-cli-debian
   - bosh-init-homebrew
+  - credhub-debian
   - certstrap-debian
 - name: homebrew
   jobs:
@@ -60,6 +61,7 @@ groups:
   - gotcha-debian
   - genesis-debian
   - bosh-cli-debian
+  - credhub-debian
   - certstrap-debian
 
 jobs:
@@ -512,6 +514,62 @@ jobs:
         repository: pushme/homebrew
         rebase: true
 
+  - name: credhub-debian
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: credhub
+        resource: credhub-cli
+        trigger: true
+    - task: unpack-tgz
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: credhub
+          path: recipe
+        outputs:
+        - name: unpacked
+        run:
+          path: sh
+          args:
+          - -exc
+          - |
+            tar xfz recipe/${IN_TGZ} -C unpacked
+            cp recipe/version unpacked/version
+        params:
+          IN_TGZ: "credhub-linux*tgz"
+
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: unpacked
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY: credhub
+          OUT_BINARY: credhub
+          NAME: credhub
+          LICENSE: Apache2
+          DESCRIPTION: CLI to interact with CredHub servers
+          URL: https://github.com/cloudfoundry-incubator/credhub-cli
+          MAINTAINERS: https://github.com/cloudfoundry-incubator/credhub-cli/graphs/contributors
+          VENDOR: "Cloud Foundry Foundation"
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+
   - name: certstrap-debian
     public: true
     serial: true
@@ -640,6 +698,13 @@ resources:
   source:
     user: cloudfoundry
     repository: bosh-init
+    access_token: (( grab meta.github.access_token ))
+
+- name: credhub-cli
+  type: github-release
+  source:
+    user: cloudfoundry-incubator
+    repository: credhub-cli
     access_token: (( grab meta.github.access_token ))
 
 - name: certstrap
