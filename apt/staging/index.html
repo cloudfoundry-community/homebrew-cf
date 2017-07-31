@@ -1,0 +1,16 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Stark &amp; Wayne APT repository</title>
+    <link rel="icon" href="/favicon.ico?v=1" type="image/x-icon" />
+</head>
+<body>
+  <h1>Stark &amp; Wayne APT repository - staging</h1>
+  <p>When you find yourself on an Ubuntu/Debian machine and you just need your favourite CLIs.</p>
+  <pre>wget -q -O - https://raw.githubusercontent.com/starkandwayne/homebrew-cf/master/public.key | apt-key add -
+echo "deb http://apt.starkandwayne.com/staging stable main" | tee /etc/apt/sources.list.d/starkandwayne.list
+apt-get update
+
+apt-get install safe
+</pre>
+</body>
+</html>
