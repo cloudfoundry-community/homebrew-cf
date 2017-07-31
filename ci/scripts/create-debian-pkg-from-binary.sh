@@ -52,3 +52,6 @@ aws_access_key_id = ${AWS_ACCESS_KEY:?required}
 aws_secret_access_key = ${AWS_SECRET_KEY:?required}
 EOF
 deb-s3 upload "${DEBIAN_FILE}" --bucket "${RELEASE_BUCKET}"
+
+echo ">> Latest debian package list"
+deb-s3 list -b "${RELEASE_BUCKET}"
