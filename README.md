@@ -41,7 +41,7 @@ apt-get install gotcha
 apt-get install shield
 
 apt-get install certstrap
-apt-get install credhub
+apt-get install credhub-cli
 ```
 
 NOTE: The `vault` package was manually created by https://gist.github.com/drnic/c03bf5929c7da3421e3978058845512b. The CI pipeline needs a way to detect and fetch latest Vault CLI downloads.

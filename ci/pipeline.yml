@@ -42,7 +42,7 @@ groups:
   - bosh2-homebrew
   - bosh-cli-debian
   - bosh-init-homebrew
-  - credhub-debian
+  - credhub-cli-debian
   - certstrap-debian
 - name: homebrew
   jobs:
@@ -61,7 +61,7 @@ groups:
   - gotcha-debian
   - genesis-debian
   - bosh-cli-debian
-  - credhub-debian
+  - credhub-cli-debian
   - certstrap-debian
 
 jobs:
@@ -514,7 +514,7 @@ jobs:
         repository: pushme/homebrew
         rebase: true
 
-  - name: credhub-debian
+  - name: credhub-cli-debian
     public: true
     serial: true
     plan:
@@ -560,7 +560,7 @@ jobs:
           REPO_OUT: pushme
           IN_BINARY: credhub
           OUT_BINARY: credhub
-          NAME: credhub
+          NAME: credhub-cli
           LICENSE: Apache2
           DESCRIPTION: CLI to interact with CredHub servers
           URL: https://github.com/cloudfoundry-incubator/credhub-cli
