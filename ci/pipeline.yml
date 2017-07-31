@@ -44,6 +44,7 @@ groups:
   - bosh-init-homebrew
   - credhub-cli-debian
   - certstrap-debian
+  - jq-debian
   - sipcalc-debian
 - name: homebrew
   jobs:
@@ -64,6 +65,7 @@ groups:
   - bosh-cli-debian
   - credhub-cli-debian
   - certstrap-debian
+  - jq-debian
   - sipcalc-debian
 
 jobs:
@@ -638,6 +640,42 @@ jobs:
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
 
+  - name: jq-debian
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: jq
+        resource: jq
+        trigger: true
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: jq
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY: jq-linux64
+          OUT_BINARY: jq
+          NAME: jq
+          LICENSE: MIT
+          DESCRIPTION: lightweight and flexible command-line JSON processor
+          URL: https://stedolan.github.io/jq/
+          MAINTAINERS: https://github.com/stedolan/jq/graphs/contributors
+          VENDOR: None
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+
   - name: sipcalc-debian
     public: true
     serial: true
@@ -749,6 +787,13 @@ resources:
   source:
     user: square
     repository: certstrap
+    access_token: (( grab meta.github.access_token ))
+
+- name: jq
+  type: github-release
+  source:
+    user: stedolan
+    repository: jq
     access_token: (( grab meta.github.access_token ))
 
 - name: sipcalc

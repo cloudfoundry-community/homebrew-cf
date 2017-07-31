@@ -42,6 +42,7 @@ apt-get install shield
 
 apt-get install certstrap
 apt-get install credhub-cli
+apt-get install jq
 apt-get install sipcalc
 ```
 

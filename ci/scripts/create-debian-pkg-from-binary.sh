@@ -16,6 +16,8 @@ if [[ -z "${VERSION:-}" ]]; then
   echo >&2 "VERSION not found in `recipe/version`"
   exit 1
 fi
+# strip any non numbers; https://github.com/stedolan/jq/releases tag is "jq-1.5"
+VERSION=$(echo $VERSION | sed "s/^[a-z\-]*//")
 
 echo ">> Creating Debian package"
 if [[ ! -x fpm ]]; then
