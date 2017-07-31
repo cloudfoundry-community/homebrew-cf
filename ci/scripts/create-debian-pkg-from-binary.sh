@@ -19,6 +19,11 @@ fi
 # strip any non numbers; https://github.com/stedolan/jq/releases tag is "jq-1.5"
 VERSION=$(echo $VERSION | sed "s/^[a-z\-]*//")
 
+echo ">> Setup GPG key"
+gpg --import certs/public.key
+gpg --allow-secret-key-import --import certs/private.key
+gpg --list-secret-keys
+
 echo ">> Creating Debian package"
 if [[ ! -x fpm ]]; then
   gem install fpm --no-ri --no-rdoc
@@ -51,7 +56,7 @@ cat > ~/.aws/credentials <<EOF
 aws_access_key_id = ${AWS_ACCESS_KEY:?required}
 aws_secret_access_key = ${AWS_SECRET_KEY:?required}
 EOF
-deb-s3 upload "${DEBIAN_FILE}" --bucket "${RELEASE_BUCKET}"
+deb-s3 upload "${DEBIAN_FILE}" --bucket "${RELEASE_BUCKET}" --sign $(cat certs/id)
 
 echo ">> Latest debian package list"
 deb-s3 list -b "${RELEASE_BUCKET}"

@@ -11,5 +11,10 @@ meta:
     aws_access_key: (( vault "secret/pipelines/homebrew/aws:aws_access_key" ))
     aws_secret_key: (( vault "secret/pipelines/homebrew/aws:aws_secret_key" ))
 
+  gpg:
+    id:  (( vault "secret/pipelines/homebrew/gpg:id" ))
+    public_key:  (( vault "secret/pipelines/homebrew/gpg:public" ))
+    private_key: (( vault "secret/pipelines/homebrew/gpg:private" ))
+
   name: homebrew-recipes
   target: sw

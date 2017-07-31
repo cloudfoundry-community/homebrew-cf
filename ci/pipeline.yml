@@ -26,6 +26,11 @@ meta:
     aws_access_key: (( param "Please specify AWS access key for debian S3 bucket" ))
     aws_secret_key: (( param "Please specify AWS secret key for debian S3 bucket" ))
 
+  gpg:
+    id:  (( param "Please provide GPG ID for signing packages" ))
+    public_key:  (( param "Please provide GPG public key for signing packages" ))
+    private_key: (( param "Please provide GPG private key for signing packages" ))
+
 groups:
 - name: (( grab meta.name ))
   jobs:
@@ -81,12 +86,31 @@ jobs:
       - get: safe
         resource: safe
         trigger: true
+    - task: gpg-keys
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        outputs:
+        - name: certs
+        run:
+          path: sh
+          args:
+          - -exc
+          - |
+            echo $GPG_ID > certs/id
+            echo $GPG_PUBLIC_KEY > certs/public.key
+            echo $GPG_PRIVATE_KEY > certs/private.key
+        params:
+          GPG_ID: (( grab meta.gpg.id ))
+          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
+          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
     - task: create-debian
       config:
         platform: linux
         image_resource: (( grab meta.image ))
         inputs:
         - name: homebrew
+        - name: certs
         - name: safe
           path: recipe
         run:
