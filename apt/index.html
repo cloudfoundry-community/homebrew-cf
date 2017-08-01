@@ -6,7 +6,9 @@
 <body>
   <h1>Stark &amp; Wayne APT repository</h1>
   <p>When you find yourself on an Ubuntu/Debian machine and you just need your favourite CLIs.</p>
-  <pre>wget -q -O - https://raw.githubusercontent.com/starkandwayne/homebrew-cf/master/public.key | apt-key add -
+  <pre>apt-get update
+apt-get install wget -y
+wget -q -O - https://raw.githubusercontent.com/starkandwayne/homebrew-cf/master/public.key | apt-key add -
 echo "deb http://apt.starkandwayne.com stable main" | tee /etc/apt/sources.list.d/starkandwayne.list
 apt-get update
 
