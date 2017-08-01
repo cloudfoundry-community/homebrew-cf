@@ -78,7 +78,7 @@ groups:
 jobs:
   - name: safe-debian
     public: true
-    serial: true
+    serial_groups: [apt]
     plan:
     - aggregate:
       - get: homebrew
@@ -167,7 +167,7 @@ jobs:
 
   - name: gotcha-debian
     public: true
-    serial: true
+    serial_groups: [apt]
     plan:
     - aggregate:
       - get: homebrew
@@ -236,7 +236,7 @@ jobs:
 
   - name: genesis-debian
     public: true
-    serial: true
+    serial_groups: [apt]
     plan:
     - aggregate:
       - get: homebrew
@@ -306,7 +306,7 @@ jobs:
 
   - name: spruce-debian
     public: true
-    serial: true
+    serial_groups: [apt]
     plan:
     - aggregate:
       - get: homebrew
@@ -375,7 +375,7 @@ jobs:
 
   - name: shield-debian
     public: true
-    serial: true
+    serial_groups: [apt]
     plan:
     - aggregate:
       - get: homebrew
@@ -444,7 +444,7 @@ jobs:
 
   - name: bosh-cli-debian
     public: true
-    serial: true
+    serial_groups: [apt]
     plan:
     - aggregate:
       - get: homebrew
@@ -546,7 +546,7 @@ jobs:
 
   - name: credhub-cli-debian
     public: true
-    serial: true
+    serial_groups: [apt]
     plan:
     - aggregate:
       - get: homebrew
@@ -602,7 +602,7 @@ jobs:
 
   - name: certstrap-debian
     public: true
-    serial: true
+    serial_groups: [apt]
     plan:
     - aggregate:
       - get: homebrew
@@ -668,7 +668,7 @@ jobs:
 
   - name: cf-cli-debian
     public: true
-    serial: true
+    serial_groups: [apt]
     plan:
     - aggregate:
       - get: homebrew
@@ -723,7 +723,7 @@ jobs:
 
   - name: jq-debian
     public: true
-    serial: true
+    serial_groups: [apt]
     plan:
     - aggregate:
       - get: homebrew
@@ -759,7 +759,7 @@ jobs:
 
   - name: sipcalc-debian
     public: true
-    serial: true
+    serial_groups: [apt]
     plan:
     - aggregate:
       - get: homebrew
