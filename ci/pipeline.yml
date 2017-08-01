@@ -86,26 +86,12 @@ jobs:
       - get: safe
         resource: safe
         trigger: true
-    - task: gpg-keys
-      config:
-        platform: linux
-        image_resource: (( grab meta.image ))
-        outputs:
-        - name: certs
-        run:
-          path: "homebrew/ci/scripts/setup-gpg-certs.sh"
-        params:
-          REPO_OUT: certs
-          GPG_ID: (( grab meta.gpg.id ))
-          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
-          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
     - task: create-debian
       config:
         platform: linux
         image_resource: (( grab meta.image ))
         inputs:
         - name: homebrew
-        - name: certs
         - name: safe
           path: recipe
         run:
@@ -125,6 +111,9 @@ jobs:
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+          GPG_ID: (( grab meta.gpg.id ))
+          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
+          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
 
   - name: safe-homebrew
     public: true

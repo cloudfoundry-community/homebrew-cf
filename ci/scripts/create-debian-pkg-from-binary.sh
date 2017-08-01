@@ -19,6 +19,13 @@ fi
 # strip any non numbers; https://github.com/stedolan/jq/releases tag is "jq-1.5"
 VERSION=$(echo $VERSION | sed "s/^[a-z\-]*//")
 
+mkdir -p certs
+echo "${GPG_ID:?required}" > certs/id
+echo "${GPG_PUBLIC_KEY:?required}" > certs/public.key
+set +x
+echo "${GPG_PRIVATE_KEY:?required}" > certs/private.key
+[ -n "$DEBUG" ] && set -x
+
 echo ">> Setup GPG public key"
 gpg --import certs/public.key
 echo ">> Setup GPG private key"
