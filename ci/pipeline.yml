@@ -97,10 +97,10 @@ jobs:
           args:
           - -exc
           - |
-            echo $GPG_ID > certs/id
-            echo $GPG_PUBLIC_KEY > certs/public.key
+            echo "$GPG_ID" > certs/id
+            echo "$GPG_PUBLIC_KEY" > certs/public.key
             set +x
-            echo $GPG_PRIVATE_KEY > certs/private.key
+            echo "$GPG_PRIVATE_KEY" > certs/private.key
         params:
           GPG_ID: (( grab meta.gpg.id ))
           GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
