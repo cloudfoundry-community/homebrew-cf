@@ -118,7 +118,7 @@ jobs:
           OUT_BINARY: safe
           NAME: safe
           LICENSE: MIT
-          DESCRIPTION: Vault CLI
+          DESCRIPTION: Alternative Vault CLI
           URL: https://github.com/starkandwayne/safe
           MAINTAINERS: https://github.com/starkandwayne/safe/graphs/contributors
           VENDOR: "Stark & Wayne LLC"
