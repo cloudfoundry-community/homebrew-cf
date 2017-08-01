@@ -1,0 +1,9 @@
+#!/bin/bash
+
+fly_target=${fly_target:-sw}
+pipeline=${pipeline:-homebrew-recipes}
+
+debian_jobs=($(spruce json ci/pipeline.yml | jq -r ".jobs[] | select(.serial_groups // [] == \"[apt]\") | .name"))
+for job in ${debian_jobs[@]}; do
+  fly -t $fly_target trigger-job -j $pipeline/$job
+done
