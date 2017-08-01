@@ -93,15 +93,9 @@ jobs:
         outputs:
         - name: certs
         run:
-          path: sh
-          args:
-          - -exc
-          - |
-            echo "$GPG_ID" > certs/id
-            echo "$GPG_PUBLIC_KEY" > certs/public.key
-            set +x
-            echo "$GPG_PRIVATE_KEY" > certs/private.key
+          path: "homebrew/ci/scripts/setup-gpg-certs.sh"
         params:
+          REPO_OUT: certs
           GPG_ID: (( grab meta.gpg.id ))
           GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
           GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
