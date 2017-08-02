@@ -52,6 +52,7 @@ groups:
   - cf-cli-debian
   - jq-debian
   - sipcalc-debian
+  - om-debian
 - name: homebrew
   jobs:
   - spruce-homebrew
@@ -74,6 +75,7 @@ groups:
   - cf-cli-debian
   - jq-debian
   - sipcalc-debian
+  - om-debian
 
 jobs:
   - name: safe-debian
@@ -805,6 +807,45 @@ jobs:
           GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
           GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
 
+  - name: om-debian
+    public: true
+    serial_groups: [apt]
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: om
+        resource: om
+        trigger: true
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: om
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY: om-linux
+          OUT_BINARY: om
+          NAME: om
+          LICENSE: Apache2
+          DESCRIPTION: Magical tool that helps you configure and deploy tiles to an Ops-Manager 1.8+
+          URL: http://www.routemeister.net/
+          MAINTAINERS: Pivotal RelEng
+          VENDOR: Pivotal
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+          GPG_ID: (( grab meta.gpg.id ))
+          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
+          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
+
 resources:
 - name: homebrew
   type: git
@@ -901,4 +942,11 @@ resources:
   source:
     user: starkandwayne
     repository: sipcalc
+    access_token: (( grab meta.github.access_token ))
+
+- name: om
+  type: github-release
+  source:
+    user: pivotal-cf
+    repository: om
     access_token: (( grab meta.github.access_token ))
