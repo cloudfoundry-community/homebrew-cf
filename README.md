@@ -48,6 +48,7 @@ apt-get install jq
 apt-get install sipcalc
 
 apt-get install om
+apt-get install pivnet-cli
 ```
 
 NOTE: The `vault` package was manually created by https://gist.github.com/drnic/c03bf5929c7da3421e3978058845512b. The CI pipeline needs a way to detect and fetch latest Vault CLI downloads.

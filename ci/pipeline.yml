@@ -53,6 +53,7 @@ groups:
   - jq-debian
   - sipcalc-debian
   - om-debian
+  - pivnet-cli-debian
 - name: homebrew
   jobs:
   - spruce-homebrew
@@ -76,6 +77,7 @@ groups:
   - jq-debian
   - sipcalc-debian
   - om-debian
+  - pivnet-cli-debian
 
 jobs:
   - name: safe-debian
@@ -836,7 +838,46 @@ jobs:
           NAME: om
           LICENSE: Apache2
           DESCRIPTION: Magical tool that helps you configure and deploy tiles to an Ops-Manager 1.8+
-          URL: http://www.routemeister.net/
+          URL: https://github.com/pivotal-cf/om
+          MAINTAINERS: Pivotal RelEng
+          VENDOR: Pivotal
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+          GPG_ID: (( grab meta.gpg.id ))
+          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
+          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
+
+  - name: pivnet-cli-debian
+    public: true
+    serial_groups: [apt]
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: pivnet-cli
+        resource: pivnet-cli
+        trigger: true
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: pivnet-cli
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY: pivnet-linux-amd64*
+          OUT_BINARY: pivnet
+          NAME: pivnet-cli
+          LICENSE: Apache2
+          DESCRIPTION: CLI to interact with Pivotal Network
+          URL: https://github.com/pivotal-cf/om
           MAINTAINERS: Pivotal RelEng
           VENDOR: Pivotal
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
@@ -949,4 +990,11 @@ resources:
   source:
     user: pivotal-cf
     repository: om
+    access_token: (( grab meta.github.access_token ))
+
+- name: pivnet-cli
+  type: github-release
+  source:
+    user: pivotal-cf
+    repository: pivnet-cli
     access_token: (( grab meta.github.access_token ))
