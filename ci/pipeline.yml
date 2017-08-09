@@ -54,6 +54,8 @@ groups:
   - sipcalc-debian
   - om-debian
   - pivnet-cli-debian
+  - concourse-fly-debian
+  - concourse-debian
 - name: homebrew
   jobs:
   - spruce-homebrew
@@ -78,6 +80,8 @@ groups:
   - sipcalc-debian
   - om-debian
   - pivnet-cli-debian
+  - concourse-fly-debian
+  - concourse-debian
 
 jobs:
   - name: safe-debian
@@ -887,6 +891,85 @@ jobs:
           GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
           GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
 
+  - name: concourse-fly-debian
+    public: true
+    serial_groups: [apt]
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: concourse
+        resource: concourse
+        trigger: true
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: concourse
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY: fly_linux_amd64
+          OUT_BINARY: fly
+          NAME: concourse-fly
+          LICENSE: Apache2
+          DESCRIPTION: CLI to interact with Concourse CI
+          URL: https://github.com/concourse/fly
+          MAINTAINERS: https://github.com/concourse/fly/graphs/contributors
+          VENDOR: Pivotal
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+          GPG_ID: (( grab meta.gpg.id ))
+          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
+          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
+
+  - name: concourse-debian
+    public: true
+    serial_groups: [apt]
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: concourse
+        resource: concourse
+        trigger: true
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: concourse
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY: concourse_linux_amd64
+          OUT_BINARY: concourse
+          NAME: concourse
+          LICENSE: Apache2
+          DESCRIPTION: Concourse CI server
+          URL: https://concourse.ci/binaries.html
+          MAINTAINERS: https://github.com/concourse/concourse/graphs/contributors
+          VENDOR: Pivotal
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+          GPG_ID: (( grab meta.gpg.id ))
+          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
+          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
+          FPM_FLAGS: --deb-recommends concourse-fly
+
 resources:
 - name: homebrew
   type: git
@@ -997,4 +1080,11 @@ resources:
   source:
     user: pivotal-cf
     repository: pivnet-cli
+    access_token: (( grab meta.github.access_token ))
+
+- name: concourse
+  type: github-release
+  source:
+    user: concourse
+    repository: concourse
     access_token: (( grab meta.github.access_token ))

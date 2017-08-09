@@ -47,6 +47,9 @@ apt-get install cf-cli
 apt-get install jq
 apt-get install sipcalc
 
+apt-get install concourse-fly
+apt-get install concourse # also installs concourse-fly
+
 apt-get install om
 apt-get install pivnet-cli
 ```
