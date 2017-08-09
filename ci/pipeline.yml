@@ -901,6 +901,8 @@ jobs:
       - get: concourse
         resource: concourse
         trigger: true
+        params:
+          globs: [fly_linux_amd64]
     - task: create-debian
       config:
         platform: linux
@@ -940,6 +942,8 @@ jobs:
       - get: concourse
         resource: concourse
         trigger: true
+        params:
+          globs: [concourse_linux_amd64]
     - task: create-debian
       config:
         platform: linux
