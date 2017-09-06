@@ -40,6 +40,7 @@ groups:
   - shield-debian
   - safe-homebrew
   - safe-debian
+  - eden-homebrew
   - eden-debian
   - gotcha-homebrew
   - gotcha-debian
@@ -62,6 +63,7 @@ groups:
   - spruce-homebrew
   - shield-homebrew
   - safe-homebrew
+  - eden-homebrew
   - gotcha-homebrew
   - genesis-homebrew
   - bosh2-homebrew
@@ -124,6 +126,39 @@ jobs:
           GPG_ID: (( grab meta.gpg.id ))
           GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
           GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
+
+  - name: eden-homebrew
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: eden
+        resource: eden
+        trigger: true
+    - task: update-homebrew
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: eden
+          path: recipe
+        outputs:
+        - name: pushme
+        run:
+          path: "homebrew/ci/scripts/update-homebrew.sh"
+          args:
+          - eden.rb
+        params:
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          BINARY: "eden-darwin-amd64"
+    - put: homebrew
+      params:
+        repository: pushme/homebrew
+        rebase: true
 
   - name: safe-debian
     public: true
