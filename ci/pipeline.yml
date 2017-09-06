@@ -40,6 +40,7 @@ groups:
   - shield-debian
   - safe-homebrew
   - safe-debian
+  - eden-debian
   - gotcha-homebrew
   - gotcha-debian
   - genesis-homebrew
@@ -70,6 +71,7 @@ groups:
   - spruce-debian
   - shield-debian
   - safe-debian
+  - eden-debian
   - gotcha-debian
   - genesis-debian
   - bosh-cli-debian
@@ -84,6 +86,45 @@ groups:
   - concourse-debian
 
 jobs:
+  - name: eden-debian
+    public: true
+    serial_groups: [apt]
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: eden
+        resource: eden
+        trigger: true
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: eden
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY: "eden-linux-amd64"
+          OUT_BINARY: eden
+          NAME: eden
+          LICENSE: MIT
+          DESCRIPTION: CLI to any Open Service Broker API
+          URL: https://github.com/starkandwayne/eden
+          MAINTAINERS: https://github.com/starkandwayne/eden/graphs/contributors
+          VENDOR: "Stark & Wayne LLC"
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+          GPG_ID: (( grab meta.gpg.id ))
+          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
+          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
+
   - name: safe-debian
     public: true
     serial_groups: [apt]
@@ -1001,6 +1042,13 @@ resources:
   source:
     user: starkandwayne
     repository: safe
+    access_token: (( grab meta.github.access_token ))
+
+- name: eden
+  type: github-release
+  source:
+    user: starkandwayne
+    repository: eden
     access_token: (( grab meta.github.access_token ))
 
 - name: gotcha
