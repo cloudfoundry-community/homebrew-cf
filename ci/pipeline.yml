@@ -1063,7 +1063,7 @@ jobs:
         resource: hub
         trigger: true
         params:
-          globs: [hub-linux-amd64*]
+          globs: [hub-linux-amd64*.tgz]
     - task: create-debian
       config:
         platform: linux
@@ -1078,7 +1078,8 @@ jobs:
           DEBUG: 1
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          IN_BINARY: hub-linux-amd64*
+          IN_BINARY_PREFIX_TGZ: hub-linux-amd64
+          IN_BINARY_AFTER_UNPACK: hub
           OUT_BINARY: hub
           NAME: hub
           LICENSE: MIT

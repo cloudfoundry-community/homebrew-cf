@@ -37,6 +37,12 @@ echo ">> Creating Debian package"
 if [[ ! -x fpm ]]; then
   gem install fpm --no-ri --no-rdoc
 fi
+if [[ ${IN_BINARY_PREFIX_TGZ:-X} != "X" ]]; then
+  cd recipe
+  tar xfz $IN_BINARY_PREFIX_TGZ*tgz
+  IN_BINARY=$(ls **/*/$IN_BINARY_AFTER_UNPACK)
+  cd -
+fi
 if [[ "recipe/${IN_BINARY}" != "recipe/${OUT_BINARY}" ]]; then
   cp recipe/${IN_BINARY} recipe/${OUT_BINARY}
 fi
