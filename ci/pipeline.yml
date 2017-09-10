@@ -58,6 +58,7 @@ groups:
   - pivnet-cli-debian
   - concourse-fly-debian
   - concourse-debian
+  - hub-debian
 - name: homebrew
   jobs:
   - spruce-homebrew
@@ -86,6 +87,7 @@ groups:
   - pivnet-cli-debian
   - concourse-fly-debian
   - concourse-debian
+  - hub-debian
 
 jobs:
   - name: eden-debian
@@ -1050,6 +1052,48 @@ jobs:
           GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
           FPM_FLAGS: --deb-recommends concourse-fly
 
+  - name: hub-debian
+    public: true
+    serial_groups: [apt]
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: hub
+        resource: hub
+        trigger: true
+        params:
+          globs: [hub-linux-amd64*]
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: hub
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY: hub-linux-amd64*
+          OUT_BINARY: hub
+          NAME: hub
+          LICENSE: MIT
+          DESCRIPTION: CLI to interact with GitHub
+          URL: https://github.com/github/hub
+          MAINTAINERS: https://github.com/github/hub/graphs/contributors
+          VENDOR: GitHub
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+          GPG_ID: (( grab meta.gpg.id ))
+          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
+          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
+
+
 resources:
 - name: homebrew
   type: git
@@ -1174,4 +1218,11 @@ resources:
   source:
     user: concourse
     repository: concourse
+    access_token: (( grab meta.github.access_token ))
+
+- name: hub
+  type: github-release
+  source:
+    user: github
+    repository: hub
     access_token: (( grab meta.github.access_token ))
