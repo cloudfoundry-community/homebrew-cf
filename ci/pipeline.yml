@@ -171,8 +171,6 @@ jobs:
     - aggregate:
       - get: homebrew
         resource: homebrew
-      - get: homebrew-public-key
-        trigger: true
       - get: safe
         resource: safe
         trigger: true
@@ -245,8 +243,6 @@ jobs:
     - aggregate:
       - get: homebrew
         resource: homebrew
-      - get: homebrew-public-key
-        trigger: true
       - get: gotcha
         resource: gotcha
         trigger: true
@@ -319,8 +315,6 @@ jobs:
     - aggregate:
       - get: homebrew
         resource: homebrew
-      - get: homebrew-public-key
-        trigger: true
       - get: genesis
         resource: genesis
         trigger: true
@@ -361,8 +355,6 @@ jobs:
     - aggregate:
       - get: homebrew
         resource: homebrew
-      - get: homebrew-public-key
-        trigger: true
       - get: genesis
         resource: genesis
         trigger: true
@@ -396,8 +388,6 @@ jobs:
     - aggregate:
       - get: homebrew
         resource: homebrew
-      - get: homebrew-public-key
-        trigger: true
       - get: spruce
         resource: spruce
         trigger: true
@@ -470,8 +460,6 @@ jobs:
     - aggregate:
       - get: homebrew
         resource: homebrew
-      - get: homebrew-public-key
-        trigger: true
       - get: shield
         resource: shield
         trigger: true
@@ -544,8 +532,6 @@ jobs:
     - aggregate:
       - get: homebrew
         resource: homebrew
-      - get: homebrew-public-key
-        trigger: true
       - get: bosh-cli
         resource: bosh-cli-linux
         trigger: true
@@ -651,8 +637,6 @@ jobs:
     - aggregate:
       - get: homebrew
         resource: homebrew
-      - get: homebrew-public-key
-        trigger: true
       - get: credhub
         resource: credhub-cli
         trigger: true
@@ -711,8 +695,6 @@ jobs:
     - aggregate:
       - get: homebrew
         resource: homebrew
-      - get: homebrew-public-key
-        trigger: true
       - get: certstrap
         resource: certstrap
         trigger: true
@@ -782,8 +764,6 @@ jobs:
     - aggregate:
       - get: homebrew
         resource: homebrew
-      - get: homebrew-public-key
-        trigger: true
       - get: cf
         resource: cf-cli-linux
         trigger: true
@@ -842,8 +822,6 @@ jobs:
     - aggregate:
       - get: homebrew
         resource: homebrew
-      - get: homebrew-public-key
-        trigger: true
       - get: jq
         resource: jq
         trigger: true
@@ -883,8 +861,6 @@ jobs:
     - aggregate:
       - get: homebrew
         resource: homebrew
-      - get: homebrew-public-key
-        trigger: true
       - get: sipcalc
         resource: sipcalc
         trigger: true
@@ -924,8 +900,6 @@ jobs:
     - aggregate:
       - get: homebrew
         resource: homebrew
-      - get: homebrew-public-key
-        trigger: true
       - get: om
         resource: om
         trigger: true
@@ -965,8 +939,6 @@ jobs:
     - aggregate:
       - get: homebrew
         resource: homebrew
-      - get: homebrew-public-key
-        trigger: true
       - get: pivnet-cli
         resource: pivnet-cli
         trigger: true
@@ -1006,8 +978,6 @@ jobs:
     - aggregate:
       - get: homebrew
         resource: homebrew
-      - get: homebrew-public-key
-        trigger: true
       - get: concourse
         resource: concourse
         trigger: true
@@ -1049,8 +1019,6 @@ jobs:
     - aggregate:
       - get: homebrew
         resource: homebrew
-      - get: homebrew-public-key
-        trigger: true
       - get: concourse
         resource: concourse
         trigger: true
@@ -1093,8 +1061,6 @@ jobs:
     - aggregate:
       - get: homebrew
         resource: homebrew
-      - get: homebrew-public-key
-        trigger: true
       - get: hub
         resource: hub
         trigger: true
