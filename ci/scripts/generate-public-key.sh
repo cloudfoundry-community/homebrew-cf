@@ -4,6 +4,8 @@ set -e
 [ -n "$DEBUG" ] && set -x
 
 # This script will generate a new /public.key and updates vault with the private key info
+# To run locally:
+#   REPO_ROOT=$PWD ci/scripts/generate-public-key.sh
 
 : ${REPO_ROOT:?required}
 export KEY_AUTHOR=${KEY_AUTHOR:-"Stark & Wayne Bot"}
@@ -36,7 +38,7 @@ gpg --list-keys
 
 key_id=$(gpg --list-keys "${KEY_AUTHOR}" | grep "^      " | tail -n1 | awk '{print $1}')
 echo "New key ID: $key_id"
-echo 5B1ADEF310E816BB30E7E729825FA0CE67EE52E3 > tmp/bot.id
+echo ${key_id} > tmp/bot.id
 gpg --export -a ${key_id} > public.key
 gpg --export-secret-keys -a ${key_id} > tmp/bot.private.key
 safe set ${GPG_SAFE_PATH} public@public.key private@tmp/bot.private.key id@tmp/bot.id
