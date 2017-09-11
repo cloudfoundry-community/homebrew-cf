@@ -8,6 +8,7 @@ set -e
 #   REPO_ROOT=$PWD ci/scripts/generate-public-key.sh
 #
 # Tips on unattended GPG key generation: https://www.gnupg.org/documentation/manuals/gnupg/Unattended-GPG-key-generation.html
+# Debian GPG key requirements: https://keyring.debian.org/creating-key.html
 
 : ${REPO_ROOT:?required}
 export KEY_AUTHOR=${KEY_AUTHOR:-"Stark & Wayne Bot"}
@@ -19,6 +20,12 @@ pushd ${REPO_ROOT}
 mkdir -p tmp
 
 export GNUPGHOME="$(mktemp -d)"
+cat >$GNUPGHOME/gpg.conf <<EOF
+personal-digest-preferences SHA256
+cert-digest-algo SHA256
+default-preference-list SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES CAST5 ZLIB BZIP2 ZIP Uncompressed
+EOF
+
 cat >tmp/bot <<EOF
     %no-protection
     %echo Generating a basic OpenPGP key
@@ -44,7 +51,7 @@ echo ${key_id} > tmp/bot.id
 gpg --export -a ${key_id} > public.key
 gpg --export-secret-keys -a ${key_id} > tmp/bot.private.key
 safe set ${GPG_SAFE_PATH} public@public.key private@tmp/bot.private.key id@tmp/bot.id
-ci/repipe
+ci/repipe --non-interactive
 
 gpg --list-keys
 gpg --fingerprint
