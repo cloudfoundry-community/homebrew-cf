@@ -6,6 +6,8 @@ set -e
 # This script will generate a new /public.key and updates vault with the private key info
 # To run locally:
 #   REPO_ROOT=$PWD ci/scripts/generate-public-key.sh
+#
+# Tips on unattended GPG key generation: https://www.gnupg.org/documentation/manuals/gnupg/Unattended-GPG-key-generation.html
 
 : ${REPO_ROOT:?required}
 export KEY_AUTHOR=${KEY_AUTHOR:-"Stark & Wayne Bot"}
