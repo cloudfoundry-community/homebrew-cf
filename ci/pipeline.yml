@@ -59,6 +59,7 @@ groups:
   - concourse-fly-debian
   - concourse-debian
   - hub-debian
+  - direnv-debian
 - name: homebrew
   jobs:
   - spruce-homebrew
@@ -88,6 +89,7 @@ groups:
   - concourse-fly-debian
   - concourse-debian
   - hub-debian
+  - direnv-debian
 
 jobs:
   - name: eden-debian
@@ -1097,6 +1099,47 @@ jobs:
           GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
 
 
+  - name: direnv-debian
+    public: true
+    serial_groups: [apt]
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: direnv
+        resource: direnv
+        params:
+          globs: [direnv.linux-amd64]
+        trigger: true
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: direnv
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY: direnv.linux-amd64
+          OUT_BINARY: direnv
+          NAME: direnv
+          LICENSE: MIT
+          DESCRIPTION: Unclutter your .profile
+          URL: https://github.com/direnv/direnv
+          MAINTAINERS: https://github.com/direnv/direnv
+          VENDOR: https://github.com/direnv/direnv
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+          GPG_ID: (( grab meta.gpg.id ))
+          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
+          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
+
 resources:
 - name: homebrew
   type: git
@@ -1236,4 +1279,11 @@ resources:
   source:
     user: github
     repository: hub
+    access_token: (( grab meta.github.access_token ))
+
+- name: direnv
+  type: github-release
+  source:
+    user: direnv
+    repository: direnv
     access_token: (( grab meta.github.access_token ))
