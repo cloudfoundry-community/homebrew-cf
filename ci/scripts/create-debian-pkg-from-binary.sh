@@ -43,12 +43,19 @@ if [[ ${IN_BINARY_PREFIX_TGZ:-X} != "X" ]]; then
   IN_BINARY=$(ls **/*/$IN_BINARY_AFTER_UNPACK)
   cd -
 fi
-if [[ "recipe/${IN_BINARY}" != "recipe/${OUT_BINARY}" ]]; then
-  cp recipe/${IN_BINARY} recipe/${OUT_BINARY}
-fi
-chmod +x recipe/${OUT_BINARY}
+
+recipe_binaries=
+provides=
+for binary in $OUT_BINARY; do
+  if [[ "recipe/${IN_BINARY}" != "recipe/${binary}" ]]; then
+    cp recipe/${IN_BINARY} recipe/${binary}
+  fi
+  chmod +x recipe/${binary}
+  recipe_binaries="${recipe_binaries} recipe/${binary}=/usr/bin/${binary} "
+  provides="${provides} --provides ${binary} "
+done
+
 fpm -s dir -t deb -n "${NAME:?required}" -v "${VERSION}" \
-  --provides "${OUT_BINARY}" \
   --vendor "${VENDOR:-Unknown}" \
   --license "${LICENSE:-Unknown}" \
   -m "${MAINTAINERS:-Unknown}" \
@@ -56,7 +63,8 @@ fpm -s dir -t deb -n "${NAME:?required}" -v "${VERSION}" \
   --url "${URL:-Unknown}" \
   --deb-use-file-permissions \
   --deb-no-default-config-files ${FPM_FLAGS:-} \
-  recipe/${OUT_BINARY}=/usr/bin/${OUT_BINARY}
+  $provides \
+  $recipe_binaries
 
 DEBIAN_FILE="${NAME}_${VERSION}_amd64.deb"
 

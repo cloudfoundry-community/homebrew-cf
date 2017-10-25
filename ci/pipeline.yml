@@ -552,7 +552,7 @@ jobs:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
           IN_BINARY: "bosh-cli-*-linux-amd64"
-          OUT_BINARY: bosh2
+          OUT_BINARY: bosh bosh2
           NAME: bosh-cli
           LICENSE: Apache2
           DESCRIPTION: Interact with BOSH director
