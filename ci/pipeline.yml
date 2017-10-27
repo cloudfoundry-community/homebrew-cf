@@ -1269,6 +1269,7 @@ resources:
 
 - name: concourse
   type: github-release
+  check_every: 30m
   source:
     user: concourse
     repository: concourse
