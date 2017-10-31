@@ -35,7 +35,6 @@ apt-get update
 apt-get install spruce
 apt-get install safe
 apt-get install bosh-cli
-apt-get install vault
 apt-get install genesis # also installs spruce, safe, vault, bosh-cli, git, perl
 
 apt-get install gotcha
@@ -49,6 +48,9 @@ apt-get install jq
 apt-get install sipcalc
 apt-get install hub
 apt-get install direnv
+
+apt-get install terraform
+apt-get install vault
 
 apt-get install concourse-fly
 apt-get install concourse # also installs concourse-fly
