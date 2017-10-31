@@ -43,6 +43,12 @@ if [[ ${IN_BINARY_PREFIX_TGZ:-X} != "X" ]]; then
   IN_BINARY=$(ls **/*/$IN_BINARY_AFTER_UNPACK)
   cd -
 fi
+if [[ ${IN_BINARY_PREFIX_ZIP:-X} != "X" ]]; then
+  cd recipe
+  unzip $IN_BINARY_PREFIX_ZIP*zip
+  IN_BINARY=${IN_BINARY_AFTER_UNPACK:-$OUT_BINARY}
+  cd -
+fi
 
 recipe_binaries=
 provides=
