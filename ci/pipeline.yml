@@ -46,6 +46,7 @@ groups:
   - gotcha-debian
   - genesis-homebrew
   - genesis-debian
+  - kafka-service-broker-debian
   - bosh2-homebrew
   - bosh-cli-debian
   - bosh-init-homebrew
@@ -79,6 +80,7 @@ groups:
   - eden-debian
   - gotcha-debian
   - genesis-debian
+  - kafka-service-broker-debian
   - bosh-cli-debian
   - credhub-cli-debian
   - certstrap-debian
@@ -343,6 +345,46 @@ jobs:
           DESCRIPTION: BOSH Deployment Paradigm
           URL: https://github.com/starkandwayne/genesis
           MAINTAINERS: https://github.com/starkandwayne/genesis/graphs/contributors
+          VENDOR: "Stark & Wayne LLC"
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+          GPG_ID: (( grab meta.gpg.id ))
+          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
+          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
+          FPM_FLAGS: --deb-recommends bosh-cli --deb-recommends safe --deb-recommends spruce --deb-recommends vault --deb-recommends git --deb-recommends perl
+
+  - name: kafka-service-broker-debian
+    public: true
+    serial_groups: [apt]
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: kafka-service-broker
+        resource: kafka-service-broker
+        trigger: true
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: kafka-service-broker
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY: "kafka-service-broker-linux-amd64"
+          OUT_BINARY: kafka-service-broker
+          NAME: kafka-service-broker
+          LICENSE: MIT
+          DESCRIPTION: Open Service Broker for Apache Kafka
+          URL: https://github.com/starkandwayne/kafka-service-broker
+          MAINTAINERS: https://github.com/starkandwayne/kafka-service-broker/graphs/contributors
           VENDOR: "Stark & Wayne LLC"
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
@@ -1239,6 +1281,13 @@ resources:
   source:
     user: starkandwayne
     repository: genesis
+    access_token: (( grab meta.github.access_token ))
+
+- name: kafka-service-broker
+  type: github-release
+  source:
+    user: starkandwayne
+    repository: kafka-service-broker
     access_token: (( grab meta.github.access_token ))
 
 - name: bosh2
