@@ -40,6 +40,7 @@ apt-get install genesis # also installs spruce, safe, vault, bosh-cli, git, perl
 apt-get install gotcha
 apt-get install shield
 apt-get install eden
+apt-get install kafka-service-broker
 
 apt-get install certstrap
 apt-get install credhub-cli
