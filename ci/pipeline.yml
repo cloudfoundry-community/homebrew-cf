@@ -42,11 +42,12 @@ groups:
   - safe-debian
   - eden-homebrew
   - eden-debian
+  - kafka-service-broker-homebrew
+  - kafka-service-broker-debian
   - gotcha-homebrew
   - gotcha-debian
   - genesis-homebrew
   - genesis-debian
-  - kafka-service-broker-debian
   - bosh2-homebrew
   - bosh-cli-debian
   - bosh-init-homebrew
@@ -68,6 +69,7 @@ groups:
   - shield-homebrew
   - safe-homebrew
   - eden-homebrew
+  - kafka-service-broker-homebrew
   - gotcha-homebrew
   - genesis-homebrew
   - bosh2-homebrew
@@ -78,9 +80,9 @@ groups:
   - shield-debian
   - safe-debian
   - eden-debian
+  - kafka-service-broker-debian
   - gotcha-debian
   - genesis-debian
-  - kafka-service-broker-debian
   - bosh-cli-debian
   - credhub-cli-debian
   - certstrap-debian
@@ -96,6 +98,79 @@ groups:
   - terraform-debian
 
 jobs:
+  - name: kafka-service-broker-debian
+    public: true
+    serial_groups: [apt]
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: kafka-service-broker
+        resource: kafka-service-broker
+        trigger: true
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: kafka-service-broker
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY: "kafka-service-broker-linux-amd64"
+          OUT_BINARY: kafka-service-broker
+          NAME: kafka-service-broker
+          LICENSE: MIT
+          DESCRIPTION: Open Service Broker for Apache Kafka
+          URL: https://github.com/starkandwayne/kafka-service-broker
+          MAINTAINERS: https://github.com/starkandwayne/kafka-service-broker/graphs/contributors
+          VENDOR: "Stark & Wayne LLC"
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+          GPG_ID: (( grab meta.gpg.id ))
+          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
+          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
+
+  - name: kafka-service-broker-homebrew
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: kafka-service-broker
+        resource: kafka-service-broker
+        trigger: true
+    - task: update-homebrew
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: kafka-service-broker
+          path: recipe
+        outputs:
+        - name: pushme
+        run:
+          path: "homebrew/ci/scripts/update-homebrew.sh"
+          args:
+          - kafka-service-broker.rb
+        params:
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          BINARY: "kafka-service-broker-darwin-amd64"
+    - put: homebrew
+      params:
+        repository: pushme/homebrew
+        rebase: true
+
+
   - name: eden-debian
     public: true
     serial_groups: [apt]
@@ -353,45 +428,6 @@ jobs:
           GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
           GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
           FPM_FLAGS: --deb-recommends bosh-cli --deb-recommends safe --deb-recommends spruce --deb-recommends vault --deb-recommends git --deb-recommends perl
-
-  - name: kafka-service-broker-debian
-    public: true
-    serial_groups: [apt]
-    plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: kafka-service-broker
-        resource: kafka-service-broker
-        trigger: true
-    - task: create-debian
-      config:
-        platform: linux
-        image_resource: (( grab meta.image ))
-        inputs:
-        - name: homebrew
-        - name: kafka-service-broker
-          path: recipe
-        run:
-          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
-        params:
-          DEBUG: 1
-          REPO_ROOT: homebrew
-          REPO_OUT: pushme
-          IN_BINARY: "kafka-service-broker-linux-amd64"
-          OUT_BINARY: kafka-service-broker
-          NAME: kafka-service-broker
-          LICENSE: MIT
-          DESCRIPTION: Open Service Broker for Apache Kafka
-          URL: https://github.com/starkandwayne/kafka-service-broker
-          MAINTAINERS: https://github.com/starkandwayne/kafka-service-broker/graphs/contributors
-          VENDOR: "Stark & Wayne LLC"
-          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
-          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
-          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
-          GPG_ID: (( grab meta.gpg.id ))
-          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
-          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
 
   - name: genesis-homebrew
     public: true
