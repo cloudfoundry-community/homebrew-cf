@@ -3,10 +3,10 @@ require "FileUtils"
 class KafkaServiceBroker < Formula
   homepage "https://github.com/starkandwayne/kafka-service-broker"
 
-  v = "v2.0.1" # CI Managed
+  v = "v2.1.0" # CI Managed
   url "https://github.com/starkandwayne/kafka-service-broker/releases/download/#{v}/kafka-service-broker-darwin-amd64"
   version v
-  sha256 "ed65a26af598a9ef5d866dc941962d95732a2282573a815478303c1cb6c7cf4c" # CI Managed
+  sha256 "6f38f1d145b24ea0a9f92e5c21ead9586610f951ac519e940fd0d821d1c82511" # CI Managed
 
   def install
     FileUtils.mv("kafka-service-broker-darwin-amd64", "kafka-service-broker")
