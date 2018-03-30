@@ -58,6 +58,7 @@ apt-get install concourse # also installs concourse-fly
 
 apt-get install om
 apt-get install pivnet-cli
+apt-get install pks
 ```
 
 NOTE: The `vault` package was manually created by https://gist.github.com/drnic/c03bf5929c7da3421e3978058845512b. The CI pipeline needs a way to detect and fetch latest Vault CLI downloads.
