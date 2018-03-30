@@ -1,5 +1,8 @@
 ---
 meta:
+  name: homebrew-recipes
+  target: sw
+
   github:
     owner: starkandwayne
     repo: homebrew-cf
@@ -16,5 +19,5 @@ meta:
     public_key:  (( vault "secret/pipelines/homebrew/gpg:public" ))
     private_key: (( vault "secret/pipelines/homebrew/gpg:private" ))
 
-  name: homebrew-recipes
-  target: sw
+  pivnet:
+    api-token: (( vault "secret/pipelines/" meta.pipeline "/pivnet:api-token" ))

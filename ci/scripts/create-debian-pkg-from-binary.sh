@@ -18,6 +18,8 @@ if [[ -z "${VERSION:-}" ]]; then
 fi
 # strip any non numbers; https://github.com/stedolan/jq/releases tag is "jq-1.5"
 VERSION=$(echo $VERSION | sed "s/^[a-z\-]*//")
+# pivnet versions might look like 1.0.0#2018-02-15T14:57:14.495Z
+VERSION=$(echo $VERSION | sed "s/#.*//")
 
 mkdir -p certs
 echo "${GPG_ID:?required}" > certs/id

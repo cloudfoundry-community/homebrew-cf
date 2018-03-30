@@ -31,6 +31,9 @@ meta:
     public_key:  (( param "Please provide GPG public key for signing packages" ))
     private_key: (( param "Please provide GPG private key for signing packages" ))
 
+  pivnet:
+    api-token: (( param "Please set api token for pivnet ))
+
 groups:
 - name: (( grab meta.name ))
   jobs:
@@ -58,6 +61,7 @@ groups:
   - sipcalc-debian
   - om-debian
   - pivnet-cli-debian
+  - pks-debian
   - concourse-fly-debian
   - concourse-debian
   - hub-debian
@@ -91,6 +95,7 @@ groups:
   - sipcalc-debian
   - om-debian
   - pivnet-cli-debian
+  - pks-debian
   - concourse-fly-debian
   - concourse-debian
   - hub-debian
@@ -1052,6 +1057,46 @@ jobs:
           GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
           GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
 
+  - name: pks-debian
+    public: true
+    serial_groups: [apt]
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: pks
+        resource: pks
+        trigger: true
+        params: {globs: [pks-linux-amd64*]}
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: pks
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY: pks-linux-amd64*
+          OUT_BINARY: pks
+          NAME: pks
+          LICENSE: PCF-PKS 1.0 OSL
+          DESCRIPTION: CLI to interact with Pivotal Container Service
+          URL: https://network.pivotal.io/products/pivotal-container-service
+          MAINTAINERS: Pivotal RelEng
+          VENDOR: Pivotal
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+          GPG_ID: (( grab meta.gpg.id ))
+          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
+          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
+
   - name: concourse-fly-debian
     public: true
     serial_groups: [apt]
@@ -1394,6 +1439,13 @@ resources:
     repository: pivnet-cli
     access_token: (( grab meta.github.access_token ))
 
+- name: pks
+  type: pivnet
+  source:
+    api_token: (( grab meta.pivnet.api-token ))
+    product_slug: pivotal-container-service
+    sort_by: semver
+
 - name: concourse
   type: github-release
   check_every: 30m
@@ -1426,3 +1478,9 @@ resource_types:
   type: docker-image
   source:
     repository: starkandwayne/hashicorp-release-resource
+
+- name: pivnet
+  type: docker-image
+  source:
+    repository: pivotalcf/pivnet-resource
+    tag: latest-final
