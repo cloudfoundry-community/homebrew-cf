@@ -14,6 +14,7 @@ Current brews offered:
 - [safe](https://github.com/starkandwayne/safe)
 - [shield](https://github.com/starkandwayne/shield)
 - [yaml2json](https://github.com/bronze1man/go-yaml2json)
+- [bosh-cli](https://github.com/cloudfoundry/bosh-cli)
 
 ```
 $ brew install spruce
