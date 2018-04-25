@@ -11,7 +11,7 @@ meta:
     type: docker-image
     source:
       repository: starkandwayne/concourse-go
-      tag: 1.8
+      tag: 1.10
 
   github:
     uri:          (( concat "git@github.com:" meta.github.owner "/" meta.github.repo ))
@@ -47,6 +47,7 @@ groups:
   - eden-debian
   - kafka-service-broker-homebrew
   - kafka-service-broker-debian
+  - install-debs-in-order-debian
   - gotcha-homebrew
   - gotcha-debian
   - genesis-homebrew
@@ -85,6 +86,7 @@ groups:
   - safe-debian
   - eden-debian
   - kafka-service-broker-debian
+  - install-debs-in-order-debian
   - gotcha-debian
   - genesis-debian
   - bosh-cli-debian
@@ -103,6 +105,45 @@ groups:
   - terraform-debian
 
 jobs:
+  - name: install-debs-in-order-debian
+    public: true
+    serial_groups: [apt]
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: install-debs-in-order
+        resource: install-debs-in-order
+        trigger: true
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: install-debs-in-order
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY: "install-debs-in-order-linux-amd64"
+          OUT_BINARY: install-debs-in-order
+          NAME: install-debs-in-order
+          LICENSE: MIT
+          DESCRIPTION: Install a directory of *.deb in the correct order
+          URL: https://github.com/starkandwayne/install-debs-in-order
+          MAINTAINERS: https://github.com/starkandwayne/install-debs-in-order/graphs/contributors
+          VENDOR: "Stark & Wayne LLC"
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+          GPG_ID: (( grab meta.gpg.id ))
+          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
+          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
+
   - name: kafka-service-broker-debian
     public: true
     serial_groups: [apt]
@@ -1368,6 +1409,13 @@ resources:
   source:
     user: starkandwayne
     repository: kafka-service-broker
+    access_token: (( grab meta.github.access_token ))
+
+- name: install-debs-in-order
+  type: github-release
+  source:
+    user: starkandwayne
+    repository: install-debs-in-order
     access_token: (( grab meta.github.access_token ))
 
 - name: bosh2

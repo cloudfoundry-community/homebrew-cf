@@ -41,6 +41,7 @@ apt-get install gotcha
 apt-get install shield
 apt-get install eden
 apt-get install kafka-service-broker
+apt-get install install-debs-in-order
 
 apt-get install certstrap
 apt-get install credhub-cli
