@@ -35,6 +35,7 @@ apt-get update
 apt-get install spruce
 apt-get install safe
 apt-get install bosh-cli
+apt-get install bosh-bootloader
 apt-get install genesis # also installs spruce, safe, vault, bosh-cli, git, perl
 
 apt-get install gotcha

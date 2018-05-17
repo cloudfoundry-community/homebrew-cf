@@ -68,6 +68,7 @@ groups:
   - hub-debian
   - direnv-debian
   - terraform-debian
+  - bosh-bootloader-debian
 - name: homebrew
   jobs:
   - spruce-homebrew
@@ -103,6 +104,7 @@ groups:
   - hub-debian
   - direnv-debian
   - terraform-debian
+  - bosh-bootloader-debian
 
 jobs:
   - name: install-debs-in-order-debian
@@ -1346,6 +1348,45 @@ jobs:
           GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
           GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
 
+  - name: bosh-bootloader-debian
+    public: true
+    serial_groups: [apt]
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: bosh-bootloader
+        resource: bosh-bootloader
+        trigger: true
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: bosh-bootloader
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY: bbl-*_linux_x86-64
+          OUT_BINARY: bbl
+          NAME: bosh-bootloader
+          LICENSE: apache2
+          DESCRIPTION: Command line utility for standing up a BOSH director on an IAAS of your choice.
+          URL: https://github.com/cloudfoundry/bosh-bootloader
+          MAINTAINERS: https://github.com/cloudfoundry/bosh-bootloader/graphs/contributors
+          VENDOR: "Cloud Foundry Foundation"
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+          GPG_ID: (( grab meta.gpg.id ))
+          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
+          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
+
 resources:
 - name: homebrew
   type: git
@@ -1520,6 +1561,13 @@ resources:
   type: hashicorp-release
   source:
     project: terraform
+
+- name: bosh-bootloader
+  type: github-release
+  source:
+    user: cloudfoundry
+    repository: bosh-bootloader
+    access_token: (( grab meta.github.access_token ))
 
 resource_types:
 - name: hashicorp-release
