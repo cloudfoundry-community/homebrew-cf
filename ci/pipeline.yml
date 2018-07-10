@@ -829,7 +829,7 @@ jobs:
       - get: homebrew
         resource: homebrew
       - get: uaa-cli
-        resource: uaa-cli
+        resource: snw-uaa-cli
         trigger: true
     - task: create-debian
       config:
@@ -868,7 +868,7 @@ jobs:
       - get: homebrew
         resource: homebrew
       - get: uaa-cli
-        resource: uaa-cli
+        resource: snw-uaa-cli
         trigger: true
     - task: update-homebrew
       config:
@@ -1562,7 +1562,7 @@ resources:
     repository: credhub-cli
     access_token: (( grab meta.github.access_token ))
 
-- name: uaa-cli
+- name: snw-uaa-cli
   type: github-release
   source:
     user: starkandwayne
