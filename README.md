@@ -14,6 +14,7 @@ Current brews offered:
 - [safe](https://github.com/starkandwayne/safe)
 - [shield](https://github.com/starkandwayne/shield)
 - [yaml2json](https://github.com/bronze1man/go-yaml2json)
+- [uaa-cli](https://github.com/cloudfoundry-incubator/uaa-cli)
 
 ```
 $ brew install spruce
@@ -47,6 +48,7 @@ apt-get install install-debs-in-order
 apt-get install certstrap
 apt-get install credhub-cli
 apt-get install cf-cli
+apt-get install uaa-cli
 apt-get install jq
 apt-get install sipcalc
 apt-get install hub
