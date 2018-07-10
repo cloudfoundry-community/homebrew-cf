@@ -6,7 +6,7 @@ class UaaCli < Formula
   v = "v0.0.1" # CI Managed
   url "https://github.com/starkandwayne/uaa-cli-releases/releases/download/#{v}/uaa-darwin-amd64"
   version v
-  sha256 "4171883b97d542e9b603e793cdf9d54d3b12f4dca1218998556b716f069aa47d" # CI Managed
+  sha256 "9774626b69bf58a09266e0aeb5f8036d4bdf8b5a4fff02d63e953aff4b0eacf0" # CI Managed
 
   def install
     FileUtils.mv("uaa-darwin-amd64", "uaa")
