@@ -8,15 +8,18 @@ $ brew tap starkandwayne/cf
 
 Current brews offered:
 
-- [spruce](https://github.com/geofffranks/spruce)
-- [genesis](https://github.com/starkandwayne/genesis)
-- [gotcha](https://github.com/starkandwayne/gotcha)
-- [safe](https://github.com/starkandwayne/safe)
-- [shield](https://github.com/starkandwayne/shield)
-- [yaml2json](https://github.com/bronze1man/go-yaml2json)
-- [uaa-cli](https://github.com/cloudfoundry-incubator/uaa-cli)
+- Stark & Wayne tools:
+  - [genesis](https://github.com/starkandwayne/genesis)
+  - [gotcha](https://github.com/starkandwayne/gotcha)
+  - [safe](https://github.com/starkandwayne/safe)
+  - [shield](https://github.com/starkandwayne/shield)
+- Other's tools:
+  - [spruce](https://github.com/geofffranks/spruce)
+  - [yaml2json](https://github.com/bronze1man/go-yaml2json)
+  - [uaa-cli](https://github.com/cloudfoundry-incubator/uaa-cli)
+  - [govc](https://github.com/vmware/govmomi)
 
-```
+```plain
 $ brew install spruce
 $ brew install gotcha
 ```
@@ -63,6 +66,8 @@ apt-get install concourse # also installs concourse-fly
 apt-get install om
 apt-get install pivnet-cli
 apt-get install pks
+
+apt-get install govc
 ```
 
 NOTE: The `vault` package was manually created by https://gist.github.com/drnic/c03bf5929c7da3421e3978058845512b. The CI pipeline needs a way to detect and fetch latest Vault CLI downloads.

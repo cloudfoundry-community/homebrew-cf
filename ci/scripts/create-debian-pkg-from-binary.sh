@@ -51,6 +51,12 @@ if [[ ${IN_BINARY_PREFIX_ZIP:-X} != "X" ]]; then
   IN_BINARY=${IN_BINARY_AFTER_UNPACK:-$OUT_BINARY}
   cd -
 fi
+if [[ ${IN_BINARY_PREFIX_GZ:-X} != "X" ]]; then
+  cd recipe
+  gunzip $IN_BINARY_PREFIX_GZ*gz
+  IN_BINARY=${IN_BINARY_AFTER_UNPACK:-$OUT_BINARY}
+  cd -
+fi
 
 recipe_binaries=
 provides=

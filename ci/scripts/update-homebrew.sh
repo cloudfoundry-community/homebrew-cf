@@ -50,7 +50,7 @@ if [[ "$(git status -s)X" != "X" ]]; then
   if [[ -z $(git config --global user.name) ]]; then
     git config --global user.name "CI Bot"
   fi
-  
+
   set -e
   echo ">> Running git operations as $(git config --global user.name) <$(git config --global user.email)>"
   echo ">> Getting back to master (from detached-head)"
