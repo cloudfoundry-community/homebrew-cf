@@ -5,7 +5,7 @@ class Bosh2 < Formula
 
   v = "v4.0.1" # CI Managed
   # remove v from version number
-  @@verNum = v.sub "v", "" 
+  @@verNum = v.sub "v", ""
   url "https://s3.amazonaws.com/bosh-cli-artifacts/bosh-cli-#{@@verNum}-darwin-amd64"
   version v
   sha256 "" # CI Managed

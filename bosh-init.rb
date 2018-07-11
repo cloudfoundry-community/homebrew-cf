@@ -5,7 +5,7 @@ class BoshInit < Formula
 
   v = "v0.0.100" # CI Managed
   # remove v from version number
-  @@verNum = v.sub "v", "" 
+  @@verNum = v.sub "v", ""
   url "https://s3.amazonaws.com/bosh-init-artifacts/bosh-init-#{@@verNum}-darwin-amd64"
   version v
   sha256 "" # CI Managed
