@@ -58,6 +58,7 @@ groups:
   - credhub-cli-debian
   - uaa-cli-homebrew
   - uaa-cli-debian
+  - riff-debian
   - certstrap-debian
   - cf-cli-debian
   - jq-debian
@@ -99,6 +100,7 @@ groups:
   - bosh-cli-debian
   - credhub-cli-debian
   - uaa-cli-debian
+  - riff-debian
   - certstrap-debian
   - cf-cli-debian
   - jq-debian
@@ -856,6 +858,47 @@ jobs:
           URL: https://github.com/cloudfoundry-incubator/uaa-cli
           MAINTAINERS: https://github.com/cloudfoundry-incubator/uaa-cli/graphs/contributors
           VENDOR: CloudFoundry.org Foundation, Inc.
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+          GPG_ID: (( grab meta.gpg.id ))
+          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
+          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
+
+  - name: riff-debian
+    public: true
+    serial_groups: [apt]
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: riff
+        trigger: true
+        params:
+          globs: [riff-linux-amd64.tgz]
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: riff
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY_PREFIX_TGZ: riff-linux-amd64
+          IN_BINARY_AFTER_UNPACK: riff
+          OUT_BINARY: riff
+          NAME: riff
+          LICENSE: Apache-2.0
+          DESCRIPTION: riff is for functions
+          URL: https://github.com/projectriff/riff
+          MAINTAINERS: https://github.com/projectriff/riff/graphs/contributors
+          VENDOR: Pivotal Inc
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -1656,6 +1699,14 @@ resources:
   source:
     user: square
     repository: certstrap
+    access_token: (( grab meta.github.access_token ))
+
+- name: riff
+  type: github-release
+  source:
+    owner: projectriff
+    repository: riff
+    pre_release: true
     access_token: (( grab meta.github.access_token ))
 
 - name: cf-cli-linux

@@ -63,6 +63,7 @@ apt-get install vault
 apt-get install concourse-fly
 apt-get install concourse # also installs concourse-fly
 
+apt-get install riff
 apt-get install om
 apt-get install pivnet-cli
 apt-get install pks
