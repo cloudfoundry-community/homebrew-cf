@@ -58,6 +58,7 @@ groups:
   - credhub-cli-debian
   - uaa-cli-homebrew
   - uaa-cli-debian
+  - riff-homebrew
   - riff-debian
   - certstrap-debian
   - cf-cli-debian
@@ -85,6 +86,7 @@ groups:
   - genesis-homebrew
   - bosh2-homebrew
   - uaa-cli-homebrew
+  - riff-homebrew
   - bosh-init-homebrew
   - govc-homebrew
 - name: debian
@@ -865,6 +867,39 @@ jobs:
           GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
           GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
 
+  - name: uaa-cli-homebrew
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: uaa-cli
+        resource: snw-uaa-cli
+        trigger: true
+    - task: update-homebrew
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: uaa-cli
+          path: recipe
+        outputs:
+        - name: pushme
+        run:
+          path: "homebrew/ci/scripts/update-homebrew.sh"
+          args:
+          - uaa-cli.rb
+        params:
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          BINARY: "uaa-darwin-amd64"
+    - put: homebrew
+      params:
+        repository: pushme/homebrew
+        rebase: true
+
   - name: riff-debian
     public: true
     serial_groups: [apt]
@@ -906,34 +941,36 @@ jobs:
           GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
           GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
 
-  - name: uaa-cli-homebrew
+  - name: riff-homebrew
     public: true
     serial: true
     plan:
     - aggregate:
       - get: homebrew
         resource: homebrew
-      - get: uaa-cli
-        resource: snw-uaa-cli
+      - get: riff
+        resource: riff
         trigger: true
+        params:
+          globs: [riff-darwin-amd64.tgz]
     - task: update-homebrew
       config:
         platform: linux
         image_resource: (( grab meta.image ))
         inputs:
         - name: homebrew
-        - name: uaa-cli
+        - name: riff
           path: recipe
         outputs:
         - name: pushme
         run:
           path: "homebrew/ci/scripts/update-homebrew.sh"
           args:
-          - uaa-cli.rb
+          - riff.rb
         params:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          BINARY: "uaa-darwin-amd64"
+          BINARY: riff-darwin-amd64.tgz
     - put: homebrew
       params:
         repository: pushme/homebrew
