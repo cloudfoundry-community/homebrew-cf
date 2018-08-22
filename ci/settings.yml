@@ -1,23 +1,23 @@
 ---
 meta:
   name: homebrew-recipes
-  target: sw
+  target: pipes
 
   github:
     owner: starkandwayne
     repo: homebrew-cf
-    private_key: (( vault  "secret/pipelines/shared/github:private_key" ))
-    access_token: (( vault "secret/pipelines/shared/github:access_token" ))
+    private_key: (( vault  "secret/pipelines/github/starkandwayne/ci-bot:private" ))
+    access_token: (( vault "secret/pipelines/github/starkandwayne/ci-bot:access_token" ))
 
   debian:
     s3_bucket: apt.starkandwayne.com
-    aws_access_key: (( vault "secret/pipelines/homebrew/aws:aws_access_key" ))
-    aws_secret_key: (( vault "secret/pipelines/homebrew/aws:aws_secret_key" ))
+    aws_access_key: (( vault "secret/pipelines/aws/packaging:access_key" ))
+    aws_secret_key: (( vault "secret/pipelines/aws/packaging:secret_key" ))
 
   gpg:
-    id:  (( vault "secret/pipelines/homebrew/gpg:id" ))
-    public_key:  (( vault "secret/pipelines/homebrew/gpg:public" ))
-    private_key: (( vault "secret/pipelines/homebrew/gpg:private" ))
+    id:  (( vault "secret/pipelines/gpg/packaging:id" ))
+    public_key:  (( vault "secret/pipelines/gpg/packaging:public" ))
+    private_key: (( vault "secret/pipelines/gpg/packaging:private" ))
 
   pivnet:
-    api-token: (( vault "secret/pipelines/" meta.pipeline "/pivnet:api-token" ))
+    api-token: (( vault "secret/pipelines/pivnet/starkandwayne:token" ))

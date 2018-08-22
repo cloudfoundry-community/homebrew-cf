@@ -52,9 +52,8 @@ groups:
   - gotcha-debian
   - genesis-homebrew
   - genesis-debian
-  - bosh2-homebrew
+  - bosh-homebrew
   - bosh-cli-debian
-  - bosh-init-homebrew
   - credhub-cli-debian
   - uaa-cli-homebrew
   - uaa-cli-debian
@@ -84,10 +83,9 @@ groups:
   - kafka-service-broker-homebrew
   - gotcha-homebrew
   - genesis-homebrew
-  - bosh2-homebrew
+  - bosh-homebrew
   - uaa-cli-homebrew
   - riff-homebrew
-  - bosh-init-homebrew
   - govc-homebrew
 - name: debian
   jobs:
@@ -690,7 +688,7 @@ jobs:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
           IN_BINARY: "bosh-cli-*-linux-amd64"
-          OUT_BINARY: bosh bosh2
+          OUT_BINARY: bosh bosh
           NAME: bosh-cli
           LICENSE: Apache2
           DESCRIPTION: Interact with BOSH director
@@ -704,15 +702,15 @@ jobs:
           GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
           GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
 
-  - name: bosh2-homebrew
+  - name: bosh-homebrew
     public: true
     serial: true
     plan:
     - aggregate:
       - get: homebrew
         resource: homebrew
-      - get: bosh2
-        resource: bosh2
+      - get: bosh
+        resource: bosh
         trigger: true
     - task: update-homebrew
       config:
@@ -720,51 +718,18 @@ jobs:
         image_resource: (( grab meta.image ))
         inputs:
         - name: homebrew
-        - name: bosh2
+        - name: bosh
           path: recipe
         outputs:
         - name: pushme
         run:
           path: "homebrew/ci/scripts/update-homebrew.sh"
           args:
-          - bosh2.rb
+          - bosh.rb
         params:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
           BINARY: "bosh-cli-*-darwin-amd64"
-    - put: homebrew
-      params:
-        repository: pushme/homebrew
-        rebase: true
-
-  - name: bosh-init-homebrew
-    public: true
-    serial: true
-    plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: bosh-init
-        resource: bosh-init
-        trigger: true
-    - task: update-homebrew
-      config:
-        platform: linux
-        image_resource: (( grab meta.image ))
-        inputs:
-        - name: homebrew
-        - name: bosh-init
-          path: recipe
-        outputs:
-        - name: pushme
-        run:
-          path: "homebrew/ci/scripts/update-homebrew.sh"
-          args:
-          - bosh-init.rb
-        params:
-          REPO_ROOT: homebrew
-          REPO_OUT: pushme
-          BINARY: "bosh-init-*-darwin-amd64"
     - put: homebrew
       params:
         repository: pushme/homebrew
@@ -1697,7 +1662,7 @@ resources:
     repository: install-debs-in-order
     access_token: (( grab meta.github.access_token ))
 
-- name: bosh2
+- name: bosh
   type: github-release
   source:
     user: cloudfoundry
@@ -1709,13 +1674,6 @@ resources:
   source:
     bucket: bosh-cli-artifacts
     regexp: bosh-cli-(.*)-linux-amd64
-
-- name: bosh-init
-  type: github-release
-  source:
-    user: cloudfoundry
-    repository: bosh-init
-    access_token: (( grab meta.github.access_token ))
 
 - name: credhub-cli
   type: github-release

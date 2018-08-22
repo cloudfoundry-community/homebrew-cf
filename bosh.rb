@@ -1,6 +1,6 @@
 require "FileUtils"
 
-class Bosh2 < Formula
+class Bosh < Formula
   homepage "https://github.com/cloudfoundry/bosh-cli"
 
   v = "v5.1.2" # CI Managed
@@ -11,11 +11,11 @@ class Bosh2 < Formula
   sha256 "" # CI Managed
 
   def install
-    FileUtils.mv("bosh-cli-#{@@verNum}-darwin-amd64", "bosh2")
-    bin.install "bosh2"
+    FileUtils.mv("bosh-cli-#{@@verNum}-darwin-amd64", "bosh")
+    bin.install "bosh"
   end
 
   test do
-    system "#{bin}/bosh2", "--version"
+    system "#{bin}/bosh", "--version"
   end
 end
