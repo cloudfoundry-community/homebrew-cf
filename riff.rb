@@ -3,10 +3,10 @@ require "FileUtils"
 class Riff < Formula
   homepage "https://github.com/projectriff/riff"
 
-  v = "v0.1.1" # CI Managed
+  v = "v0.1.2" # CI Managed
   url "https://github.com/projectriff/riff/releases/download/#{v}/riff-darwin-amd64.tgz"
   version v
-  sha256 "04e35c54bccc2471740f8cd840e77b7a361a8c69cd419782cde0271f3dcbfad4" # CI Managed
+  sha256 "b492be38a37ddc4ab9241ffe963522381cc72b49d7b6b8731edb13d3758c1a0f" # CI Managed
 
   def gunzip(filename)
     command = "gunzip --force #{filename}"
