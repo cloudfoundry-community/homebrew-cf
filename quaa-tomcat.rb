@@ -10,6 +10,8 @@ class QuaaTomcat < Formula
   sha256 "373036b0135fb27ffc9475c1b53bcf160a984cf17d145013862a3cc8248829e1"
 
   depends_on :java => "1.8+"
+  depends_on "cloudfoundry/tap/bosh-cli" => "5.2.2"
+  depends_on "starkandwayne/cf/uaa-cli" => "0.0.1"
 
   resource "tomcat" do
     url "https://www.apache.org/dyn/closer.cgi?path=/tomcat/tomcat-9/v9.0.12/bin/apache-tomcat-9.0.12.tar.gz"
@@ -22,14 +24,18 @@ class QuaaTomcat < Formula
 
   def install
     resource("tomcat").stage do
-      # Install files
-      prefix.install %w[NOTICE LICENSE RELEASE-NOTES RUNNING.txt]
+      puts "Installing Apache Tomcat..."
       libexec.install Dir["*"]
       bin.install_symlink "#{libexec}/bin/catalina.sh" => "uaa-catalina"
     end
+
+    p warfile = Dir['*.war'].first
+    p Formula["cloudfoundry/tap/bosh-cli"].opt_bin
+    p Formula["starkandwayne/cf/uaa-cli"].opt_bin
+    # prefix.install resource("manifests")
   end
 
-  plist_options :manual => "catalina run"
+  plist_options :manual => "uaa-catalina run"
 
   def plist; <<~EOS
     <?xml version="1.0" encoding="UTF-8"?>
@@ -58,11 +64,11 @@ class QuaaTomcat < Formula
     rm Dir["#{libexec}/logs/*"]
 
     pid = fork do
-      exec bin/"catalina", "start"
+      exec bin/"uaa-catalina", "start"
     end
     sleep 3
     begin
-      system bin/"catalina", "stop"
+      system bin/"uaa-catalina", "stop"
     ensure
       Process.wait pid
     end
