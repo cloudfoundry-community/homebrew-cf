@@ -23,19 +23,21 @@ class QuaaTomcat < Formula
   end
 
   def install
+    warfile = Dir['*.war'].first
+    prefix.install resource("manifests")
+    FileUtils.mkdir_p "#{prefix}/operators"
+    FileUtils.cp "#{prefix}/manifests/ops-files/3-http-only.yml", "#{prefix}/operators/3-http-only.yml"
+    FileUtils.rm_rf "#{prefix}/.envrc"
+
     resource("tomcat").stage do
       puts "Installing Apache Tomcat..."
       libexec.install Dir["*"]
       bin.install_symlink "#{libexec}/bin/catalina.sh" => "uaa-catalina"
     end
 
-    p warfile = Dir['*.war'].first
-    p Formula["cloudfoundry/tap/bosh-cli"].opt_bin
-    p Formula["starkandwayne/cf/uaa-cli"].opt_bin
-    # prefix.install resource("manifests")
   end
 
-  plist_options :manual => "uaa-catalina run"
+  # plist_options :manual => "uaa-catalina run"
 
   def plist; <<~EOS
     <?xml version="1.0" encoding="UTF-8"?>
@@ -48,11 +50,24 @@ class QuaaTomcat < Formula
         <string>#{plist_name}</string>
         <key>ProgramArguments</key>
         <array>
-          <string>#{opt_bin}/uaa-catalina</string>
-          <string>run</string>
+          <string>#{opt_bin}/quaa</string>
+          <string>up</string>
         </array>
         <key>KeepAlive</key>
         <true/>
+        <key>EnvironmentVariables</key>
+        <dict>
+          <key>UAADEPLOY_PROJECT_ROOT</key>
+          <string>#{prefix}</string>
+          <key>CATALINA_BIN</key>
+          <string>uaa-catalina</string>
+          <key>OPTIONAL_CLI_INSTALL</key>
+          <string>1</string>
+        </dict>
+        <key>StandardOutPath</key>
+        <string>#{libexec}/logs/launchd.out.log</string>
+        <key>StandardErrorPath</key>
+        <string>#{libexec}/logs/launchd.err.log</string>
       </dict>
     </plist>
   EOS
