@@ -2,10 +2,10 @@ class Quaa < Formula
   desc "Quickly run Cloud Foundry UAA inside Apache Tomcat"
   homepage "https://github.com/cloudfoundry/uaa"
 
-  v = "1.0.0" # CI Managed
+  v = "1.0.2" # CI Managed
   url "https://github.com/starkandwayne/quick-uaa-local/archive/v#{v}.tar.gz"
   version v
-  sha256 "2a548d745beab2f1403f53fa88f82c6c51353b5c92bef3f774ac4b33d885d3a6"
+  sha256 "c51de317600995b38af54905740fb1bde8cac171a9aa987d2f78cabfea6d65e0"
 
   devel do
     url "https://github.com/starkandwayne/quick-uaa-local.git", using: :git
