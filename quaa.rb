@@ -2,16 +2,21 @@ class Quaa < Formula
   desc "Quickly run Cloud Foundry UAA inside Apache Tomcat"
   homepage "https://github.com/cloudfoundry/uaa"
 
-  v = "v4.20.0" # CI Managed
-  # remove v from version number
-  verNum = v.sub "v", ""
-  url "https://github.com/starkandwayne/uaa-war-releases/releases/download/v#{verNum}/cloudfoundry-identity-uaa-#{verNum}.war"
+  v = "1.0.0" # CI Managed
+  url "https://github.com/starkandwayne/quick-uaa-local/archive/v#{v}.tar.gz"
   version v
-  sha256 "373036b0135fb27ffc9475c1b53bcf160a984cf17d145013862a3cc8248829e1"
+  sha256 "2a548d745beab2f1403f53fa88f82c6c51353b5c92bef3f774ac4b33d885d3a6"
 
   depends_on :java => "1.8+"
   depends_on "cloudfoundry/tap/bosh-cli" => "5.2.2"
   depends_on "starkandwayne/cf/uaa-cli" => "0.0.1"
+
+  resource "uaa-server" do
+    v = "4.20.0"
+    url "https://github.com/starkandwayne/uaa-war-releases/releases/download/v#{v}/cloudfoundry-identity-uaa-#{v}.war"
+    version "4.20.0"
+    sha256 "373036b0135fb27ffc9475c1b53bcf160a984cf17d145013862a3cc8248829e1"
+  end
 
   resource "tomcat" do
     version = "9.0.12"
@@ -24,15 +29,16 @@ class Quaa < Formula
   end
 
   def install
-    warfile  = Dir['*.war'].first
-    share.install warfile
-
     bosh_bin = File.join(Formula["cloudfoundry/tap/bosh-cli"].opt_bin, "bosh")
     uaa_bin  = File.join(Formula["starkandwayne/cf/uaa-cli"].opt_bin, "uaa")
 
-    resource("manifests").stage do
-      puts "Installing quaa manifests..."
-      (share/"manifests").install Dir["*", ".versions"]
+    puts "Installing quaa manifests..."
+    (share/"manifests").install Dir["*", ".versions"]
+
+    warfile = nil
+    resource("uaa-server").stage do
+      warfile = Dir['*.war'].first
+      share.install warfile
     end
 
     resource("tomcat").stage do
