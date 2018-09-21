@@ -34,7 +34,6 @@ class Quaa < Formula
     bosh_bin = File.join(Formula["cloudfoundry/tap/bosh-cli"].opt_bin, "bosh")
     uaa_bin  = File.join(Formula["starkandwayne/cf/uaa-cli"].opt_bin, "uaa")
 
-    puts "Installing quaa manifests..."
     (share/"manifests").install Dir["*", ".versions"]
 
     warfile = nil
@@ -44,7 +43,6 @@ class Quaa < Formula
     end
 
     resource("tomcat").stage do
-      puts "Installing Apache Tomcat..."
       (libexec/"tomcat").install Dir["*"]
     end
 
@@ -63,6 +61,30 @@ cd $DIR/..
 SHELL
     bin.mkpath
     (bin/"quaa").binwrite(quaa)
+
+    puts <<-README
+
+    To run an in-memory UAA:
+
+        quaa up
+
+    To run the UAA backed by your local existing PostgreSQL database:
+
+        quaa up --postgresql
+
+    The UAA will be running at http://localhost:8080
+
+    In another terminal, you can target & authorize the new "uaa" CLI:
+
+        quaa auth-client
+
+    Example "uaa" commands to try:
+
+        uaa clients
+        uaa users
+        uss groups
+
+    README
   end
 
   plist_options :manual => "quaa up"
