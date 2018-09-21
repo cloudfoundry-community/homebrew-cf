@@ -7,6 +7,11 @@ class Quaa < Formula
   version v
   sha256 "2a548d745beab2f1403f53fa88f82c6c51353b5c92bef3f774ac4b33d885d3a6"
 
+  devel do
+    url "https://github.com/starkandwayne/quick-uaa-local.git", using: :git
+  end
+
+
   depends_on :java => "1.8+"
   depends_on "cloudfoundry/tap/bosh-cli" => "5.2.2"
   depends_on "starkandwayne/cf/uaa-cli" => "0.0.1"
@@ -14,18 +19,15 @@ class Quaa < Formula
   resource "uaa-server" do
     v = "4.20.0"
     url "https://github.com/starkandwayne/uaa-war-releases/releases/download/v#{v}/cloudfoundry-identity-uaa-#{v}.war"
-    version "4.20.0"
+    version v
     sha256 "373036b0135fb27ffc9475c1b53bcf160a984cf17d145013862a3cc8248829e1"
   end
 
   resource "tomcat" do
     version = "9.0.12"
     url "http://www-eu.apache.org/dist/tomcat/tomcat-9/v#{version}/bin/apache-tomcat-#{version}.tar.gz"
+    version v
     sha256 "1fa3d15dcbe7b1addf03cab39b27908b9e5bc3a26ab0c268c0abcc88920f51dc"
-  end
-
-  resource "manifests" do
-    url "https://github.com/starkandwayne/quick-uaa-local.git", using: :git
   end
 
   def install
@@ -65,7 +67,7 @@ SHELL
 
   plist_options :manual => "quaa up"
 
-  def plist; <<~EOS
+  def _plist; <<~EOS
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
     <plist version="1.0">
