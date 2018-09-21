@@ -12,7 +12,7 @@ class Quaa < Formula
   end
 
 
-  depends_on :java => "1.8"
+  depends_on java: "1.8"
   depends_on "cloudfoundry/tap/bosh-cli" => "5.2.2"
   depends_on "starkandwayne/cf/uaa-cli" => "0.0.1"
 
