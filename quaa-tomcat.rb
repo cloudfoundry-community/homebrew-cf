@@ -57,7 +57,7 @@ SHELL
     (bin/"quaa").binwrite(quaa)
   end
 
-  # plist_options :manual => "uaa-catalina run"
+  plist_options :manual => "quaa up"
 
   def plist; <<~EOS
     <?xml version="1.0" encoding="UTF-8"?>
@@ -75,15 +75,6 @@ SHELL
         </array>
         <key>KeepAlive</key>
         <true/>
-        <key>EnvironmentVariables</key>
-        <dict>
-          <key>UAADEPLOY_PROJECT_ROOT</key>
-          <string>#{prefix}</string>
-          <key>CATALINA_BIN</key>
-          <string>uaa-catalina</string>
-          <key>OPTIONAL_CLI_INSTALL</key>
-          <string>1</string>
-        </dict>
         <key>StandardOutPath</key>
         <string>#{libexec}/logs/launchd.out.log</string>
         <key>StandardErrorPath</key>
