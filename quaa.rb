@@ -1,5 +1,5 @@
-class QuaaTomcat < Formula
-  desc "Cloud Foundry UAA running inside Apache Tomcat"
+class Quaa < Formula
+  desc "Quickly run Cloud Foundry UAA inside Apache Tomcat"
   homepage "https://github.com/cloudfoundry/uaa"
 
   v = "v4.20.0" # CI Managed
