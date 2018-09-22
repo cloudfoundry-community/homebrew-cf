@@ -1,23 +1,24 @@
 ---
 meta:
-  name: homebrew-recipes
-  target: pipes
+  name: homebrew-cf
+  target: ohio-sw
+  # url: https://ci2.starkandwayne.com team: starkandwayne
 
   github:
     owner: starkandwayne
     repo: homebrew-cf
-    private_key: (( vault  "secret/pipelines/github/starkandwayne/ci-bot:private" ))
-    access_token: (( vault "secret/pipelines/github/starkandwayne/ci-bot:access_token" ))
+    private_key: ((github-private-key))
+    access_token: ((github-access-token))
 
   debian:
     s3_bucket: apt.starkandwayne.com
-    aws_access_key: (( vault "secret/pipelines/aws/packaging:access_key" ))
-    aws_secret_key: (( vault "secret/pipelines/aws/packaging:secret_key" ))
+    aws_access_key: ((aws-secret-key))
+    aws_secret_key: ((aws-access-key))
 
   gpg:
-    id:  (( vault "secret/pipelines/gpg/packaging:id" ))
-    public_key:  (( vault "secret/pipelines/gpg/packaging:public" ))
-    private_key: (( vault "secret/pipelines/gpg/packaging:private" ))
+    id:  ((gpg-packaging-id))
+    public_key:  ((gpg-packaging-public))
+    private_key: ((gpg-packaging-private))
 
   pivnet:
-    api-token: (( vault "secret/pipelines/pivnet/starkandwayne:token" ))
+    api-token: ((pivnet-token))
