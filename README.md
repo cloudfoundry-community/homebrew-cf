@@ -1,9 +1,11 @@
-A homebrew tap for useful BOSH / Cloud Foundry utilities
+# Homebrew Tap & Debian Packages for useful BOSH / Cloud Foundry / Kubernetes utilities
 
-To enable:
+## Homebrew
 
-```
-$ brew tap starkandwayne/cf
+To enable Homebrew Tap:
+
+```plain
+brew tap starkandwayne/cf
 ```
 
 Current brews offered:
@@ -20,18 +22,26 @@ Current brews offered:
   - [govc](https://github.com/vmware/govmomi)
 
 ```plain
-$ brew install spruce
-$ brew install gotcha
+brew install bosh
+brew install eden
+brew install genesis
+brew install gotcha
+brew install govc
+brew install kafka-service-broker
+brew install quaa
+brew install riff
+brew install safe
+brew install shield
+brew install spruce
+brew install uaa-cli
+brew install yaml2json
 ```
-
-Coming soon:
-- [cloudfoundry-utils](https://github.com/starkandwayne/cloudfoundry-utils)
 
 ## Debian packages
 
 This project automatically packages several CLI binaries as Debian packages. To install:
 
-```
+```plain
 wget -q -O - https://raw.githubusercontent.com/starkandwayne/homebrew-cf/master/public.key | apt-key add -
 echo "deb http://apt.starkandwayne.com stable main" | tee /etc/apt/sources.list.d/starkandwayne.list
 apt-get update
@@ -75,6 +85,13 @@ NOTE: The `vault` package was manually created by https://gist.github.com/drnic/
 
 To update the static site's index.html, run:
 
-```
+```plain
 aws s3 sync apt/ s3://apt.starkandwayne.com/
 ```
+
+## CI
+
+The CI pipeline to automatically update these Homebrew & Debian packages is:
+
+- Hosted at https://ci2.starkandwayne.com/teams/starkandwayne/pipelines/homebrew-cf
+- Defined at https://github.com/starkandwayne/homebrew-cf under the ci/ folder
