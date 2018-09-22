@@ -16,43 +16,17 @@ class Quaa < Formula
   depends_on "cloudfoundry/tap/bosh-cli" => "5.2.2"
   depends_on "starkandwayne/cf/uaa-cli" => "0.0.1"
 
-  resource "uaa-server" do
-    v = "4.20.0"
-    url "https://github.com/starkandwayne/uaa-war-releases/releases/download/v#{v}/cloudfoundry-identity-uaa-#{v}.war"
-    version v
-    sha256 "373036b0135fb27ffc9475c1b53bcf160a984cf17d145013862a3cc8248829e1"
-  end
-
-  resource "tomcat" do
-    version = "9.0.12"
-    url "http://www-eu.apache.org/dist/tomcat/tomcat-9/v#{version}/bin/apache-tomcat-#{version}.tar.gz"
-    version v
-    sha256 "1fa3d15dcbe7b1addf03cab39b27908b9e5bc3a26ab0c268c0abcc88920f51dc"
-  end
-
   def install
     bosh_bin = File.join(Formula["cloudfoundry/tap/bosh-cli"].opt_bin, "bosh")
     uaa_bin  = File.join(Formula["starkandwayne/cf/uaa-cli"].opt_bin, "uaa")
 
     (share/"manifests").install Dir["*", ".versions"]
 
-    warfile = nil
-    resource("uaa-server").stage do
-      warfile = Dir['*.war'].first
-      share.install warfile
-    end
-
-    resource("tomcat").stage do
-      (libexec/"tomcat").install Dir["*"]
-    end
-
     quaa = <<-SHELL
 #!/bin/bash
 
-export TOMCAT_TGZ_PATH=#{(share/warfile)}
 export BOSH_BIN=#{bosh_bin}
 export UAA_BIN=#{uaa_bin}
-export CATALINA_BIN=#{(libexec/"tomcat/bin/catalina.sh")}
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR/..
