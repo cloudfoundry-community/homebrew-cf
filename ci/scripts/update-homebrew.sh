@@ -28,9 +28,18 @@ function auto_sed() {
 echo ">> Retrieving version + sha256 metadata"
 
 VERSION=$(cat recipe/version)
+TAG=$(cat recipe/tag)
 if [[ -z "${VERSION:-}" ]]; then
   echo >&2 "VERSION not found in `recipe/version`"
   exit 1
+fi
+
+if [[ "${FETCH_TGZ_BASE:-X}" != "X" ]]; then
+  pushd recipe
+  fetch_tgz="${FETCH_TGZ_BASE}/${TAG}.tar.gz"
+  curl -L $fetch_tgz -O
+  BINARY=${TAG}.tar.gz
+  popd
 fi
 
 # change to the root of the homebrew repo

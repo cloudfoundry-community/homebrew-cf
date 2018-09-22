@@ -1622,7 +1622,7 @@ jobs:
         params:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          BINARY: "*.tar.gz"
+          FETCH_TGZ_BASE: https://github.com/starkandwayne/quick-uaa-local/archive/
     - put: homebrew
       params:
         repository: pushme/homebrew
