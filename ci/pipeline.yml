@@ -74,6 +74,7 @@ groups:
   - bosh-bootloader-debian
   - govc-homebrew
   - govc-debian
+  - quaa-homebrew
 - name: homebrew
   jobs:
   - spruce-homebrew
@@ -87,6 +88,7 @@ groups:
   - uaa-cli-homebrew
   - riff-homebrew
   - govc-homebrew
+  - quaa-homebrew
 - name: debian
   jobs:
   - spruce-debian
@@ -1590,6 +1592,42 @@ jobs:
         repository: pushme/homebrew
         rebase: true
 
+  - name: quaa-homebrew
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: quaa
+        resource: quick-uaa-local
+        params:
+          globs: ['x']
+          include_source_tarball: true
+        trigger: true
+    - task: update-homebrew
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: quaa
+          path: recipe
+        outputs:
+        - name: pushme
+        run:
+          path: "homebrew/ci/scripts/update-homebrew.sh"
+          args:
+          - quaa.rb
+        params:
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          BINARY: "*.tar.gz"
+    - put: homebrew
+      params:
+        repository: pushme/homebrew
+        rebase: true
+
 resources:
 - name: homebrew
   type: git
@@ -1785,6 +1823,13 @@ resources:
   source:
     user: vmware
     repository: govmomi
+    access_token: (( grab meta.github.access_token ))
+
+- name: quick-uaa-local
+  type: github-release
+  source:
+    user: starkandwayne
+    repository: quick-uaa-local
     access_token: (( grab meta.github.access_token ))
 
 resource_types:
