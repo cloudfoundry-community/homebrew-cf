@@ -5,7 +5,7 @@ class Quaa < Formula
   v = "v1.0.4" # CI Managed
   url "https://github.com/starkandwayne/quick-uaa-local/archive/#{v}.tar.gz"
   version v
-  sha256 "496cff79ae37f3e6904591d019427fb5f460acc8ad6f61a1cb57a08c5849ca4c" # CI Managed
+  sha256 "bef7ecc603ef40aaf92b4eb31070853ea7e3968149e57b0ecda6ae6faee228d1" # CI Managed
 
   devel do
     url "https://github.com/starkandwayne/quick-uaa-local.git", using: :git
