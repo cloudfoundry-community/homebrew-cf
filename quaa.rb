@@ -56,7 +56,7 @@ SHELL
 
         uaa clients
         uaa users
-        uss groups
+        uaa groups
 
     README
   end
