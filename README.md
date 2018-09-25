@@ -67,6 +67,8 @@ apt-get install sipcalc
 apt-get install hub
 apt-get install direnv
 
+apt-get install pack
+
 apt-get install terraform
 apt-get install vault
 
