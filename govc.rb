@@ -3,10 +3,10 @@ require "FileUtils"
 class Govc < Formula
   homepage "https://github.com/vmware/govmomi"
 
-  v = "v0.18.0" # CI Managed
+  v = "v0.19.0" # CI Managed
   url "https://github.com/vmware/govmomi/releases/download/#{v}/govc_darwin_amd64.gz"
   version v
-  sha256 "58d522f32e79c509f4b42edb7d0e80ef0bade5592520df06b93c8f91731e780a" # CI Managed
+  sha256 "9b67f43580cdd731ff1b963e6767248e8bbdb523c29fb97d54210574ff6e085a" # CI Managed
 
   def gunzip(filename)
     command = "gunzip --force #{filename}"
