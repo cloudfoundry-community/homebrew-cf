@@ -4,7 +4,7 @@ class Pack < Formula
   homepage "https://github.com/buildpack/pack"
 
   v = "v0.0.4" # CI Managed
-  url "https://github.com/buildpack/pack/releases/download/#{v}/pack-macos"
+  url "https://github.com/buildpack/pack/releases/download/#{v}/pack-macos.tar.gz"
   version v
   sha256 "" # CI Managed
 
