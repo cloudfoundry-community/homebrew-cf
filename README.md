@@ -30,12 +30,17 @@ brew install govc
 brew install kafka-service-broker
 brew install quaa
 brew install riff
-brew install safe
+brew install starkandwayne/cf/safe
 brew install shield
 brew install spruce
 brew install uaa-cli
 brew install yaml2json
 ```
+
+**Please note:** The Homebrew-core formula for Safe is broken, unmaintained,
+and unsupported by us. It will, however, take precedence when running 
+`brew install safe`. Please ensure you use `brew install starkandwayne/cf/safe`
+to install the proper version provided by this tap.
 
 ## Debian packages
 
