@@ -1659,7 +1659,7 @@ jobs:
         params:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          BINARY: "pack-macos.tar.gz"
+          BINARY: "pack-*-macos.tar.gz"
     - put: homebrew
       params:
         repository: pushme/homebrew
@@ -1689,7 +1689,7 @@ jobs:
           DEBUG: 1
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          IN_BINARY: pack-linux.tar.gz
+          IN_BINARY: pack-*-linux.tar.gz
           OUT_BINARY: pack
           NAME: pack
           LICENSE: Apache 2.0
