@@ -3,10 +3,10 @@ require "FileUtils"
 class Eden < Formula
   homepage "https://github.com/starkandwayne/eden"
 
-  v = "v0.7.0" # CI Managed
+  v = "v0.7.1" # CI Managed
   url "https://github.com/starkandwayne/eden/releases/download/#{v}/eden-darwin-amd64"
   version v
-  sha256 "05c1718cd7154514e5e8dc8814e9d609b0d235e4d894610a5384b607905c3e42" # CI Managed
+  sha256 "3c77b121f3ac886a3f4647c58edef74d803a840e2c02f4c249d82bbfc6f465f4" # CI Managed
 
   def install
     FileUtils.mv("eden-darwin-amd64", "eden")
