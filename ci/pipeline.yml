@@ -57,8 +57,6 @@ groups:
   - credhub-cli-debian
   - uaa-cli-homebrew
   - uaa-cli-debian
-  - riff-homebrew
-  - riff-debian
   - certstrap-debian
   - cf-cli-debian
   - jq-debian
@@ -77,6 +75,10 @@ groups:
   - quaa-homebrew
   - pack-homebrew
   - pack-debian
+
+  - riff-homebrew
+  - riff-debian
+  - knctl-debian
 - name: homebrew
   jobs:
   - spruce-homebrew
@@ -88,10 +90,10 @@ groups:
   - genesis-homebrew
   - bosh-homebrew
   - uaa-cli-homebrew
-  - riff-homebrew
   - govc-homebrew
   - quaa-homebrew
   - pack-homebrew
+  - riff-homebrew
 - name: debian
   jobs:
   - spruce-debian
@@ -105,7 +107,6 @@ groups:
   - bosh-cli-debian
   - credhub-cli-debian
   - uaa-cli-debian
-  - riff-debian
   - certstrap-debian
   - cf-cli-debian
   - jq-debian
@@ -121,6 +122,8 @@ groups:
   - bosh-bootloader-debian
   - govc-debian
   - pack-debian
+  - riff-debian
+  - knctl-debian
 
 jobs:
   - name: install-debs-in-order-debian
@@ -870,6 +873,46 @@ jobs:
       params:
         repository: pushme/homebrew
         rebase: true
+
+  - name: knctl-debian
+    public: true
+    serial_groups: [apt]
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: knctl
+        trigger: true
+        params:
+          globs: [knctl-linux-amd64]
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: knctl
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY: knctl-linux-amd64
+          OUT_BINARY: knctl
+          NAME: knctl
+          LICENSE: Apache-2.0
+          DESCRIPTION: Knative CLI
+          URL: https://github.com/cppforlife/knctl
+          MAINTAINERS: https://github.com/cppforlife/knctl/graphs/contributors
+          VENDOR: Pivotal Inc
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+          GPG_ID: (( grab meta.gpg.id ))
+          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
+          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
 
   - name: riff-debian
     public: true
@@ -1913,6 +1956,13 @@ resources:
   source:
     user: buildpack
     repository: pack
+    access_token: (( grab meta.github.access_token ))
+
+- name: knctl
+  type: github-release
+  source:
+    user: cppforlife
+    repository: knctl
     access_token: (( grab meta.github.access_token ))
 
 resource_types:
