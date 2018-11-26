@@ -52,7 +52,6 @@ groups:
   - gotcha-debian
   - genesis-homebrew
   - genesis-debian
-  - bosh-homebrew
   - bosh-cli-debian
   - credhub-cli-debian
   - uaa-cli-homebrew
@@ -89,7 +88,6 @@ groups:
   - kafka-service-broker-homebrew
   - gotcha-homebrew
   - genesis-homebrew
-  - bosh-homebrew
   - uaa-cli-homebrew
   - govc-homebrew
   - quaa-homebrew
@@ -712,39 +710,6 @@ jobs:
           GPG_ID: (( grab meta.gpg.id ))
           GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
           GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
-
-  - name: bosh-homebrew
-    public: true
-    serial: true
-    plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: bosh
-        resource: bosh
-        trigger: true
-    - task: update-homebrew
-      config:
-        platform: linux
-        image_resource: (( grab meta.image ))
-        inputs:
-        - name: homebrew
-        - name: bosh
-          path: recipe
-        outputs:
-        - name: pushme
-        run:
-          path: "homebrew/ci/scripts/update-homebrew.sh"
-          args:
-          - bosh.rb
-        params:
-          REPO_ROOT: homebrew
-          REPO_OUT: pushme
-          BINARY: "bosh-cli-*-darwin-amd64"
-    - put: homebrew
-      params:
-        repository: pushme/homebrew
-        rebase: true
 
   - name: credhub-cli-debian
     public: true
@@ -1852,13 +1817,6 @@ resources:
   source:
     user: starkandwayne
     repository: install-debs-in-order
-    access_token: (( grab meta.github.access_token ))
-
-- name: bosh
-  type: github-release
-  source:
-    user: cloudfoundry
-    repository: bosh-cli
     access_token: (( grab meta.github.access_token ))
 
 - name: bosh-cli-linux
