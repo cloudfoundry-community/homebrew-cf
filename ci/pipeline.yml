@@ -61,6 +61,7 @@ groups:
   - cf-cli-debian
   - jq-debian
   - sipcalc-debian
+  - om-homebrew
   - om-debian
   - pivnet-cli-debian
   - pks-debian
@@ -94,6 +95,7 @@ groups:
   - quaa-homebrew
   - pack-homebrew
   - riff-homebrew
+  - om-homebrew
 - name: debian
   jobs:
   - spruce-debian
@@ -1194,6 +1196,39 @@ jobs:
           GPG_ID: (( grab meta.gpg.id ))
           GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
           GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
+
+  - name: om-homebrew
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: om
+        resource: om
+        trigger: true
+    - task: update-homebrew
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: om
+          path: recipe
+        outputs:
+        - name: pushme
+        run:
+          path: "homebrew/ci/scripts/update-homebrew.sh"
+          args:
+          - om.rb
+        params:
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          BINARY: "om-darwin"
+    - put: homebrew
+      params:
+        repository: pushme/homebrew
+        rebase: true
 
   - name: om-debian
     public: true
