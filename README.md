@@ -79,7 +79,6 @@ quaa      | Tool to quickly deploy/run the Cloud Foundry UAA locally, or to a re
 riff      | CLI tool that helps developers build and run functions using Knative | Pivotal | [projectriff/riff](https://github.com/projectriff/riff)
 safe      | CLI tool to interact with a Vault server | Stark & Wayne | [starkandwayne/safe](https://github.com/starkandwayne/safe)
 shield    | CLI tool to interact with SHIELD, a data protection offering | Stark & Wayne | [starkandwayne/shield](https://github.com/starkandwayne/shield)
-sipcalc   | IP calculator supporting both IPv4 and IPv6 | Sii | [sii/sipcalc](https://github.com/sii/sipcalc)
 spruce    | General purpose YAML & JSON merging tool | geoffranks et al. | [geoffranks/spruce](https://github.com/geoffranks/spruce)
 terraform | Tool for building, changing, and combining infrastructure safely | HashiCorp | [hashicorp/terraform](https://github.com/hashicorp/terraform)
 uaa-cli   | Experimental CLI for UAA written in Golang | Various | [cloudfoundry-community/uaa-cli](https://github.com/cloudfoundry-community/uaa-cli)

@@ -59,7 +59,6 @@ groups:
   - certstrap-debian
   - cf-cli-debian
   - jq-debian
-  - sipcalc-debian
   - om-homebrew
   - om-debian
   - pivnet-cli-debian
@@ -110,7 +109,6 @@ groups:
   - certstrap-debian
   - cf-cli-debian
   - jq-debian
-  - sipcalc-debian
   - om-debian
   - pivnet-cli-debian
   - pks-debian
@@ -1123,45 +1121,6 @@ jobs:
           GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
           GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
 
-  - name: sipcalc-debian
-    public: true
-    serial_groups: [apt]
-    plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: sipcalc
-        resource: sipcalc
-        trigger: true
-    - task: create-debian
-      config:
-        platform: linux
-        image_resource: (( grab meta.image ))
-        inputs:
-        - name: homebrew
-        - name: sipcalc
-          path: recipe
-        run:
-          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
-        params:
-          DEBUG: 1
-          REPO_ROOT: homebrew
-          REPO_OUT: pushme
-          IN_BINARY: sipcalc_linux_amd64
-          OUT_BINARY: sipcalc
-          NAME: sipcalc
-          LICENSE: Unknown
-          DESCRIPTION: Console based ip subnet calculator
-          URL: http://www.routemeister.net/
-          MAINTAINERS: Simon Ekstrand (simon@routemeister.net)
-          VENDOR: Simon Ekstrand (simon@routemeister.net)
-          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
-          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
-          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
-          GPG_ID: (( grab meta.gpg.id ))
-          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
-          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
-
   - name: om-homebrew
     public: true
     serial: true
@@ -1866,13 +1825,6 @@ resources:
   source:
     user: stedolan
     repository: jq
-    access_token: (( grab meta.github.access_token ))
-
-- name: sipcalc
-  type: github-release
-  source:
-    user: starkandwayne
-    repository: sipcalc
     access_token: (( grab meta.github.access_token ))
 
 - name: om
