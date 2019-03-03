@@ -3,11 +3,11 @@ require "FileUtils"
 class Om < Formula
   homepage "https://github.com/pivotal-cf/om"
 
-  v = "v0.51.0" # CI Managed
+  v = "v0.53.0" # CI Managed
   @@verNum = v.sub "v", ""
   url "https://github.com/pivotal-cf/om/releases/download/#{@@verNum}/om-darwin"
   version @@verNum
-  sha256 "496a6ae05b5471e1a088e9d657639970ea606edf3284a72ae8610044cb5b374b" # CI Managed
+  sha256 "ec90978d3b1b5a4bcaf953b53ca017ac40ea4f3c69bdb21f60728c9dc07f19ca" # CI Managed
 
   def install
     FileUtils.mv("om-darwin", "om")
