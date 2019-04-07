@@ -61,6 +61,7 @@ bosh-bootloader | CLI tool for standing up a BOSH director | Cloudfoundry | [clo
 eden      | CLI tool to interact with any Open Service Broker API | Stark & Wayne | [starkandwayne/eden](https://github.com/starkandwayne/eden)
 certstrap | Tools to bootstrap CAs, certificate requests, and signed certificates. | Square | [square/certstrap](https://github.com/square/certstrap)
 cf-cli    | CLI tool to interact with the Cloudfoundry API | Cloudfoundry | [cloudfoundry/cli](https://github.com/cloudfoundry/cli)
+cf7-cli    | v7 beta CLI tool to interact with the Cloudfoundry API | Cloudfoundry | [cloudfoundry/cli](https://github.com/cloudfoundry/cli)
 concourse | Continuous thing do-er | Concourse | [concourse/concourse](https://github.com/concourse/concourse)
 concourse-fly | CLI tool to interact with a Concourse server | Concourse | [concourse/fly](https://github.com/concourse/fly)
 credhub-cli | CLI tool to interact with a CredHub server | Cloudfoundry | [cloudfoundry-community/credhub-cli](https://github.com/cloudfoundry-incubator/credhub-cli)
