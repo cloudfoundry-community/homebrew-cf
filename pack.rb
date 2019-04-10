@@ -5,7 +5,7 @@ class Pack < Formula
 
   v = "v0.1.0" # CI Managed
   @@verNum = v.sub "v", ""
-  url "https://github.com/buildpack/pack/releases/download/#{v}/pack-#{@@verNum}-macos.tar.gz"
+  url "https://github.com/buildpack/pack/releases/download/#{v}/pack-#{v}-macos.tar.gz"
   version v
   sha256 "" # CI Managed
 
