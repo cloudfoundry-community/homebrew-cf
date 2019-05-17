@@ -3,7 +3,7 @@ require "FileUtils"
 class Pack < Formula
   homepage "https://github.com/buildpack/pack"
 
-  v = "v0.1.0" # CI Managed
+  v = "v0.2.0" # CI Managed
   @@verNum = v.sub "v", ""
   url "https://github.com/buildpack/pack/releases/download/#{v}/pack-#{@@verNum}-macos.tar.gz"
   version v
