@@ -71,7 +71,6 @@ groups:
   - govc-homebrew
   - govc-debian
   - quaa-homebrew
-  - pack-homebrew
   - pack-debian
 
   - riff-homebrew
@@ -89,7 +88,6 @@ groups:
   - uaa-cli-homebrew
   - govc-homebrew
   - quaa-homebrew
-  - pack-homebrew
   - riff-homebrew
   - om-homebrew
 - name: debian
@@ -1601,39 +1599,6 @@ jobs:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
           FETCH_TGZ_BASE: https://github.com/starkandwayne/quick-uaa-local/archive/
-    - put: homebrew
-      params:
-        repository: pushme/homebrew
-        rebase: true
-
-  - name: pack-homebrew
-    public: true
-    serial: true
-    plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: pack
-        params:
-        trigger: true
-    - task: update-homebrew
-      config:
-        platform: linux
-        image_resource: (( grab meta.image ))
-        inputs:
-        - name: homebrew
-        - name: pack
-          path: recipe
-        outputs:
-        - name: pushme
-        run:
-          path: "homebrew/ci/scripts/update-homebrew.sh"
-          args:
-          - pack.rb
-        params:
-          REPO_ROOT: homebrew
-          REPO_OUT: pushme
-          BINARY: "pack-*-macos.tar.gz"
     - put: homebrew
       params:
         repository: pushme/homebrew
