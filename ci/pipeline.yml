@@ -477,8 +477,8 @@ jobs:
           NAME: genesis
           LICENSE: MIT
           DESCRIPTION: BOSH Deployment Paradigm
-          URL: https://github.com/starkandwayne/genesis
-          MAINTAINERS: https://github.com/starkandwayne/genesis/graphs/contributors
+          URL: https://github.com/genesis-community/genesis
+          MAINTAINERS: https://github.com/genesis-community/genesis/graphs/contributors
           VENDOR: "Stark & Wayne LLC"
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
@@ -622,8 +622,8 @@ jobs:
           NAME: shield
           LICENSE: MIT
           DESCRIPTION: CLI to SHIELD Backup/Restore Director
-          URL: https://github.com/starkandwayne/shield
-          MAINTAINERS: https://github.com/starkandwayne/shield/graphs/contributors
+          URL: https://github.com/shieldproject/shield
+          MAINTAINERS: https://github.com/shieldproject/shield/graphs/contributors
           VENDOR: "Stark & Wayne"
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
