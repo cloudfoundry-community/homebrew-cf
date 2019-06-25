@@ -6,7 +6,7 @@ class Shield < Formula
   v = "v8.2.1" # CI Managed
   url "https://github.com/starkandwayne/shield/releases/download/#{v}/shield-darwin-amd64"
   version v
-  sha256 "c7b69c47b9346f99e27aeacbdbb22a12c5de0a287da6e3c77edfedb434728026" # CI Managed
+  sha256 "18f6f9fae64804179cdd4bb0fc538074f15d26e46102de3b726a57637ca9ff19" # CI Managed
 
   def install
     FileUtils.mv("shield-darwin-amd64", "shield")
