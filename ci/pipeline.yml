@@ -1669,7 +1669,7 @@ resources:
 - name: shield
   type: github-release
   source:
-    user: starkandwayne
+    user: shieldproject
     repository: shield
     access_token: (( grab meta.github.access_token ))
 
@@ -1697,7 +1697,7 @@ resources:
 - name: genesis
   type: github-release
   source:
-    user: starkandwayne
+    user: genesis-community
     repository: genesis
     access_token: (( grab meta.github.access_token ))
 
