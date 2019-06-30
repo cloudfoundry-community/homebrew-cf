@@ -82,6 +82,8 @@ spruce    | General purpose YAML & JSON merging tool | geoffranks et al. | [geof
 terraform | Tool for building, changing, and combining infrastructure safely | HashiCorp | [hashicorp/terraform](https://github.com/hashicorp/terraform)
 uaa-cli   | Experimental CLI for UAA written in Golang | Various | [cloudfoundry-community/uaa-cli](https://github.com/cloudfoundry-community/uaa-cli)
 vault     | Secrets management, encryption as a service, and privileged access management | HashiCorp | [hashicorp/vault](https://github.com/hashicorp/vault)
+aliyun-cli | Alibaba Cloud CLI | Alibaba Cloud | [aliyun/aliyun-cli](https://github.com/aliyun/aliyun-cli)
+
 
 _Please note that the `vault` package was manually created by
 https://gist.github.com/drnic/c03bf5929c7da3421e3978058845512b. The CI pipeline

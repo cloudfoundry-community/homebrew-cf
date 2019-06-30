@@ -72,10 +72,10 @@ groups:
   - govc-debian
   - quaa-homebrew
   - pack-debian
-
   - riff-homebrew
   - riff-debian
   - knctl-debian
+  - aliyun-debian
 - name: homebrew
   jobs:
   - spruce-homebrew
@@ -117,6 +117,7 @@ groups:
   - pack-debian
   - riff-debian
   - knctl-debian
+  - aliyun-debian
 
 jobs:
   - name: install-debs-in-order-debian
@@ -1643,6 +1644,47 @@ jobs:
           GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
           GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
 
+  - name: aliyun-debian
+    public: true
+    serial_groups: [apt]
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: homebrew
+      - get: aliyun-cli
+        resource: aliyun-cli
+        trigger: true
+        params: {globs: [aliyun-cli-linux*tgz]}
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: aliyun-cli
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY_PREFIX_TGZ: aliyun-cli-linux
+          IN_BINARY_AFTER_UNPACK: aliyun
+          OUT_BINARY: aliyun
+          NAME: aliyun-cli
+          LICENSE: Apache 2.0
+          DESCRIPTION: Alibaba Cloud CLI
+          URL: https://github.com/aliyun/aliyun-cli
+          MAINTAINERS: https://github.com/aliyun/aliyun-cli/graphs/contributors
+          VENDOR: Alibaba Cloud
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+          GPG_ID: (( grab meta.gpg.id ))
+          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
+          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
+
 resources:
 - name: homebrew
   type: git
@@ -1845,6 +1887,13 @@ resources:
   source:
     user: cppforlife
     repository: knctl
+    access_token: (( grab meta.github.access_token ))
+
+- name: aliyun-cli
+  type: github-release
+  source:
+    user: aliyun
+    repository: aliyun-cli
     access_token: (( grab meta.github.access_token ))
 
 resource_types:
