@@ -124,12 +124,11 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: install-debs-in-order
-        resource: install-debs-in-order
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: install-debs-in-order
+      resource: install-debs-in-order
+      trigger: true
     - task: create-debian
       config:
         platform: linux
@@ -163,12 +162,11 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: kafka-service-broker
-        resource: kafka-service-broker
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: kafka-service-broker
+      resource: kafka-service-broker
+      trigger: true
     - task: create-debian
       config:
         platform: linux
@@ -202,12 +200,11 @@ jobs:
     public: true
     serial: true
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: kafka-service-broker
-        resource: kafka-service-broker
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: kafka-service-broker
+      resource: kafka-service-broker
+      trigger: true
     - task: update-homebrew
       config:
         platform: linux
@@ -235,14 +232,13 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: homebrew-public-key
-        trigger: true
-      - get: eden
-        resource: eden
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: homebrew-public-key
+      trigger: true
+    - get: eden
+      resource: eden
+      trigger: true
     - task: create-debian
       config:
         platform: linux
@@ -276,12 +272,11 @@ jobs:
     public: true
     serial: true
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: eden
-        resource: eden
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: eden
+      resource: eden
+      trigger: true
     - task: update-homebrew
       config:
         platform: linux
@@ -309,12 +304,11 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: safe
-        resource: safe
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: safe
+      resource: safe
+      trigger: true
     - task: create-debian
       config:
         platform: linux
@@ -348,12 +342,11 @@ jobs:
     public: true
     serial: true
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: safe
-        resource: safe
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: safe
+      resource: safe
+      trigger: true
     - task: update-homebrew
       config:
         platform: linux
@@ -381,12 +374,11 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: gotcha
-        resource: gotcha
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: gotcha
+      resource: gotcha
+      trigger: true
     - task: create-debian
       config:
         platform: linux
@@ -420,12 +412,11 @@ jobs:
     public: true
     serial: true
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: gotcha
-        resource: gotcha
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: gotcha
+      resource: gotcha
+      trigger: true
     - task: update-homebrew
       config:
         platform: linux
@@ -453,12 +444,11 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: genesis
-        resource: genesis
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: genesis
+      resource: genesis
+      trigger: true
     - task: create-debian
       config:
         platform: linux
@@ -493,12 +483,11 @@ jobs:
     public: true
     serial: true
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: genesis
-        resource: genesis
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: genesis
+      resource: genesis
+      trigger: true
     - task: update-homebrew
       config:
         platform: linux
@@ -526,12 +515,11 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: spruce
-        resource: spruce
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: spruce
+      resource: spruce
+      trigger: true
     - task: create-debian
       config:
         platform: linux
@@ -565,12 +553,11 @@ jobs:
     public: true
     serial: true
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: spruce
-        resource: spruce
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: spruce
+      resource: spruce
+      trigger: true
     - task: update-homebrew
       config:
         platform: linux
@@ -598,12 +585,11 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: shield
-        resource: shield
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: shield
+      resource: shield
+      trigger: true
     - task: create-debian
       config:
         platform: linux
@@ -637,12 +623,11 @@ jobs:
     public: true
     serial: true
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: shield
-        resource: shield
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: shield
+      resource: shield
+      trigger: true
     - task: update-homebrew
       config:
         platform: linux
@@ -670,12 +655,11 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: bosh-cli
-        resource: bosh-cli-linux
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: bosh-cli
+      resource: bosh-cli-linux
+      trigger: true
     - task: create-debian
       config:
         platform: linux
@@ -709,12 +693,11 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: credhub
-        resource: credhub-cli
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: credhub
+      resource: credhub-cli
+      trigger: true
     - task: unpack-tgz
       config:
         platform: linux
@@ -767,12 +750,11 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: uaa-cli
-        resource: snw-uaa-cli
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: uaa-cli
+      resource: snw-uaa-cli
+      trigger: true
     - task: create-debian
       config:
         platform: linux
@@ -806,12 +788,11 @@ jobs:
     public: true
     serial: true
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: uaa-cli
-        resource: snw-uaa-cli
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: uaa-cli
+      resource: snw-uaa-cli
+      trigger: true
     - task: update-homebrew
       config:
         platform: linux
@@ -839,13 +820,12 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: knctl
-        trigger: true
-        params:
-          globs: [knctl-linux-amd64]
+    - get: homebrew
+      resource: homebrew
+    - get: knctl
+      trigger: true
+      params:
+        globs: [knctl-linux-amd64]
     - task: create-debian
       config:
         platform: linux
@@ -879,13 +859,12 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: riff
-        trigger: true
-        params:
-          globs: [riff-linux-amd64.tgz]
+    - get: homebrew
+      resource: homebrew
+    - get: riff
+      trigger: true
+      params:
+        globs: [riff-linux-amd64.tgz]
     - task: create-debian
       config:
         platform: linux
@@ -920,14 +899,13 @@ jobs:
     public: true
     serial: true
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: riff
-        resource: riff
-        trigger: true
-        params:
-          globs: [riff-darwin-amd64.tgz]
+    - get: homebrew
+      resource: homebrew
+    - get: riff
+      resource: riff
+      trigger: true
+      params:
+        globs: [riff-darwin-amd64.tgz]
     - task: update-homebrew
       config:
         platform: linux
@@ -955,13 +933,12 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: certstrap
-        resource: certstrap
-        trigger: true
-        params: { include_source_tarball: true }
+    - get: homebrew
+      resource: homebrew
+    - get: certstrap
+      resource: certstrap
+      trigger: true
+      params: { include_source_tarball: true }
     - task: compile-certstrap
       config:
         platform: linux
@@ -1024,12 +1001,11 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: cf
-        resource: cf-cli-linux
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: cf
+      resource: cf-cli-linux
+      trigger: true
     - task: unpack-tgz
       config:
         platform: linux
@@ -1082,12 +1058,11 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: cf
-        resource: cf7-cli-linux
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: cf
+      resource: cf7-cli-linux
+      trigger: true
     - task: unpack-tgz
       config:
         platform: linux
@@ -1140,12 +1115,11 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: jq
-        resource: jq
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: jq
+      resource: jq
+      trigger: true
     - task: create-debian
       config:
         platform: linux
@@ -1179,12 +1153,11 @@ jobs:
     public: true
     serial: true
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: om
-        resource: om
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: om
+      resource: om
+      trigger: true
     - task: update-homebrew
       config:
         platform: linux
@@ -1212,12 +1185,11 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: om
-        resource: om
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: om
+      resource: om
+      trigger: true
     - task: create-debian
       config:
         platform: linux
@@ -1251,12 +1223,11 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: pivnet-cli
-        resource: pivnet-cli
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: pivnet-cli
+      resource: pivnet-cli
+      trigger: true
     - task: create-debian
       config:
         platform: linux
@@ -1290,13 +1261,12 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: pks
-        resource: pks
-        trigger: true
-        params: {globs: [pks-linux-amd64*]}
+    - get: homebrew
+      resource: homebrew
+    - get: pks
+      resource: pks
+      trigger: true
+      params: {globs: [pks-linux-amd64*]}
     - task: create-debian
       config:
         platform: linux
@@ -1330,14 +1300,13 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: hub
-        resource: hub
-        trigger: true
-        params:
-          globs: [hub-linux-amd64*.tgz]
+    - get: homebrew
+      resource: homebrew
+    - get: hub
+      resource: hub
+      trigger: true
+      params:
+        globs: [hub-linux-amd64*.tgz]
     - task: create-debian
       config:
         platform: linux
@@ -1373,14 +1342,13 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: direnv
-        resource: direnv
-        params:
-          globs: [direnv.linux-amd64]
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: direnv
+      resource: direnv
+      params:
+        globs: [direnv.linux-amd64]
+      trigger: true
     - task: create-debian
       config:
         platform: linux
@@ -1414,13 +1382,12 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: terraform
-        resource: terraform
-        params: {regexp: linux_amd64}
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: terraform
+      resource: terraform
+      params: {regexp: linux_amd64}
+      trigger: true
     - task: create-debian
       config:
         platform: linux
@@ -1455,12 +1422,11 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: bosh-bootloader
-        resource: bosh-bootloader
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: bosh-bootloader
+      resource: bosh-bootloader
+      trigger: true
     - task: create-debian
       config:
         platform: linux
@@ -1494,16 +1460,15 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: homebrew-public-key
-        trigger: true
-      - get: govc
-        resource: govc
-        params:
-          globs: [govc_linux_amd64.gz]
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: homebrew-public-key
+      trigger: true
+    - get: govc
+      resource: govc
+      params:
+        globs: [govc_linux_amd64.gz]
+      trigger: true
     - task: create-debian
       config:
         platform: linux
@@ -1538,14 +1503,13 @@ jobs:
     public: true
     serial: true
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: govc
-        resource: govc
-        params:
-          globs: [govc_darwin_amd64.gz]
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: govc
+      resource: govc
+      params:
+        globs: [govc_darwin_amd64.gz]
+      trigger: true
     - task: update-homebrew
       config:
         platform: linux
@@ -1573,15 +1537,14 @@ jobs:
     public: true
     serial: true
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: quaa
-        resource: quick-uaa-local
-        params:
-          globs: ['x']
-          include_source_tarball: true
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: quaa
+      resource: quick-uaa-local
+      params:
+        globs: ['x']
+        include_source_tarball: true
+      trigger: true
     - task: update-homebrew
       config:
         platform: linux
@@ -1609,12 +1572,11 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: pack
-        resource: pack
-        trigger: true
+    - get: homebrew
+      resource: homebrew
+    - get: pack
+      resource: pack
+      trigger: true
     - task: create-debian
       config:
         platform: linux
@@ -1648,13 +1610,12 @@ jobs:
     public: true
     serial_groups: [apt]
     plan:
-    - aggregate:
-      - get: homebrew
-        resource: homebrew
-      - get: aliyun-cli
-        resource: aliyun-cli
-        trigger: true
-        params: {globs: [aliyun-cli-linux*tgz]}
+    - get: homebrew
+      resource: homebrew
+    - get: aliyun-cli
+      resource: aliyun-cli
+      trigger: true
+      params: {globs: [aliyun-cli-linux*tgz]}
     - task: create-debian
       config:
         platform: linux
