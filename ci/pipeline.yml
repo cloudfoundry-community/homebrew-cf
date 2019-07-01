@@ -76,6 +76,7 @@ groups:
   - riff-debian
   - knctl-debian
   - aliyun-debian
+  - yj-homebrew
   - yj-debian
 - name: homebrew
   jobs:
@@ -91,6 +92,7 @@ groups:
   - quaa-homebrew
   - riff-homebrew
   - om-homebrew
+  - yj-homebrew
 - name: debian
   jobs:
   - spruce-debian
@@ -1647,6 +1649,39 @@ jobs:
           GPG_ID: (( grab meta.gpg.id ))
           GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
           GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
+
+  - name: yj-homebrew
+    public: true
+    serial: true
+    plan:
+    - get: homebrew
+      resource: homebrew
+    - get: yj
+      resource: yj
+      trigger: true
+      params: {globs: [yj-macos]}
+    - task: update-homebrew
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: yj
+          path: recipe
+        outputs:
+        - name: pushme
+        run:
+          path: "homebrew/ci/scripts/update-homebrew.sh"
+          args:
+          - yj.rb
+        params:
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          BINARY: "yj-macos"
+    - put: homebrew
+      params:
+        repository: pushme/homebrew
+        rebase: true
 
   - name: yj-debian
     public: true
