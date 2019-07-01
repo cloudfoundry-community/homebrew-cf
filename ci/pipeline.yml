@@ -76,6 +76,7 @@ groups:
   - riff-debian
   - knctl-debian
   - aliyun-debian
+  - yj-debian
 - name: homebrew
   jobs:
   - spruce-homebrew
@@ -118,6 +119,7 @@ groups:
   - riff-debian
   - knctl-debian
   - aliyun-debian
+  - yj-debian
 
 jobs:
   - name: install-debs-in-order-debian
@@ -1646,6 +1648,45 @@ jobs:
           GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
           GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
 
+  - name: yj-debian
+    public: true
+    serial_groups: [apt]
+    plan:
+    - get: homebrew
+      resource: homebrew
+    - get: yj
+      resource: yj
+      trigger: true
+      params: {globs: [yj-linux]}
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: yj
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY: yj-linux
+          OUT_BINARY: yj
+          NAME: yj
+          LICENSE: apache2
+          DESCRIPTION: CLI - Convert YAML <=> TOML <=> JSON <=> HCL
+          URL: https://github.com/sclevine/yj
+          MAINTAINERS: https://github.com/sclevine/yj/graphs/contributors
+          VENDOR: Stephen Levine
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+          GPG_ID: (( grab meta.gpg.id ))
+          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
+          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
+
 resources:
 - name: homebrew
   type: git
@@ -1855,6 +1896,13 @@ resources:
   source:
     user: aliyun
     repository: aliyun-cli
+    access_token: (( grab meta.github.access_token ))
+
+- name: yj
+  type: github-release
+  source:
+    user: sclevine
+    repository: yj
     access_token: (( grab meta.github.access_token ))
 
 resource_types:
