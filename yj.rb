@@ -1,6 +1,6 @@
 require "FileUtils"
 
-class Safe < Formula
+class Yj < Formula
   homepage "https://github.com/sclevine/yj"
 
   v = "v4.0.0" # CI Managed
