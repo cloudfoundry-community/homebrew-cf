@@ -10,7 +10,7 @@ class Om < Formula
   sha256 "63bda93dce923cced123ced4cbfea06d30b042b3dd9b9f9dc2eea99570b40ca2" # CI Managed
 
   def install
-    FileUtils.mv("om-darwin", "om")
+    FileUtils.mv("om-darwin-#{@@verNum}", "om")
     bin.install "om"
   end
 
