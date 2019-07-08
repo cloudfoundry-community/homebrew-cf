@@ -5,7 +5,7 @@ class Om < Formula
 
   v = "v2.0.1" # CI Managed
   @@verNum = v.sub "v", ""
-  url "https://github.com/pivotal-cf/om/releases/download/#{@@verNum}/om-darwin"
+  url "https://github.com/pivotal-cf/om/releases/download/#{@@verNum}/om-darwin-#{@@verNum}"
   version @@verNum
   sha256 "" # CI Managed
 
