@@ -29,6 +29,9 @@ echo ">> Retrieving version + sha256 metadata"
 
 VERSION=$(cat recipe/version)
 TAG=$(cat recipe/tag)
+# Allow VERSION to be used in BINARY
+BINARY=$(eval echo "${BINARY}")
+
 if [[ -z "${VERSION:-}" ]]; then
   echo >&2 "VERSION not found in `recipe/version`"
   exit 1

@@ -1179,7 +1179,7 @@ jobs:
         params:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          BINARY: "om-darwin*"
+          BINARY: om-darwin-$VERSION
     - put: homebrew
       params:
         repository: pushme/homebrew
@@ -1208,7 +1208,7 @@ jobs:
           DEBUG: 1
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          IN_BINARY: om-linux*
+          IN_BINARY: om-linux-$VERSION
           OUT_BINARY: om
           NAME: om
           LICENSE: Apache2
