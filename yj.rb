@@ -1,4 +1,4 @@
-require "FileUtils"
+require "fileutils"
 
 class Yj < Formula
   homepage "https://github.com/sclevine/yj"

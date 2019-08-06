@@ -1,4 +1,4 @@
-require "FileUtils"
+require "fileutils"
 
 class KafkaServiceBroker < Formula
   homepage "https://github.com/starkandwayne/kafka-service-broker"

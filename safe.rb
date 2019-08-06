@@ -1,4 +1,4 @@
-require "FileUtils"
+require "fileutils"
 
 class Safe < Formula
   homepage "https://github.com/starkandwayne/safe"
