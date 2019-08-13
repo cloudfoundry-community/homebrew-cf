@@ -1,4 +1,4 @@
-require "FileUtils"
+require "fileutils"
 
 class Govc < Formula
   homepage "https://github.com/vmware/govmomi"

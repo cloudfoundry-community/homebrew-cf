@@ -1,4 +1,4 @@
-require "FileUtils"
+require "fileutils"
 
 class Shield < Formula
   homepage "https://github.com/starkandwayne/shield"

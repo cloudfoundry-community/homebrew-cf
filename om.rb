@@ -1,4 +1,4 @@
-require "FileUtils"
+require "fileutils"
 
 class Om < Formula
   homepage "https://github.com/pivotal-cf/om"

@@ -1,4 +1,4 @@
-require "FileUtils"
+require "fileutils"
 
 class Genesis < Formula
   homepage "https://github.com/geofffranks/genesis"

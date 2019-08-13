@@ -1,4 +1,4 @@
-require "FileUtils"
+require "fileutils"
 
 class Spruce < Formula
   homepage "https://github.com/geofffranks/spruce"

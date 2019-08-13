@@ -1,4 +1,4 @@
-require "FileUtils"
+require "fileutils"
 
 class UaaCli < Formula
   homepage "https://github.com/cloudfoundry-incubator/uaa-cli"

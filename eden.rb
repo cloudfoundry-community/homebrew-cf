@@ -1,4 +1,4 @@
-require "FileUtils"
+require "fileutils"
 
 class Eden < Formula
   homepage "https://github.com/starkandwayne/eden"

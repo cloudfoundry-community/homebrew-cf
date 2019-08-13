@@ -1,4 +1,4 @@
-require "FileUtils"
+require "fileutils"
 
 class Gotcha < Formula
   homepage "https://github.com/starkandwayne/gotcha"
