@@ -107,6 +107,7 @@ groups:
   - credhub-cli-debian
   - uaa-cli-debian
   - certstrap-debian
+  - cf-cli-debian
   - cf7-cli-debian
   - jq-debian
   - om-debian
