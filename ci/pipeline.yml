@@ -1009,7 +1009,7 @@ jobs:
     - get: homebrew
       resource: homebrew
     - get: cf
-      resource: cf-cli-linux
+      resource: cf6-cli-linux
       trigger: true
     - task: unpack-tgz
       config:
@@ -1830,12 +1830,12 @@ resources:
     pre_release: true
     access_token: (( grab meta.github.access_token ))
 
-- name: cf-cli-linux
+- name: cf6-cli-linux
   type: s3
   source:
     bucket: cf-cli-releases
     region_name: us-west-1
-    regexp: releases/v(.*)/cf-cli_(.*)_linux_x86-64.tgz
+    regexp: releases/v6.*/cf-cli_(.*)_linux_x86-64.tgz
 
 - name: cf7-cli-linux
   type: s3
