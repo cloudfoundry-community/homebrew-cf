@@ -7,49 +7,49 @@
   <h1>Stark &amp; Wayne APT repository</h1>
   <p>When you find yourself on an Ubuntu/Debian machine and you just need your favourite CLIs.</p>
   <pre>apt-get update
-apt-get install gnupg wget -y
+apt install gnupg wget -y
 wget -q -O - https://raw.githubusercontent.com/starkandwayne/homebrew-cf/master/public.key | apt-key add -
 echo "deb http://apt.starkandwayne.com stable main" | tee /etc/apt/sources.list.d/starkandwayne.list
 apt-get update
 
-apt-get install spruce
-apt-get install safe
-apt-get install bosh-cli
-apt-get install genesis # also installs spruce, safe, vault, bosh-cli, git, perl
+apt install spruce
+apt install safe
+apt install bosh-cli
+apt install genesis # also installs spruce, safe, vault, bosh-cli, git, perl
 
-apt-get install gotcha
-apt-get install shield
-apt-get install eden
-apt-get install kafka-service-broker
-apt-get install install-debs-in-order
+apt install gotcha
+apt install shield
+apt install eden
+apt install kafka-service-broker
+apt install install-debs-in-order
 
-apt-get install certstrap
-apt-get install credhub-cli
-apt-get install cf-cli # currently v6
-apt-get install cf6-cli
-apt-get install cf7-cli
-apt-get install uaa-cli
-apt-get install jq
-apt-get install yj
-apt-get install hub
-apt-get install direnv
+apt install certstrap
+apt install credhub-cli
+apt install cf-cli # currently v6
+apt install cf6-cli
+apt install cf7-cli
+apt install uaa-cli
+apt install jq
+apt install yj
+apt install hub
+apt install direnv
 
-apt-get install pack
-apt-get install minica
+apt install pack
+apt install minica
 
-apt-get install terraform
-apt-get install vault
+apt install terraform
+apt install vault
 
-apt-get install riff
-apt-get install om
-apt-get install pivnet-cli
-apt-get install pks
+apt install riff
+apt install om
+apt install pivnet-cli
+apt install pks
 
-apt-get install knctl
+apt install knctl
 
-apt-get install aliyun-cli
+apt install aliyun-cli
 
-apt-get install govc
+apt install govc
 </pre>
 <p>These packages are <a href="https://ci.starkandwayne.com/teams/main/pipelines/homebrew-recipes?groups=debian">automatically generated</a> when their respective upstream projects publish new releases.</p>
 <p>The scripts for building these Debian packages are at <a href="https://github.com/starkandwayne/homebrew-cf/tree/master/ci">https://github.com/starkandwayne/homebrew-cf in /ci subfolder</a>. Pull requests for new packages and fixes are welcome.</p>
