@@ -28,7 +28,6 @@ function auto_sed() {
 echo ">> Retrieving version + sha256 metadata"
 
 VERSION=$(cat recipe/version)
-TAG=$(cat recipe/tag)
 # Allow VERSION to be used in BINARY
 BINARY=$(eval echo "${BINARY}")
 
@@ -38,6 +37,7 @@ if [[ -z "${VERSION:-}" ]]; then
 fi
 
 if [[ "${FETCH_TGZ_BASE:-X}" != "X" ]]; then
+  TAG=$(cat recipe/tag)
   pushd recipe
   fetch_tgz="${FETCH_TGZ_BASE}/${TAG}.tar.gz"
   curl -L $fetch_tgz -O
