@@ -10,7 +10,6 @@ class Fissile < Formula
   sha256 "a0ce729dfade481b65f8770c09e08d9603e02640e123d2275dc73730d808635e" # CI Managed
 
   def install
-    FileUtils.mv("fissile-darwin-amd64", "fissile")
     bin.install "fissile"
   end
 
