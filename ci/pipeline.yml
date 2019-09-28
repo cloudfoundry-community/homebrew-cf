@@ -11,7 +11,7 @@ meta:
     type: docker-image
     source:
       repository: starkandwayne/concourse-go
-      tag: 1.10
+      tag: "1.13"
 
   github:
     uri:          (( concat "git@github.com:" meta.github.owner "/" meta.github.repo ))
@@ -80,6 +80,7 @@ groups:
   - minica-debian
   - yj-homebrew
   - yj-debian
+  - fissile-homebrew
 - name: homebrew
   jobs:
   - spruce-homebrew
