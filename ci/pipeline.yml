@@ -1627,6 +1627,10 @@ jobs:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
           BINARY: "fissile-$VERSION.darwin-amd64.tgz"
+    - put: homebrew
+      params:
+        repository: pushme/homebrew
+        rebase: true
 
   - name: quaa-homebrew
     public: true
