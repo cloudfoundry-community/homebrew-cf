@@ -7,7 +7,7 @@ class Fissile < Formula
   v_safe = v.gsub("+", "%2B").gsub(%{^v}, "")
   url "http://cf-opensusefs2.s3.amazonaws.com/fissile/develop/fissile-#{v_safe}.darwin-amd64.tgz"
   version v
-  sha256 "83bafee201f1fba80aad174a731a7528d331f5dee68c80d45d42d18510d29162" # CI Managed
+  sha256 "a0ce729dfade481b65f8770c09e08d9603e02640e123d2275dc73730d808635e" # CI Managed
 
   def install
     FileUtils.mv("fissile-darwin-amd64", "fissile")
