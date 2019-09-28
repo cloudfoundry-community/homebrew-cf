@@ -95,6 +95,7 @@ groups:
   - riff-homebrew
   - om-homebrew
   - yj-homebrew
+  - fissile-homebrew
 - name: debian
   jobs:
   - spruce-debian
@@ -1599,6 +1600,34 @@ jobs:
         repository: pushme/homebrew
         rebase: true
 
+  - name: fissile-homebrew
+    public: true
+    serial: true
+    plan:
+    - get: homebrew
+      resource: homebrew
+    - get: fissile
+      resource: fissile-darwin
+      trigger: true
+    - task: update-homebrew
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: fissile
+          path: recipe
+        outputs:
+        - name: pushme
+        run:
+          path: "homebrew/ci/scripts/update-homebrew.sh"
+          args:
+          - fissile.rb
+        params:
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          BINARY: "fissile-$VERSION.darwin-amd64.tgz"
+
   - name: quaa-homebrew
     public: true
     serial: true
@@ -2047,6 +2076,11 @@ resources:
     repository: minica-binaries
     access_token: (( grab meta.github.access_token ))
 
+- name: fissile-darwin
+  type: s3
+  source:
+    bucket: cf-opensusefs2
+    regexp: fissile/develop/fissile-(.*)\.darwin-amd64\.tgz
 resource_types:
 - name: hashicorp-release
   type: docker-image
