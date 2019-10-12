@@ -821,7 +821,7 @@ jobs:
         params:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          BINARY: "uaa-darwin-amd64"
+          BINARY: "uaa-darwin-amd64-$VERSION"
     - put: homebrew
       params:
         repository: pushme/homebrew
@@ -1944,8 +1944,8 @@ resources:
 - name: snw-uaa-cli
   type: github-release
   source:
-    user: starkandwayne
-    repository: uaa-cli-releases
+    user: cloudfoundry-incubator
+    repository: uaa-cli
     access_token: (( grab meta.github.access_token ))
 
 - name: certstrap
