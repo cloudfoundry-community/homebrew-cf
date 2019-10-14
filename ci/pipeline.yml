@@ -764,7 +764,7 @@ jobs:
     - get: homebrew
       resource: homebrew
     - get: uaa-cli
-      resource: snw-uaa-cli
+      resource: uaa-cli
       trigger: true
     - task: create-debian
       config:
@@ -780,7 +780,7 @@ jobs:
           DEBUG: 1
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          IN_BINARY: "uaa-linux-amd64"
+          IN_BINARY: "uaa-linux-amd64-$VERSION"
           OUT_BINARY: uaa
           NAME: uaa-cli
           LICENSE: Apache-2.0
@@ -802,7 +802,7 @@ jobs:
     - get: homebrew
       resource: homebrew
     - get: uaa-cli
-      resource: snw-uaa-cli
+      resource: uaa-cli
       trigger: true
     - task: update-homebrew
       config:
@@ -1941,7 +1941,7 @@ resources:
     repository: credhub-cli
     access_token: (( grab meta.github.access_token ))
 
-- name: snw-uaa-cli
+- name: uaa-cli
   type: github-release
   source:
     user: cloudfoundry-incubator
