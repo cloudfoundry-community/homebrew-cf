@@ -74,7 +74,6 @@ jq        | Command-line JSON processor, like `sed` for JSON. | Stedolan | [sted
 kafka-service-broker | CLI tool to interact with Kafka/ZooKeeper OSB | Stark & Wayne | [starkandwayne/kafka-service-broker](https://github.com/starkandwayne/kafka-service-broker)
 om        | CLI tool to deploy products with Ops Manager | Pivotal | [pivotal-cf/om](https://github.com/pivotal-cf/om)
 pivnet-cli | CLI tool to interact with the Pivotal Network | Pivotal | [pivotal-cf/pivnet-cli](https://github.com/pivotal-cf/pivnet-cli)
-pks       | CLI tool to interact with Pivotal Container Services | Pivotal | N/A
 quaa      | Tool to quickly deploy/run the Cloud Foundry UAA locally, or to a remote platform/cloud | Stark & Wayne | [quaa](https://github.com/starkandwayne/quaa)
 riff      | CLI tool that helps developers build and run functions using Knative | Pivotal | [projectriff/riff](https://github.com/projectriff/riff)
 safe      | CLI tool to interact with a Vault server | Stark & Wayne | [starkandwayne/safe](https://github.com/starkandwayne/safe)
