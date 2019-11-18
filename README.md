@@ -85,11 +85,6 @@ vault     | Secrets management, encryption as a service, and privileged access m
 aliyun-cli | Alibaba Cloud CLI | Alibaba Cloud | [aliyun/aliyun-cli](https://github.com/aliyun/aliyun-cli)
 minica | MiniCA | Jacob Hoffman-Andrews | [jsha/minica](https://github.com/jsha/minica)
 
-
-_Please note that the `vault` package was manually created by
-https://gist.github.com/drnic/c03bf5929c7da3421e3978058845512b. The CI pipeline
-needs a way to detect and fetch latest Vault CLI downloads._
-
 To update the static site's index.html, run:
 
 ```plain
