@@ -80,6 +80,7 @@ groups:
   - yj-homebrew
   - yj-debian
   - fissile-homebrew
+  - vault-debian
 - name: homebrew
   jobs:
   - spruce-homebrew
@@ -127,6 +128,7 @@ groups:
   - aliyun-debian
   - minica-debian
   - yj-debian
+  - vault-debian
 
 jobs:
   - name: install-debs-in-order-debian
@@ -378,6 +380,46 @@ jobs:
       params:
         repository: pushme/homebrew
         rebase: true
+
+  - name: vault-debian
+    public: true
+    serial_groups: [apt]
+    plan:
+    - get: homebrew
+      resource: homebrew
+    - get: vault
+      resource: vault
+      trigger: true
+      params: { regexp: linux_amd64 }
+    - task: create-debian
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: vault
+          path: recipe
+        run:
+          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
+        params:
+          DEBUG: 1
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          IN_BINARY_PREFIX_ZIP: vault_
+          IN_BINARY: "vault"
+          OUT_BINARY: vault
+          NAME: vault
+          LICENSE: Mozilla Public License 2.0
+          DESCRIPTION: A tool for secrets management, encryption as a service, and privileged access management
+          URL: https://www.vaultproject.io/
+          MAINTAINERS: https://github.com/starkandwayne/safe/graphs/contributors
+          VENDOR: "Hashicorp"
+          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
+          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
+          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+          GPG_ID: (( grab meta.gpg.id ))
+          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
+          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
 
   - name: gotcha-debian
     public: true
@@ -1852,6 +1894,11 @@ resources:
     repository: safe
     access_token: (( grab meta.github.access_token ))
 
+- name: vault
+  type: hashicorp-release
+  source:
+    project: vault
+
 - name: eden
   type: github-release
   source:
@@ -2038,6 +2085,7 @@ resources:
   source:
     bucket: cf-opensusefs2
     regexp: fissile/develop/fissile-(.*)\.darwin-amd64\.tgz
+
 resource_types:
 - name: hashicorp-release
   type: docker-image
