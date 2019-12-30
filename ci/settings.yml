@@ -1,14 +1,14 @@
 ---
 meta:
   name: homebrew-cf
-  target: ohio-sw
+  target: pipes@main
   # url: https://ci2.starkandwayne.com team: starkandwayne
 
   github:
     owner: starkandwayne
     repo: homebrew-cf
-    private_key: ((github-private-key))
-    access_token: ((github-access-token))
+    private_key: ((github.private-key))
+    access_token: ((github.access-token))
 
   debian:
     s3_bucket: apt.starkandwayne.com
