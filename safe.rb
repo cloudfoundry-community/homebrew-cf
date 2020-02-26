@@ -3,10 +3,10 @@ require "fileutils"
 class Safe < Formula
   homepage "https://github.com/starkandwayne/safe"
 
-  v = "v1.5.1" # CI Managed
+  v = "v1.5.2" # CI Managed
   url "https://github.com/starkandwayne/safe/releases/download/#{v}/safe-darwin-amd64"
   version v
-  sha256 "01dd85d1ea607ae82afc196d9b5be9987c9094c4d8f65a3a0e0e8e4bd5b9eb70" # CI Managed
+  sha256 "26d4030eac905286ce058a1d1009fa55525760f1466aec68a89cb550a8349c31" # CI Managed
 
   def install
     FileUtils.mv("safe-darwin-amd64", "safe")
