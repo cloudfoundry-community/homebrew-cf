@@ -3,10 +3,10 @@ require "fileutils"
 class Shield < Formula
   homepage "https://github.com/starkandwayne/shield"
 
-  v = "v8.6.3" # CI Managed
+  v = "v8.7.0" # CI Managed
   url "https://github.com/starkandwayne/shield/releases/download/#{v}/shield-darwin-amd64"
   version v
-  sha256 "0818aba6e151ee34ab7d778798a53e8384b9a4db0ccd089cea05ccea050dc661" # CI Managed
+  sha256 "c8a0e1b0457ca933dc8f1926ce07962f8e1b1a138f348ce6468f2e104298a8bc" # CI Managed
 
   def install
     FileUtils.mv("shield-darwin-amd64", "shield")
