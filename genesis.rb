@@ -3,10 +3,10 @@ require "fileutils"
 class Genesis < Formula
   homepage "https://github.com/geofffranks/genesis"
 
-  v = "v2.7.0" # CI Managed
+  v = "v2.7.1" # CI Managed
   url "https://github.com/starkandwayne/genesis/releases/download/#{v}/genesis"
   version v
-  sha256 "38525f8f1eaf7cef4dd6695f1d2f599c709a952ea1e2ee7c1057eba48025e44d" # CI Managed
+  sha256 "bf1b2036fd9aac1e87adab1472feac7e587867cb8989f4dfbf0a19cde457f6c6" # CI Managed
 
   def install
     bin.install "genesis"
