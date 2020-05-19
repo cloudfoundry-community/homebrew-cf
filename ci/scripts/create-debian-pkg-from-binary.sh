@@ -39,7 +39,7 @@ gpg --list-secret-keys
 
 echo ">> Creating Debian package"
 if [[ ! -x fpm ]]; then
-  gem install fpm --no-ri --no-rdoc
+  gem install fpm --no-document
 fi
 if [[ ${IN_BINARY_PREFIX_TGZ:-X} != "X" ]]; then
   cd recipe
@@ -90,7 +90,7 @@ DEBIAN_FILE="${NAME}_${VERSION}_amd64.deb"
 
 echo ">> Uploading Debian package to APT repository"
 if [[ ! -x deb-s3 ]]; then
-  gem install deb-s3 --no-ri --no-rdoc
+  gem install deb-s3 --no-document
 fi
 
 mkdir ~/.aws
