@@ -7,7 +7,7 @@ class Quaa < Formula
   version v
   sha256 "bef7ecc603ef40aaf92b4eb31070853ea7e3968149e57b0ecda6ae6faee228d1" # CI Managed
 
-  devel do
+  head do
     url "https://github.com/starkandwayne/quick-uaa-local.git", using: :git
   end
 
