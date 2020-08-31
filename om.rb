@@ -7,7 +7,7 @@ class Om < Formula
   @@verNum = v.sub "v", ""
   url "https://github.com/pivotal-cf/om/releases/download/#{@@verNum}/om-darwin-#{@@verNum}"
   version @@verNum
-  sha256 "" # CI Managed
+  sha256 "7611a5c2c15e6071afcda224f56eadde91fcb15d44525aa6d8923cd48127d8bf" # CI Managed
 
   def install
     FileUtils.mv("om-darwin-#{@@verNum}", "om")
