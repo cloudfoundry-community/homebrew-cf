@@ -1055,7 +1055,7 @@ jobs:
     - get: homebrew
       resource: homebrew
     - get: cf
-      resource: cf6-cli-linux
+      resource: cf7-cli-linux
       trigger: true
     - task: unpack-tgz
       config:
@@ -1094,7 +1094,7 @@ jobs:
           OUT_BINARY: cf
           NAME: cf-cli
           LICENSE: Apache2
-          DESCRIPTION: official command line client for Cloud Foundry
+          DESCRIPTION: official command line client for Cloud Foundry v7
           URL: https://docs.cloudfoundry.org
           MAINTAINERS: https://github.com/cloudfoundry/cli/graphs/contributors
           VENDOR: Cloud Foundry Foundation
@@ -1147,8 +1147,8 @@ jobs:
           DEBUG: 1
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          IN_BINARY: cf
-          OUT_BINARY: cf
+          IN_BINARY: cf6
+          OUT_BINARY: cf6
           NAME: cf6-cli
           LICENSE: Apache2
           DESCRIPTION: official command line client for Cloud Foundry
