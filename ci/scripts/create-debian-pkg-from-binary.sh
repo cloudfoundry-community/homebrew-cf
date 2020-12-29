@@ -68,7 +68,7 @@ recipe_binaries=
 provides=
 for binary in $OUT_BINARY; do
   if [[ "recipe/${IN_BINARY}" != "recipe/${binary}" ]]; then
-    cp recipe/${IN_BINARY} recipe/${binary}
+    cp --remove-destination recipe/${IN_BINARY} recipe/${binary}
   fi
   chmod +x recipe/${binary}
   recipe_binaries="${recipe_binaries} recipe/${binary}=/usr/bin/${binary} "
