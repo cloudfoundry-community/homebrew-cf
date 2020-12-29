@@ -1860,6 +1860,7 @@ jobs:
 resources:
 - name: homebrew
   type: git
+  check_every: 6h
   source:
     uri: (( grab meta.github.uri ))
     branch: (( grab meta.github.branch ))
@@ -1867,6 +1868,7 @@ resources:
 
 - name: homebrew-public-key
   type: git
+  check_every: 6h
   source:
     uri: (( grab meta.github.uri ))
     branch: (( grab meta.github.branch ))
@@ -1875,6 +1877,7 @@ resources:
 
 - name: spruce
   type: github-release
+  check_every: 6h
   source:
     user: geofffranks
     repository: spruce
@@ -1882,6 +1885,7 @@ resources:
 
 - name: shield
   type: github-release
+  check_every: 6h
   source:
     user: shieldproject
     repository: shield
@@ -1889,6 +1893,7 @@ resources:
 
 - name: safe
   type: github-release
+  check_every: 6h
   source:
     user: starkandwayne
     repository: safe
@@ -1896,11 +1901,13 @@ resources:
 
 - name: vault
   type: hashicorp-release
+  check_every: 6h
   source:
     project: vault
 
 - name: eden
   type: github-release
+  check_every: 6h
   source:
     user: starkandwayne
     repository: eden
@@ -1908,6 +1915,7 @@ resources:
 
 - name: gotcha
   type: github-release
+  check_every: 6h
   source:
     user: starkandwayne
     repository: gotcha
@@ -1915,6 +1923,7 @@ resources:
 
 - name: genesis
   type: github-release
+  check_every: 6h
   source:
     user: genesis-community
     repository: genesis
@@ -1922,6 +1931,7 @@ resources:
 
 - name: kafka-service-broker
   type: github-release
+  check_every: 6h
   source:
     user: starkandwayne
     repository: kafka-service-broker
@@ -1929,6 +1939,7 @@ resources:
 
 - name: install-debs-in-order
   type: github-release
+  check_every: 6h
   source:
     user: starkandwayne
     repository: install-debs-in-order
@@ -1936,12 +1947,14 @@ resources:
 
 - name: bosh-cli-linux
   type: s3
+  check_every: 6h
   source:
     bucket: bosh-cli-artifacts
     regexp: bosh-cli-(.*)-linux-amd64
 
 - name: credhub-cli
   type: github-release
+  check_every: 6h
   source:
     user: cloudfoundry-incubator
     repository: credhub-cli
@@ -1949,6 +1962,7 @@ resources:
 
 - name: uaa-cli
   type: github-release
+  check_every: 6h
   source:
     user: cloudfoundry-incubator
     repository: uaa-cli
@@ -1956,6 +1970,7 @@ resources:
 
 - name: certstrap
   type: github-release
+  check_every: 6h
   source:
     user: square
     repository: certstrap
@@ -1963,6 +1978,7 @@ resources:
 
 - name: riff
   type: github-release
+  check_every: 6h
   source:
     owner: projectriff
     repository: riff
@@ -1971,6 +1987,7 @@ resources:
 
 - name: cf6-cli-linux
   type: s3
+  check_every: 6h
   source:
     bucket: cf-cli-releases
     region_name: us-west-1
@@ -1978,6 +1995,7 @@ resources:
 
 - name: cf7-cli-linux
   type: s3
+  check_every: 6h
   source:
     bucket: v7-cf-cli-releases
     region_name: us-west-1
@@ -1986,6 +2004,7 @@ resources:
 
 - name: jq
   type: github-release
+  check_every: 6h
   source:
     user: stedolan
     repository: jq
@@ -1993,6 +2012,7 @@ resources:
 
 - name: om
   type: github-release
+  check_every: 6h
   source:
     user: pivotal-cf
     repository: om
@@ -2000,6 +2020,7 @@ resources:
 
 - name: pivnet-cli
   type: github-release
+  check_every: 6h
   source:
     user: pivotal-cf
     repository: pivnet-cli
@@ -2007,6 +2028,7 @@ resources:
 
 - name: hub
   type: github-release
+  check_every: 6h
   source:
     user: github
     repository: hub
@@ -2014,6 +2036,7 @@ resources:
 
 - name: direnv
   type: github-release
+  check_every: 6h
   source:
     user: direnv
     repository: direnv
@@ -2021,11 +2044,13 @@ resources:
 
 - name: terraform
   type: hashicorp-release
+  check_every: 6h
   source:
     project: terraform
 
 - name: bosh-bootloader
   type: github-release
+  check_every: 6h
   source:
     user: cloudfoundry
     repository: bosh-bootloader
@@ -2033,6 +2058,7 @@ resources:
 
 - name: govc
   type: github-release
+  check_every: 6h
   source:
     user: vmware
     repository: govmomi
@@ -2040,6 +2066,7 @@ resources:
 
 - name: quick-uaa-local
   type: github-release
+  check_every: 6h
   source:
     user: starkandwayne
     repository: quick-uaa-local
@@ -2047,6 +2074,7 @@ resources:
 
 - name: pack
   type: github-release
+  check_every: 6h
   source:
     user: buildpack
     repository: pack
@@ -2054,6 +2082,7 @@ resources:
 
 - name: knctl
   type: github-release
+  check_every: 6h
   source:
     user: cppforlife
     repository: knctl
@@ -2061,6 +2090,7 @@ resources:
 
 - name: aliyun-cli
   type: github-release
+  check_every: 6h
   source:
     user: aliyun
     repository: aliyun-cli
@@ -2068,6 +2098,7 @@ resources:
 
 - name: yj
   type: github-release
+  check_every: 6h
   source:
     user: sclevine
     repository: yj
@@ -2075,6 +2106,7 @@ resources:
 
 - name: minica
   type: github-release
+  check_every: 6h
   source:
     user: starkandwayne
     repository: minica-binaries
@@ -2082,6 +2114,7 @@ resources:
 
 - name: fissile-darwin
   type: s3
+  check_every: 6h
   source:
     bucket: cf-opensusefs2
     regexp: fissile/develop/fissile-(.*)\.darwin-amd64\.tgz
