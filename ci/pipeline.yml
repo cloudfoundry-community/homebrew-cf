@@ -1090,7 +1090,7 @@ jobs:
           DEBUG: 1
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          IN_BINARY: cf
+          IN_BINARY: cf7
           OUT_BINARY: cf
           NAME: cf-cli
           LICENSE: Apache2
@@ -1147,7 +1147,7 @@ jobs:
           DEBUG: 1
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          IN_BINARY: cf6
+          IN_BINARY: cf
           OUT_BINARY: cf6
           NAME: cf6-cli
           LICENSE: Apache2
