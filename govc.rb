@@ -4,7 +4,7 @@ class Govc < Formula
   homepage "https://github.com/vmware/govmomi"
 
   v = "v0.25.0" # CI Managed
-  url "https://github.com/vmware/govmomi/releases/download/#{v}/govc_darwin_amd64.gz"
+  url "https://github.com/vmware/govmomi/releases/download/#{v}/govc_darwin_amd64.tar.gz"
   version v
   sha256 "" # CI Managed
 
