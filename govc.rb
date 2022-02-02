@@ -3,7 +3,7 @@ require "fileutils"
 class Govc < Formula
   homepage "https://github.com/vmware/govmomi"
 
-  v = "v0.27.2" # CI Managed
+  v = "v0.27.3" # CI Managed
   url "https://github.com/vmware/govmomi/releases/download/#{v}/govc_Darwin_x86_64.tar.gz"
   version v
   sha256 "" # CI Managed
