@@ -4,7 +4,7 @@ class Spruce < Formula
   homepage "https://github.com/geofffranks/spruce"
 
   v = "v1.30.0" # CI Managed
-  url "https://github.com/geofffranks/spruce/releases/download/#{v}/spruce-darwin-amd64"
+  url "https://github.com/geofffranks/spruce/releases/download/#{v}/spruce_darwin_amd64"
   version v
   sha256 "" # CI Managed
 
