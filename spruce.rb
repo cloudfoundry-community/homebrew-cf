@@ -9,7 +9,7 @@ class Spruce < Formula
   sha256 "" # CI Managed
 
   def install
-    FileUtils.mv("spruce-darwin-amd64", "spruce")
+    FileUtils.mv("spruce_darwin_amd64", "spruce")
     bin.install "spruce"
   end
 
