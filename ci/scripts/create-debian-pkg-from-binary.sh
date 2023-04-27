@@ -98,6 +98,7 @@ cat > ~/.aws/credentials <<EOF
 [default]
 aws_access_key_id = ${AWS_ACCESS_KEY:?required}
 aws_secret_access_key = ${AWS_SECRET_KEY:?required}
+region = ${S3_REGION:?required}
 EOF
 deb-s3 upload "${DEBIAN_FILE}" \
   --bucket "${RELEASE_BUCKET}" \

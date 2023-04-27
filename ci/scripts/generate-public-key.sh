@@ -11,8 +11,8 @@ set -e
 # Debian GPG key requirements: https://keyring.debian.org/creating-key.html
 
 : ${REPO_ROOT:?required}
-export KEY_AUTHOR=${KEY_AUTHOR:-"Stark & Wayne Bot"}
-export KEY_EMAIL=${KEY_EMAIL:-"drnic+bot@starkandwayne.com"}
+export KEY_AUTHOR=${KEY_AUTHOR:-"Adepttech Bot"}
+export KEY_EMAIL=${KEY_EMAIL:-"krutten+bot@adepttech.ca"}
 export GPG_SAFE_PATH=${GPG_SAFE_PATH:-secret/pipelines/homebrew/gpg}
 
 # change to the root of the repo

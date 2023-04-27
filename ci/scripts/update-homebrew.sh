@@ -57,7 +57,7 @@ auto_sed "s/sha256 \\\".*\\\" # CI Managed/sha256 \\\"${SHASUM}\\\" # CI Managed
 if [[ "$(git status -s)X" != "X" ]]; then
   set +e
   if [[ -z $(git config --global user.email) ]]; then
-    git config --global user.email "drnic+bot@starkandwayne.com"
+    git config --global user.email "krutten+bot@adepttech.ca"
   fi
   if [[ -z $(git config --global user.name) ]]; then
     git config --global user.name "CI Bot"

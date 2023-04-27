@@ -4,13 +4,15 @@ meta:
   pipeline: (( grab meta.name ))
   target:   (( param "Please identify the name of the target Concourse CI" ))
   image:
-    type: docker-image
+    type: registry-image
     source:
-      repository: starkandwayne/concourse
+      repository: registry.ops.scalecf.net/genesis-community/concourse
+      tag: "latest"
+      insecure: true
   image-golang:
     type: docker-image
     source:
-      repository: starkandwayne/concourse-go
+      repository: registry.ops.scalecf.net/genesis-community/concourse-go
       tag: "1.13"
 
   github:
@@ -25,6 +27,7 @@ meta:
     s3_bucket:      (( param "Please specify AWS S3 bucket for Debian packages" ))
     aws_access_key: (( param "Please specify AWS access key for debian S3 bucket" ))
     aws_secret_key: (( param "Please specify AWS secret key for debian S3 bucket" ))
+    region:         us-east-1
 
   gpg:
     id:  (( param "Please provide GPG ID for signing packages" ))
@@ -1253,6 +1256,7 @@ jobs:
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
+          S3_REGION: (( grab.debian.region ))
           GPG_ID: (( grab meta.gpg.id ))
           GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
           GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))

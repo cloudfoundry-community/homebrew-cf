@@ -5,15 +5,16 @@ meta:
   # url: https://ci2.starkandwayne.com team: starkandwayne
 
   github:
-    owner: starkandwayne
+    owner: krutten
     repo: homebrew-cf
     private_key: ((github.private-key))
     access_token: ((github.access-token))
 
   debian:
-    s3_bucket: apt.starkandwayne.com
+    s3_bucket: apt.community.cloudfoundry.org
     aws_access_key: ((aws-access-key))
     aws_secret_key: ((aws-secret-key))
+    region: us-west-2
 
   gpg:
     id:  ((gpg-packaging-id))
