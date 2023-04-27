@@ -1334,7 +1334,7 @@ jobs:
           DEBUG: 1
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          IN_BINARY: om-linux-$VERSION
+          IN_BINARY: om-linux-amd64-$VERSION
           OUT_BINARY: om
           NAME: om
           LICENSE: Apache2
