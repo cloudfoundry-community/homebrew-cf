@@ -14,7 +14,7 @@ meta:
     s3_bucket: apt.community.cloudfoundry.org
     aws_access_key: ((aws-access-key))
     aws_secret_key: ((aws-secret-key))
-    region: us-west-2
+    region: "us-west-2"
 
   gpg:
     id:  ((gpg-packaging-id))

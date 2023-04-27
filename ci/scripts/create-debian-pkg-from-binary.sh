@@ -102,7 +102,8 @@ region = ${S3_REGION:?required}
 EOF
 deb-s3 upload "${DEBIAN_FILE}" \
   --bucket "${RELEASE_BUCKET}" \
+  --s3-region "${S3_REGION}" \
   --sign "$(cat certs/id)"
 
 echo ">> Latest debian package list"
-deb-s3 list -b "${RELEASE_BUCKET}"
+deb-s3 list -b "${RELEASE_BUCKET}" --s3-region "${S3_REGION}"
