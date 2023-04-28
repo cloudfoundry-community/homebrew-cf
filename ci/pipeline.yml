@@ -1581,6 +1581,7 @@ jobs:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
           IN_BINARY_PREFIX_TGZ:  govc_Linux_x86_64 
+          IN_BINARY_AFTER_UNPACK: govc
           OUT_BINARY: govc
           NAME: govc
           LICENSE: Apache-2.0
@@ -2155,7 +2156,8 @@ resource_types:
 - name: hashicorp-release
   type: docker-image
   source:
-    repository: starkandwayne/hashicorp-release-resource
+    repository: registry.ops.scalecf.net/genesis-community/hashicorp-release-resource
+    insecure: true
 
 - name: pivnet
   type: docker-image
