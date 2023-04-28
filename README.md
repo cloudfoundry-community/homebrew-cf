@@ -44,8 +44,8 @@ This project automatically packages several CLI binaries as Debian packages as
 well. To add our APT repository to your OS:
 
 ```plain
-wget -q -O - https://raw.githubusercontent.com/starkandwayne/homebrew-cf/master/public.key | apt-key add -
-echo "deb http://apt.starkandwayne.com stable main" | tee /etc/apt/sources.list.d/starkandwayne.list
+wget -q -O - https://raw.githubusercontent.com/cloudfoundry-community/homebrew-cf/master/public.key | apt-key add -
+echo "deb http://apt.community.cloudfoundry.org stable main" | tee /etc/apt/sources.list.d/starkandwayne.list
 apt-get update
 ```
 
@@ -88,12 +88,12 @@ minica | MiniCA | Jacob Hoffman-Andrews | [jsha/minica](https://github.com/jsha/
 To update the static site's index.html, run:
 
 ```plain
-aws s3 sync apt/ s3://apt.starkandwayne.com/
+aws s3 sync apt/ s3://apt.community.cloudfoundry.org/
 ```
 
 ## CI
 
 The CI pipeline to automatically update these Homebrew & Debian packages is:
 
-- Hosted at https://ci2.starkandwayne.com/teams/starkandwayne/pipelines/homebrew-cf
-- Defined at https://github.com/starkandwayne/homebrew-cf under the ci/ folder
+- Pipeline is currently being migrated to a new Concourse
+- Defined at https://github.com/cloudfoundry-community/homebrew-cf under the ci/ folder

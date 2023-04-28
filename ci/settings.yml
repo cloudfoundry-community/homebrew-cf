@@ -2,10 +2,10 @@
 meta:
   name: homebrew-cf
   target: pipes@main
-  # url: https://ci2.starkandwayne.com team: starkandwayne
+  # url: https://pipes.scalecf.net team: main
 
   github:
-    owner: krutten
+    owner: cloudfoundry-community
     repo: homebrew-cf
     private_key: ((github.private-key))
     access_token: ((github.access-token))

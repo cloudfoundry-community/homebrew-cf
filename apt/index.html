@@ -8,7 +8,7 @@
   <p>When you find yourself on an Ubuntu/Debian machine and you just need your favourite CLIs.</p>
   <pre>apt-get update
 apt install gnupg wget -y
-wget -q -O - https://raw.githubusercontent.com/krutten/homebrew-cf/master/public.key | apt-key add -
+wget -q -O - https://raw.githubusercontent.com/cloudfoundry-community/homebrew-cf/master/public.key | apt-key add -
 echo "deb http://apt.community.cloudfoundry.org stable main" | tee /etc/apt/sources.list.d/starkandwayne.list
 apt-get update
 
@@ -51,7 +51,7 @@ apt install aliyun-cli
 apt install govc
 </pre>
 <p>These packages are automatically generated when their respective upstream projects publish new releases.</p>
-<p>The scripts for building these Debian packages are at <a href="https://github.com/krutten/homebrew-cf/tree/master/ci">https://github.com/krutten/homebrew-cf in /ci subfolder</a>. Pull requests for new packages and fixes are welcome.</p>
-<p>NOTE: This will be moved to https://github.com/cloudfoundry-community/homebrew-cf shortly</p>
+<p>The scripts for building these Debian packages are at <a href="https://github.com/cloudfoundry-community/homebrew-cf/tree/master/ci">https://github.com/cloudfoundry-community/homebrew-cf in /ci subfolder</a>. Pull requests for new packages and fixes are welcome.</p>
+<p>(Previously was Stark &amp; Wayne Community APT repository)
 </body>
 </html>
