@@ -1564,7 +1564,7 @@ jobs:
     - get: govc
       resource: govc
       params:
-        globs: [govc_linux_amd64.gz]
+        globs: [govc_Linux_x86_64.tar.gz]
       trigger: true
     - task: create-debian
       config:
@@ -1580,8 +1580,7 @@ jobs:
           DEBUG: 1
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          IN_BINARY_PREFIX_GZ: govc_linux_amd64
-          IN_BINARY_AFTER_UNPACK: govc_linux_amd64
+          IN_BINARY_PREFIX_TGZ:  govc_Linux_x86_64 
           OUT_BINARY: govc
           NAME: govc
           LICENSE: Apache-2.0
@@ -1859,7 +1858,7 @@ jobs:
     - get: yj
       resource: yj
       trigger: true
-      params: {globs: [yj-linux]}
+      params: {globs: [yj-linux-amd64]}
     - task: create-debian
       config:
         platform: linux
@@ -1874,7 +1873,7 @@ jobs:
           DEBUG: 1
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          IN_BINARY: yj-linux
+          IN_BINARY: yj-linux-amd64
           OUT_BINARY: yj
           NAME: yj
           LICENSE: apache2
