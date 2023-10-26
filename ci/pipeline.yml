@@ -1537,7 +1537,7 @@ jobs:
           DEBUG: 1
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          IN_BINARY: bbl-*_linux_x86-64
+          IN_BINARY: bbl-*_linux_amd64
           OUT_BINARY: bbl
           NAME: bosh-bootloader
           LICENSE: apache2
