@@ -340,14 +340,14 @@ jobs:
           DEBUG: 1
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          IN_BINARY: "safe-linux-amd64"
+          IN_BINARY: "safe-*-linux-amd64"
           OUT_BINARY: safe
           NAME: safe
           LICENSE: MIT
           DESCRIPTION: Alternative Vault CLI
-          URL: https://github.com/starkandwayne/safe
-          MAINTAINERS: https://github.com/starkandwayne/safe/graphs/contributors
-          VENDOR: "Stark & Wayne LLC"
+          URL: https://github.com/cloudfoundry-community/safe
+          MAINTAINERS: https://github.com/cloudfoundry-community/safe/graphs/contributors
+          VENDOR: "Cloud Foundry Community"
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -382,7 +382,7 @@ jobs:
         params:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          BINARY: "safe-darwin-amd64"
+          BINARY: "safe-*-darwin-amd64"
     - put: homebrew
       params:
         repository: pushme/homebrew
@@ -419,7 +419,7 @@ jobs:
           LICENSE: Mozilla Public License 2.0
           DESCRIPTION: A tool for secrets management, encryption as a service, and privileged access management
           URL: https://www.vaultproject.io/
-          MAINTAINERS: https://github.com/starkandwayne/safe/graphs/contributors
+          MAINTAINERS: https://github.com/cloudfoundry-community/safe/graphs/contributors
           VENDOR: "Hashicorp"
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
@@ -530,7 +530,7 @@ jobs:
           DESCRIPTION: BOSH Deployment Paradigm
           URL: https://github.com/genesis-community/genesis
           MAINTAINERS: https://github.com/genesis-community/genesis/graphs/contributors
-          VENDOR: "Stark & Wayne LLC"
+          VENDOR: "Five Twenty LLC"
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -673,7 +673,7 @@ jobs:
           DESCRIPTION: CLI to SHIELD Backup/Restore Director
           URL: https://github.com/shieldproject/shield
           MAINTAINERS: https://github.com/shieldproject/shield/graphs/contributors
-          VENDOR: "Stark & Wayne"
+          VENDOR: "Cloud Foundry Community"
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -1928,7 +1928,7 @@ resources:
   type: github-release
   check_every: 6h
   source:
-    user: starkandwayne
+    user: cloudfoundry-community
     repository: safe
     access_token: (( grab meta.github.access_token ))
 
