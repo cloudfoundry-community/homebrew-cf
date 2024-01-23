@@ -6,7 +6,7 @@ class Safe < Formula
   v = "v1.9.0" # CI Managed
   url "https://github.com/starkandwayne/safe/releases/download/#{v}/safe-darwin-amd64"
   version v
-  sha256 "" # CI Managed
+  sha256 "6854eb15989f7e4bc16d231fc28a041058922fc52da92211e1df07ff502eb6a1" # CI Managed
 
   def install
     FileUtils.mv("safe-darwin-amd64", "safe")
