@@ -13,7 +13,7 @@ meta:
     type: docker-image
     source:
       repository: registry.ops.scalecf.net/genesis-community/concourse-go
-      tag: "1.13"
+      tag: "1.18"
 
   github:
     uri:          (( concat "git@github.com:" meta.github.owner "/" meta.github.repo ))
@@ -1028,7 +1028,7 @@ jobs:
             export PATH=$PATH:$GOPATH/bin
             mkdir -p $GOPATH/src/github.com/square/certstrap
             cp -r unpack/*-certstrap-*/* $GOPATH/src/github.com/square/certstrap
-            go install github.com/square/certstrap
+            go install github.com/square/certstrap@latest
 
             cp $GOPATH/bin/certstrap build/certstrap
             cp recipe/version build/version
