@@ -1,14 +1,15 @@
-# Stark & Wayne's Homebrew Tap & APT Repository
+# CF Community Homebrew Tap & APT Repository
 
 Homebrew Tap & Debian Packages for useful BOSH / Cloud Foundry / Kubernetes
-utilities. Some are software we've written, others are community tools we've
-found valuable in day-to-day operations with CF and Kubernetes.
+utilities. These were initially created by Stark & Wayne and contains some
+software they had written, and other community tools that have been found
+valuable in day-to-day operations with CF and Kubernetes.
 
 ## Homebrew Tap
 
 Tap the formula repository:
 ```plain
-brew tap starkandwayne/cf
+brew tap cloudfoundry-community/cf
 ```
 
 
@@ -30,13 +31,14 @@ uaa-cli   | Experimental CLI for UAA written in Golang | Various | [cloudfoundry
 
 To install a package from our tap, run:
 
-`brew install starkandwayne/cf/<package>`, e.g. `brew install starkandwayne/cf/safe`
+`brew install cloudfoundry-community/cf/<package>`, e.g. `brew install cloudfoundry-community/cf/safe`
 
 _Please note that while some of the above software is provided by other
 formulas, we only support installations from our tap. Other taps contain
 mismatched dependency versions which outright break some of our software.
-Please make sure you prefix package names with `starkandwayne/cf/<package>`
-to avoid installing an unsupported version._
+Please make sure you prefix package names with
+`cloudfoundry-community/cf/<package>` to avoid installing an unsupported
+version._
 
 ## Debian packages
 
