@@ -1,15 +1,16 @@
 require "fileutils"
 
 class Safe < Formula
-  homepage "https://github.com/starkandwayne/safe"
+  homepage "https://github.com/cloudfoundry-community/safe"
 
-  v = "v1.8.0" # CI Managed
-  url "https://github.com/starkandwayne/safe/releases/download/#{v}/safe-darwin-amd64"
+  v = "v1.9.0" # CI Managed
+  @@verNum = v.sub "v", ""
+  url "https://github.com/cloudfoundry-community/safe/releases/download/#{v}/safe-#{v.gsub(/v/,"")}-darwin-amd64"
   version v
-  sha256 "847571b0c4d65f13249afdc45ac7d572fd6b3a24883aa6577acd9327099597b3" # CI Managed
+  sha256 "6854eb15989f7e4bc16d231fc28a041058922fc52da92211e1df07ff502eb6a1" # CI Managed
 
   def install
-    FileUtils.mv("safe-darwin-amd64", "safe")
+    FileUtils.mv("safe-#{@@verNum}-darwin-amd64", "safe")
     bin.install "safe"
   end
 

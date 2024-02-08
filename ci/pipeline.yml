@@ -13,7 +13,7 @@ meta:
     type: docker-image
     source:
       repository: registry.ops.scalecf.net/genesis-community/concourse-go
-      tag: "1.13"
+      tag: "1.18"
 
   github:
     uri:          (( concat "git@github.com:" meta.github.owner "/" meta.github.repo ))
@@ -164,7 +164,7 @@ jobs:
           DESCRIPTION: Install a directory of *.deb in the correct order
           URL: https://github.com/starkandwayne/install-debs-in-order
           MAINTAINERS: https://github.com/starkandwayne/install-debs-in-order/graphs/contributors
-          VENDOR: "Stark & Wayne LLC"
+          VENDOR: Stark & Wayne LLC
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -203,7 +203,7 @@ jobs:
           DESCRIPTION: Open Service Broker for Apache Kafka
           URL: https://github.com/starkandwayne/kafka-service-broker
           MAINTAINERS: https://github.com/starkandwayne/kafka-service-broker/graphs/contributors
-          VENDOR: "Stark & Wayne LLC"
+          VENDOR: Stark & Wayne LLC
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -276,7 +276,7 @@ jobs:
           DESCRIPTION: CLI to any Open Service Broker API
           URL: https://github.com/starkandwayne/eden
           MAINTAINERS: https://github.com/starkandwayne/eden/graphs/contributors
-          VENDOR: "Stark & Wayne LLC"
+          VENDOR: Stark & Wayne LLC
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -340,14 +340,14 @@ jobs:
           DEBUG: 1
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          IN_BINARY: "safe-linux-amd64"
+          IN_BINARY: "safe-*-linux-amd64"
           OUT_BINARY: safe
           NAME: safe
           LICENSE: MIT
           DESCRIPTION: Alternative Vault CLI
-          URL: https://github.com/starkandwayne/safe
-          MAINTAINERS: https://github.com/starkandwayne/safe/graphs/contributors
-          VENDOR: "Stark & Wayne LLC"
+          URL: https://github.com/cloudfoundry-community/safe
+          MAINTAINERS: https://github.com/cloudfoundry-community/safe/graphs/contributors
+          VENDOR: Cloud Foundry Community
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -382,7 +382,7 @@ jobs:
         params:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          BINARY: "safe-darwin-amd64"
+          BINARY: "safe-*-darwin-amd64"
     - put: homebrew
       params:
         repository: pushme/homebrew
@@ -419,8 +419,8 @@ jobs:
           LICENSE: Mozilla Public License 2.0
           DESCRIPTION: A tool for secrets management, encryption as a service, and privileged access management
           URL: https://www.vaultproject.io/
-          MAINTAINERS: https://github.com/starkandwayne/safe/graphs/contributors
-          VENDOR: "Hashicorp"
+          MAINTAINERS: https://github.com/cloudfoundry-community/safe/graphs/contributors
+          VENDOR: Hashicorp
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -459,7 +459,7 @@ jobs:
           DESCRIPTION: Debugging MiTM HTTP Proxy
           URL: https://github.com/starkandwayne/gotcha
           MAINTAINERS: https://github.com/starkandwayne/gotcha/graphs/contributors
-          VENDOR: "Stark & Wayne LLC"
+          VENDOR: Stark & Wayne LLC
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -530,7 +530,7 @@ jobs:
           DESCRIPTION: BOSH Deployment Paradigm
           URL: https://github.com/genesis-community/genesis
           MAINTAINERS: https://github.com/genesis-community/genesis/graphs/contributors
-          VENDOR: "Stark & Wayne LLC"
+          VENDOR: Five Twenty LLC
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -602,7 +602,7 @@ jobs:
           DESCRIPTION: General purpose YAML & JSON merging tool
           URL: https://github.com/geofffranks/spruce
           MAINTAINERS: https://github.com/geofffranks/spruce/graphs/contributors
-          VENDOR: "Geoff Franks"
+          VENDOR: Geoff Franks
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -673,7 +673,7 @@ jobs:
           DESCRIPTION: CLI to SHIELD Backup/Restore Director
           URL: https://github.com/shieldproject/shield
           MAINTAINERS: https://github.com/shieldproject/shield/graphs/contributors
-          VENDOR: "Stark & Wayne"
+          VENDOR: Cloud Foundry Community
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -744,7 +744,7 @@ jobs:
           DESCRIPTION: Interact with BOSH director
           URL: https://bosh.io/docs/cli-v2.html
           MAINTAINERS: https://github.com/cloudfoundry/bosh-cli/graphs/contributors
-          VENDOR: "Cloud Foundry Foundation"
+          VENDOR: Cloud Foundry Foundation
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -802,7 +802,7 @@ jobs:
           DESCRIPTION: CLI to interact with CredHub servers
           URL: https://github.com/cloudfoundry-incubator/credhub-cli
           MAINTAINERS: https://github.com/cloudfoundry-incubator/credhub-cli/graphs/contributors
-          VENDOR: "Cloud Foundry Foundation"
+          VENDOR: Cloud Foundry Foundation
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -841,7 +841,7 @@ jobs:
           DESCRIPTION: CLI to UAA
           URL: https://github.com/cloudfoundry-incubator/uaa-cli
           MAINTAINERS: https://github.com/cloudfoundry-incubator/uaa-cli/graphs/contributors
-          VENDOR: CloudFoundry.org Foundation, Inc.
+          VENDOR: Cloud Foundry Foundation
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -913,7 +913,7 @@ jobs:
           DESCRIPTION: Knative CLI
           URL: https://github.com/cppforlife/knctl
           MAINTAINERS: https://github.com/cppforlife/knctl/graphs/contributors
-          VENDOR: Pivotal Inc
+          VENDOR: Pivotal
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -954,7 +954,7 @@ jobs:
           DESCRIPTION: riff is for functions
           URL: https://github.com/projectriff/riff
           MAINTAINERS: https://github.com/projectriff/riff/graphs/contributors
-          VENDOR: Pivotal Inc
+          VENDOR: Pivotal
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -1028,7 +1028,7 @@ jobs:
             export PATH=$PATH:$GOPATH/bin
             mkdir -p $GOPATH/src/github.com/square/certstrap
             cp -r unpack/*-certstrap-*/* $GOPATH/src/github.com/square/certstrap
-            go install github.com/square/certstrap
+            go install github.com/square/certstrap@latest
 
             cp $GOPATH/bin/certstrap build/certstrap
             cp recipe/version build/version
@@ -1270,7 +1270,7 @@ jobs:
           DESCRIPTION: lightweight and flexible command-line JSON processor
           URL: https://stedolan.github.io/jq/
           MAINTAINERS: https://github.com/stedolan/jq/graphs/contributors
-          VENDOR: None
+          VENDOR: Stephen Dolan
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -1464,7 +1464,7 @@ jobs:
           DESCRIPTION: Unclutter your .profile
           URL: https://github.com/direnv/direnv
           MAINTAINERS: https://github.com/direnv/direnv
-          VENDOR: https://github.com/direnv/direnv
+          VENDOR: https://github.com/direnv
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -1537,14 +1537,14 @@ jobs:
           DEBUG: 1
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          IN_BINARY: bbl-*_linux_x86-64
+          IN_BINARY: bbl-*_linux_amd64
           OUT_BINARY: bbl
           NAME: bosh-bootloader
           LICENSE: apache2
           DESCRIPTION: Command line utility for standing up a BOSH director on an IAAS of your choice.
           URL: https://github.com/cloudfoundry/bosh-bootloader
           MAINTAINERS: https://github.com/cloudfoundry/bosh-bootloader/graphs/contributors
-          VENDOR: "Cloud Foundry Foundation"
+          VENDOR: Cloud Foundry Foundation
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -1588,7 +1588,7 @@ jobs:
           DESCRIPTION: CLI to vSphere
           URL: https://github.com/vmware/govmomi
           MAINTAINERS: https://github.com/vmware/govmomi/graphs/contributors
-          VENDOR: "VMWare"
+          VENDOR: VMWare
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
@@ -1928,7 +1928,7 @@ resources:
   type: github-release
   check_every: 6h
   source:
-    user: starkandwayne
+    user: cloudfoundry-community
     repository: safe
     access_token: (( grab meta.github.access_token ))
 
