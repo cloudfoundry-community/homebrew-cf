@@ -3,11 +3,11 @@ require "fileutils"
 class UaaCli < Formula
   homepage "https://github.com/cloudfoundry-incubator/uaa-cli"
 
-  v = "v0.21.0" # CI Managed
+  v = "v0.22.0" # CI Managed
   @@verNum = v.sub "v", ""
   url "https://github.com/cloudfoundry-incubator/uaa-cli/releases/download/#{@@verNum}/uaa-darwin-amd64-#{@@verNum}"
   version v
-  sha256 "7419ff82a375d5a0ef944220b6d86fed1314efe5e730f87053a92c80b48386b7" # CI Managed
+  sha256 "33eae67fe192f6409ef270bca7720e5987636e0941b9f3f72f813d44cf514bc9" # CI Managed
 
   def install
     FileUtils.mv("uaa-darwin-amd64-#{@@verNum}", "uaa")
