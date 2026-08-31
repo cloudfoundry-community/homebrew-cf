@@ -10,6 +10,7 @@ valuable in day-to-day operations with CF and Kubernetes.
 Tap the formula repository:
 ```plain
 brew tap cloudfoundry-community/cf
+brew trust cloudfoundry-community/cf
 ```
 
 
@@ -18,16 +19,16 @@ Current software offered:
 | Package | Description | Author | Source |
 | ------- | ----------- | ------ | ------ |
 eden      | CLI tool to interact with any Open Service Broker API                | Stark & Wayne     | [starkandwayne/eden][eden]
-genesis   | BOSH Deployment Paradigm                                             | Stark & Wayne     | [starkandwayne/genesis][genesis]
+genesis   | BOSH Deployment Paradigm                                             | FiveTwenty.io     | [fivetwenty-io/genesis][genesis]
 gotcha    | Small HTTP/HTTPS MITM proxy, to troubleshoot encrypted HTTP traffic  | Stark & Wayne     | [starkandwayne/gotcha][gotcha]
 govc      | vSphere CLI built on top of govmomi                                  | VMWare            | [vmware/govmomi][govmomi]
 kafka-service-broker | CLI tool to interact with Kafka/ZooKeeper OSB             | Stark & Wayne     | [starkandwayne/kafka-service-broker][kafka_svc_bkr]
 quaa      | Tool to quickly deploy/run the Cloud Foundry UAA locally, or to a remote platform/cloud | Stark & Wayne | [quaa][quaa]
 riff      | CLI tool that helps developers build and run functions using Knative | Pivotal           | [projectriff/riff][riff]
 safe      | CLI tool to interact with a Vault server                             | Stark & Wayne     | [starkandwayne/safe][safe]
-shield    | CLI tool to interact with SHIELD, a data protection offering         | Stark & Wayne     | [starkandwayne/shield][shield]
+shield    | CLI tool to interact with SHIELD, a data protection offering         | FiveTwenty.io     | [fivetwenty-io/shield][shield]
 spruce    | General purpose YAML & JSON merging tool                             | geoffranks et al. | [geoffranks/spruce][spruce]
-uaa-cli   | Experimental CLI for UAA written in Golang                           | Various           | [cloudfoundry-community/uaa-cli][uaa_cli]
+uaa-cli   | Experimental CLI for UAA written in Golang                           | Cloud Foundry     | [cloudfoundry-community/uaa-cli][uaa_cli]
 
 [eden]: https://github.com/starkandwayne/eden
 [genesis]: https://github.com/starkandwayne/genesis
@@ -56,6 +57,14 @@ version._
 
 This project automatically packages several CLI binaries as Debian packages as
 well. To add our APT repository to your OS:
+
+```plain
+wget -q https://raw.githubusercontent.com/cloudfoundry-community/homebrew-cf/master/public.key -O /etc/apt/keyrings/cloudfoundry-community.key
+echo "deb [signed-by=/etc/apt/keyrings/cloudfoundry-community.key] http://apt.community.cloudfoundry.org stable main" | tee /etc/apt/sources.list.d/cloudfoundry-community.list
+apt-get update
+```
+
+#### Older Debian releases (before 22.04)
 
 ```plain
 wget -q -O - https://raw.githubusercontent.com/cloudfoundry-community/homebrew-cf/master/public.key | apt-key add -
