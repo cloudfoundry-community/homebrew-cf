@@ -7,8 +7,8 @@ meta:
   github:
     owner: cloudfoundry-community
     repo: homebrew-cf
-    private_key: ((github.private-key))
-    access_token: ((github.access-token))
+    private_key: ((cloudfoundry-community-ci-bot-github.private_key))
+    access_token: ((cloudfoundry-community-ci-bot-github.access_token))
 
   debian:
     s3_bucket: apt.community.cloudfoundry.org
