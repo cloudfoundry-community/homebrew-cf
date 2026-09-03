@@ -8,8 +8,8 @@
   <p>When you find yourself on an Ubuntu/Debian machine and you just need your favourite CLIs.</p>
   <pre>apt-get update
 apt install gnupg wget -y
-wget -q -O - https://raw.githubusercontent.com/cloudfoundry-community/homebrew-cf/master/public.key | apt-key add -
-echo "deb http://apt.community.cloudfoundry.org stable main" | tee /etc/apt/sources.list.d/starkandwayne.list
+wget -q https://raw.githubusercontent.com/cloudfoundry-community/homebrew-cf/master/public.key -O /etc/apt/keyrings/cloudfoundry-community.key
+echo "deb [signed-by=/etc/apt/keyrings/cloudfoundry-community.key] http://apt.community.cloudfoundry.org stable main" | tee /etc/apt/sources.list.d/cloudfoundry-community.list
 apt-get update
 
 apt install spruce
@@ -46,12 +46,10 @@ apt install pivnet-cli
 
 apt install knctl
 
-apt install aliyun-cli
-
 apt install govc
 </pre>
 <p>These packages are automatically generated when their respective upstream projects publish new releases.</p>
 <p>The scripts for building these Debian packages are at <a href="https://github.com/cloudfoundry-community/homebrew-cf/tree/master/ci">https://github.com/cloudfoundry-community/homebrew-cf in /ci subfolder</a>. Pull requests for new packages and fixes are welcome.</p>
-<p>(Previously was Stark &amp; Wayne Community APT repository)
+<p>(Previously was Stark &amp; Wayne Community APT repository, now Cloud Foundry Community APT repository)
 </body>
 </html>
