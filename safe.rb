@@ -3,11 +3,11 @@ require "fileutils"
 class Safe < Formula
   homepage "https://github.com/cloudfoundry-community/safe"
 
-  v = "v1.23.0" # CI Managed
+  v = "v1.24.0" # CI Managed
   @@verNum = v.sub "v", ""
   url "https://github.com/cloudfoundry-community/safe/releases/download/#{v}/safe-#{v.gsub(/v/,"")}-darwin-amd64"
   version v
-  sha256 "48c80e5e1c13f13c0f585a18315ba33bcbf640090bf7dfdcaa9805f23a07a181" # CI Managed
+  sha256 "bb004de9e04af562bb3e99d39378c1db15d78c45142f3158c093e6577f68f63b" # CI Managed
 
   def install
     FileUtils.mv("safe-#{@@verNum}-darwin-amd64", "safe")
