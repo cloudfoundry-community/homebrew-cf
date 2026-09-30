@@ -20,7 +20,6 @@ Current software offered:
 | ------- | ----------- | ------ | ------ |
 genesis   | BOSH Deployment Paradigm                                             | FiveTwenty.io     | [genesis-community/genesis][genesis]
 govc      | vSphere CLI built on top of govmomi                                  | VMWare            | [vmware/govmomi][govmomi]
-kafka-service-broker | CLI tool to interact with Kafka/ZooKeeper OSB             | Stark & Wayne     | [starkandwayne/kafka-service-broker][kafka_svc_bkr]
 quaa      | Tool to quickly deploy/run the Cloud Foundry UAA locally, or to a remote platform/cloud | Stark & Wayne | [starkandwayne/quaa][quaa]
 riff      | CLI tool that helps developers build and run functions using Knative | Pivotal           | [projectriff/riff][riff]
 safe      | CLI tool to interact with a Vault server                             | FiveTwenty.io     | [cloudfoundry-community/safe][safe]
@@ -30,7 +29,6 @@ uaa-cli   | Experimental CLI for UAA written in Golang                          
 
 [genesis]: https://github.com/genesis-community/genesis
 [govmomi]: https://github.com/vmware/govmomi
-[kafka_svc_bkr]: https://github.com/starkandwayne/kafka-service-broker
 [quaa]: https://github.com/starkandwayne/quaa
 [riff]: https://github.com/projectriff/riff
 [safe]: https://github.com/cloudfoundry-community/safe
@@ -94,7 +92,6 @@ govc        | vSphere CLI built on top of govmomi                               
 hub         | CLI tool that wraps git in order to extend it with extra features           | GitHub        | [github/hub][hub]
 install-debs-in-order | Install Debian packages in order                                  | Stark & Wayne | [starkandwayne/install-debs-in-order][debs_in_order]
 jq          | Command-line JSON processor, like `sed` for JSON.                           | Stedolan      | [stedolan/jq][jq]
-kafka-service-broker | CLI tool to interact with Kafka/ZooKeeper OSB                      | Stark & Wayne | [starkandwayne/kafka-service-broker][kafka_svc_bkr]
 om          | CLI tool to deploy products with Ops Manager                                | Pivotal       | [pivotal-cf/om][om]
 pivnet-cli  | CLI tool to interact with the Pivotal Network                               | Pivotal       | [pivotal-cf/pivnet-cli][pivnet]
 quaa        | Tool to quickly deploy/run the Cloud Foundry UAA locally, or to a remote platform/cloud | Stark & Wayne | [starkandwayne/quaa][quaa]
