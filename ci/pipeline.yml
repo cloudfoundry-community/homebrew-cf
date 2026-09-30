@@ -777,7 +777,7 @@ jobs:
     - get: homebrew
       resource: homebrew
     - get: cf
-      resource: cf7-cli-linux
+      resource: cf8-cli-linux
       trigger: true
     - task: unpack-tgz
       config:
@@ -812,11 +812,11 @@ jobs:
           DEBUG: 1
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          IN_BINARY: cf7
+          IN_BINARY: cf8
           OUT_BINARY: cf
           NAME: cf-cli
           LICENSE: Apache2
-          DESCRIPTION: official command line client for Cloud Foundry v7
+          DESCRIPTION: official command line client for Cloud Foundry v8
           URL: https://docs.cloudfoundry.org
           MAINTAINERS: https://github.com/cloudfoundry/cli/graphs/contributors
           VENDOR: Cloud Foundry Foundation
