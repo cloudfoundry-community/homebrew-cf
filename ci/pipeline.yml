@@ -880,6 +880,7 @@ jobs:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
           BINARY: "uaa-darwin-amd64-$VERSION"
+          BINARY_ARM64: "uaa-darwin-arm64-$VERSION"
     - put: homebrew
       params:
         repository: pushme/homebrew
@@ -1668,7 +1669,7 @@ jobs:
     - get: govc
       resource: govc
       params:
-        globs: [govc_darwin_amd64.gz]
+        globs: [govc_Darwin_x86_64.tar.gz, govc_Darwin_arm64.tar.gz]
       trigger: true
     - task: update-homebrew
       config:
@@ -1687,7 +1688,8 @@ jobs:
         params:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          BINARY: "govc_darwin_amd64.gz"
+          BINARY: "govc_Darwin_x86_64.tar.gz"
+          BINARY_ARM64: "govc_Darwin_arm64.tar.gz"
     - put: homebrew
       params:
         repository: pushme/homebrew
