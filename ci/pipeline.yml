@@ -46,8 +46,6 @@ groups:
   - shield-debian
   - safe-homebrew
   - safe-debian
-  - eden-homebrew
-  - eden-debian
   - kafka-service-broker-homebrew
   - kafka-service-broker-debian
   - install-debs-in-order-debian
@@ -87,7 +85,6 @@ groups:
   - spruce-homebrew
   - shield-homebrew
   - safe-homebrew
-  - eden-homebrew
   - kafka-service-broker-homebrew
   - genesis-homebrew
   - uaa-cli-homebrew
@@ -102,7 +99,6 @@ groups:
   - spruce-debian
   - shield-debian
   - safe-debian
-  - eden-debian
   - kafka-service-broker-debian
   - install-debs-in-order-debian
   - genesis-debian
@@ -235,79 +231,6 @@ jobs:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
           BINARY: "kafka-service-broker-darwin-amd64"
-    - put: homebrew
-      params:
-        repository: pushme/homebrew
-        rebase: true
-
-  - name: eden-debian
-    public: true
-    serial_groups: [apt]
-    plan:
-    - get: homebrew
-      resource: homebrew
-    - get: homebrew-public-key
-      trigger: true
-    - get: eden
-      resource: eden
-      trigger: true
-    - task: create-debian
-      config:
-        platform: linux
-        image_resource: (( grab meta.image ))
-        inputs:
-        - name: homebrew
-        - name: eden
-          path: recipe
-        run:
-          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
-        params:
-          DEBUG: 1
-          REPO_ROOT: homebrew
-          REPO_OUT: pushme
-          IN_BINARY: "eden-linux-amd64"
-          OUT_BINARY: eden
-          NAME: eden
-          LICENSE: MIT
-          DESCRIPTION: CLI to any Open Service Broker API
-          URL: https://github.com/starkandwayne/eden
-          MAINTAINERS: https://github.com/starkandwayne/eden/graphs/contributors
-          VENDOR: Stark & Wayne LLC
-          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
-          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
-          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
-          S3_REGION: (( grab meta.debian.region ))
-          GPG_ID: (( grab meta.gpg.id ))
-          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
-          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
-
-  - name: eden-homebrew
-    public: true
-    serial: true
-    plan:
-    - get: homebrew
-      resource: homebrew
-    - get: eden
-      resource: eden
-      trigger: true
-    - task: update-homebrew
-      config:
-        platform: linux
-        image_resource: (( grab meta.image ))
-        inputs:
-        - name: homebrew
-        - name: eden
-          path: recipe
-        outputs:
-        - name: pushme
-        run:
-          path: "homebrew/ci/scripts/update-homebrew.sh"
-          args:
-          - eden.rb
-        params:
-          REPO_ROOT: homebrew
-          REPO_OUT: pushme
-          BINARY: "eden-darwin-amd64"
     - put: homebrew
       params:
         repository: pushme/homebrew
@@ -1886,14 +1809,6 @@ resources:
   check_every: 6h
   source:
     project: vault
-
-- name: eden
-  type: github-release
-  check_every: 6h
-  source:
-    user: starkandwayne
-    repository: eden
-    access_token: (( grab meta.github.access_token ))
 
 - name: genesis
   type: github-release
