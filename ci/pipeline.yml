@@ -711,6 +711,7 @@ jobs:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
           BINARY: "shield-darwin-amd64"
+          BINARY_ARM64: "shield-darwin-arm64"
     - put: homebrew
       params:
         repository: pushme/homebrew
@@ -1365,7 +1366,8 @@ jobs:
         params:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          BINARY: om-darwin-$VERSION
+          BINARY: om-darwin-amd64-$VERSION
+          BINARY_ARM64: om-darwin-arm64-$VERSION
     - put: homebrew
       params:
         repository: pushme/homebrew
@@ -1845,7 +1847,7 @@ jobs:
     - get: yj
       resource: yj
       trigger: true
-      params: {globs: [yj-macos]}
+      params: {globs: [yj-macos-amd64, yj-macos-arm64]}
     - task: update-homebrew
       config:
         platform: linux
@@ -1863,7 +1865,8 @@ jobs:
         params:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          BINARY: "yj-macos"
+          BINARY: "yj-macos-amd64"
+          BINARY_ARM64: "yj-macos-arm64"
     - put: homebrew
       params:
         repository: pushme/homebrew
