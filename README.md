@@ -21,7 +21,6 @@ Current software offered:
 genesis   | BOSH Deployment Paradigm                                             | FiveTwenty.io     | [genesis-community/genesis][genesis]
 govc      | vSphere CLI built on top of govmomi                                  | VMWare            | [vmware/govmomi][govmomi]
 quaa      | Tool to quickly deploy/run the Cloud Foundry UAA locally, or to a remote platform/cloud | Stark & Wayne | [starkandwayne/quaa][quaa]
-riff      | CLI tool that helps developers build and run functions using Knative | Pivotal           | [projectriff/riff][riff]
 safe      | CLI tool to interact with a Vault server                             | FiveTwenty.io     | [cloudfoundry-community/safe][safe]
 shield    | CLI tool to interact with SHIELD, a data protection offering         | FiveTwenty.io     | [fivetwenty-io/shield][shield]
 spruce    | General purpose YAML & JSON merging tool                             | geoffranks et al. | [geoffranks/spruce][spruce]
@@ -30,7 +29,6 @@ uaa-cli   | Experimental CLI for UAA written in Golang                          
 [genesis]: https://github.com/genesis-community/genesis
 [govmomi]: https://github.com/vmware/govmomi
 [quaa]: https://github.com/starkandwayne/quaa
-[riff]: https://github.com/projectriff/riff
 [safe]: https://github.com/cloudfoundry-community/safe
 [shield]: https://github.com/shieldproject/shield
 [spruce]: https://github.com/geoffranks/spruce
@@ -95,7 +93,6 @@ jq          | Command-line JSON processor, like `sed` for JSON.                 
 om          | CLI tool to deploy products with Ops Manager                                | Pivotal       | [pivotal-cf/om][om]
 pivnet-cli  | CLI tool to interact with the Pivotal Network                               | Pivotal       | [pivotal-cf/pivnet-cli][pivnet]
 quaa        | Tool to quickly deploy/run the Cloud Foundry UAA locally, or to a remote platform/cloud | Stark & Wayne | [starkandwayne/quaa][quaa]
-riff        | CLI tool that helps developers build and run functions using Knative          | Pivotal       | [projectriff/riff][riff]
 safe        | CLI tool to interact with a Vault server                                      | FiveTwenty.io | [starkandwayne/safe][safe]
 shield      | CLI tool to interact with SHIELD, a data protection offering                  | FiveTwenty.io | [starkandwayne/shield][shield]
 spruce      | General purpose YAML & JSON merging tool                                  | geoffranks et al. | [geoffranks/spruce][spruce]
