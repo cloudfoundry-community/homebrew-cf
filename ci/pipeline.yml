@@ -125,6 +125,7 @@ jobs:
     - get: install-debs-in-order
       resource: install-debs-in-order
       trigger: true
+      params: {globs: [install-debs-in-order-linux-amd64]}
     - task: create-debian
       config:
         platform: linux
@@ -164,6 +165,7 @@ jobs:
     - get: safe
       resource: safe
       trigger: true
+      params: {globs: [safe-*-linux-amd64]}
     - task: create-debian
       config:
         platform: linux
@@ -277,6 +279,7 @@ jobs:
     - get: genesis
       resource: genesis
       trigger: true
+      params: {globs: [genesis]}
     - task: create-debian
       config:
         platform: linux
@@ -349,6 +352,7 @@ jobs:
     - get: spruce
       resource: spruce
       trigger: true
+      params: {globs: [spruce-linux-amd64]}
     - task: create-debian
       config:
         platform: linux
@@ -421,6 +425,7 @@ jobs:
     - get: shield
       resource: shield
       trigger: true
+      params: {globs: [shield-linux-amd64]}
     - task: create-debian
       config:
         platform: linux
@@ -533,6 +538,7 @@ jobs:
     - get: credhub
       resource: credhub-cli
       trigger: true
+      params: {globs: [credhub-linux-amd64-*.tgz]}
     - task: unpack-tgz
       config:
         platform: linux
@@ -591,6 +597,7 @@ jobs:
     - get: uaa-cli
       resource: uaa-cli
       trigger: true
+      params: {globs: [uaa-linux-amd64-*]}
     - task: create-debian
       config:
         platform: linux
@@ -1004,6 +1011,7 @@ jobs:
     - get: jq
       resource: jq
       trigger: true
+      params: {globs: [jq-linux64]}
     - task: create-debian
       config:
         platform: linux
@@ -1076,6 +1084,7 @@ jobs:
     - get: om
       resource: om
       trigger: true
+      params: {globs: ["om-linux-amd64-*[0-9]"]}
     - task: create-debian
       config:
         platform: linux
@@ -1115,6 +1124,7 @@ jobs:
     - get: pivnet-cli
       resource: pivnet-cli
       trigger: true
+      params: {globs: [pivnet-linux-amd64-*]}
     - task: create-debian
       config:
         platform: linux
@@ -1279,6 +1289,7 @@ jobs:
     - get: bosh-bootloader
       resource: bosh-bootloader
       trigger: true
+      params: {globs: [bbl-*_linux_amd64]}
     - task: create-debian
       config:
         platform: linux
@@ -1432,6 +1443,7 @@ jobs:
     - get: pack
       resource: pack
       trigger: true
+      params: {globs: [pack-*-linux.tgz]}
     - task: create-debian
       config:
         platform: linux
@@ -1471,6 +1483,7 @@ jobs:
     - get: minica
       resource: minica
       trigger: true
+      params: {globs: [minica-linux-amd64]}
     - task: create-debian
       config:
         platform: linux
