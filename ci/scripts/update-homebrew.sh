@@ -50,13 +50,24 @@ fi
 # change to the root of the homebrew repo
 pushd ${REPO_ROOT}
 
-SHASUM=$(shasum -a 256 ../recipe/${BINARY} | cut -d " " -f1)
+# Fail instead of writing an empty sha256 when a release renames its assets
+function sha_of() {
+  local f
+  f=$(ls ../recipe/$1 2>/dev/null | head -n1)
+  if [[ -z "$f" ]]; then
+    echo >&2 "Binary '$1' not found in recipe/ (asset renamed upstream?)"
+    exit 1
+  fi
+  shasum -a 256 "$f" | cut -d " " -f1
+}
+
+SHASUM=$(sha_of "${BINARY}")
 
 echo ">> Updating $formula with new version/shasum"
 auto_sed "s/v = \\\".*\\\" # CI Managed/v = \\\"v${VERSION}\\\" # CI Managed/" $formula
 auto_sed "s/sha256 \\\".*\\\" # CI Managed$/sha256 \\\"${SHASUM}\\\" # CI Managed/" $formula
 if [[ -n "${BINARY_ARM64}" ]]; then
-  SHASUM_ARM64=$(shasum -a 256 ../recipe/${BINARY_ARM64} | cut -d " " -f1)
+  SHASUM_ARM64=$(sha_of "${BINARY_ARM64}")
   auto_sed "s/sha256 \\\".*\\\" # CI Managed arm64$/sha256 \\\"${SHASUM_ARM64}\\\" # CI Managed arm64/" $formula
 fi
 
