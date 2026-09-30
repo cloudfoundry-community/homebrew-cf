@@ -383,6 +383,7 @@ jobs:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
           BINARY: "safe-*-darwin-amd64"
+          BINARY_ARM64: "safe-*-darwin-arm64"
     - put: homebrew
       params:
         repository: pushme/homebrew
@@ -638,6 +639,7 @@ jobs:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
           BINARY: "spruce-darwin-amd64"
+          BINARY_ARM64: "spruce-darwin-arm64"
     - put: homebrew
       params:
         repository: pushme/homebrew

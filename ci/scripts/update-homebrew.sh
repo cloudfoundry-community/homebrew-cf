@@ -12,7 +12,8 @@ shift
 # This script is run from a concourse pipeline (per ci/pipeline.yml).
 #
 # It is resompsible for bumping the version + shasum in the homebrew-cf repo
-# to get the new version of the binary for darwin_amd64.
+# to get the new version of the binary for darwin_amd64, and for darwin_arm64
+# when BINARY_ARM64 is set (its sha256 line is marked "# CI Managed arm64").
 
 function auto_sed() {
   cmd=$1
@@ -30,6 +31,7 @@ echo ">> Retrieving version + sha256 metadata"
 VERSION=$(cat recipe/version)
 # Allow VERSION to be used in BINARY
 BINARY=$(eval echo "${BINARY}")
+BINARY_ARM64=$(eval echo "${BINARY_ARM64:-}")
 
 if [[ -z "${VERSION:-}" ]]; then
   echo >&2 "VERSION not found in `recipe/version`"
@@ -52,7 +54,11 @@ SHASUM=$(shasum -a 256 ../recipe/${BINARY} | cut -d " " -f1)
 
 echo ">> Updating $formula with new version/shasum"
 auto_sed "s/v = \\\".*\\\" # CI Managed/v = \\\"v${VERSION}\\\" # CI Managed/" $formula
-auto_sed "s/sha256 \\\".*\\\" # CI Managed/sha256 \\\"${SHASUM}\\\" # CI Managed/" $formula
+auto_sed "s/sha256 \\\".*\\\" # CI Managed$/sha256 \\\"${SHASUM}\\\" # CI Managed/" $formula
+if [[ -n "${BINARY_ARM64}" ]]; then
+  SHASUM_ARM64=$(shasum -a 256 ../recipe/${BINARY_ARM64} | cut -d " " -f1)
+  auto_sed "s/sha256 \\\".*\\\" # CI Managed arm64$/sha256 \\\"${SHASUM_ARM64}\\\" # CI Managed arm64/" $formula
+fi
 
 if [[ "$(git status -s)X" != "X" ]]; then
   set +e
