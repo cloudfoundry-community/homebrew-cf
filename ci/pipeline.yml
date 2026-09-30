@@ -51,8 +51,6 @@ groups:
   - kafka-service-broker-homebrew
   - kafka-service-broker-debian
   - install-debs-in-order-debian
-  - gotcha-homebrew
-  - gotcha-debian
   - genesis-homebrew
   - genesis-debian
   - bosh-cli-debian
@@ -91,7 +89,6 @@ groups:
   - safe-homebrew
   - eden-homebrew
   - kafka-service-broker-homebrew
-  - gotcha-homebrew
   - genesis-homebrew
   - uaa-cli-homebrew
   - govc-homebrew
@@ -108,7 +105,6 @@ groups:
   - eden-debian
   - kafka-service-broker-debian
   - install-debs-in-order-debian
-  - gotcha-debian
   - genesis-debian
   - bosh-cli-debian
   - credhub-cli-debian
@@ -429,77 +425,6 @@ jobs:
           GPG_ID: (( grab meta.gpg.id ))
           GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
           GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
-
-  - name: gotcha-debian
-    public: true
-    serial_groups: [apt]
-    plan:
-    - get: homebrew
-      resource: homebrew
-    - get: gotcha
-      resource: gotcha
-      trigger: true
-    - task: create-debian
-      config:
-        platform: linux
-        image_resource: (( grab meta.image ))
-        inputs:
-        - name: homebrew
-        - name: gotcha
-          path: recipe
-        run:
-          path: "homebrew/ci/scripts/create-debian-pkg-from-binary.sh"
-        params:
-          DEBUG: 1
-          REPO_ROOT: homebrew
-          REPO_OUT: pushme
-          IN_BINARY: "gotcha-linux-amd64"
-          OUT_BINARY: gotcha
-          NAME: gotcha
-          LICENSE: MIT
-          DESCRIPTION: Debugging MiTM HTTP Proxy
-          URL: https://github.com/starkandwayne/gotcha
-          MAINTAINERS: https://github.com/starkandwayne/gotcha/graphs/contributors
-          VENDOR: Stark & Wayne LLC
-          RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
-          AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
-          AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
-          S3_REGION: (( grab meta.debian.region ))
-          GPG_ID: (( grab meta.gpg.id ))
-          GPG_PUBLIC_KEY: (( grab meta.gpg.public_key ))
-          GPG_PRIVATE_KEY: (( grab meta.gpg.private_key ))
-
-  - name: gotcha-homebrew
-    public: true
-    serial: true
-    plan:
-    - get: homebrew
-      resource: homebrew
-    - get: gotcha
-      resource: gotcha
-      trigger: true
-    - task: update-homebrew
-      config:
-        platform: linux
-        image_resource: (( grab meta.image ))
-        inputs:
-        - name: homebrew
-        - name: gotcha
-          path: recipe
-        outputs:
-        - name: pushme
-        run:
-          path: "homebrew/ci/scripts/update-homebrew.sh"
-          args:
-          - gotcha.rb
-        params:
-          REPO_ROOT: homebrew
-          REPO_OUT: pushme
-          BINARY: "gotcha-darwin-amd64"
-    - put: homebrew
-      params:
-        repository: pushme/homebrew
-        rebase: true
 
   - name: genesis-debian
     public: true
@@ -1968,14 +1893,6 @@ resources:
   source:
     user: starkandwayne
     repository: eden
-    access_token: (( grab meta.github.access_token ))
-
-- name: gotcha
-  type: github-release
-  check_every: 6h
-  source:
-    user: starkandwayne
-    repository: gotcha
     access_token: (( grab meta.github.access_token ))
 
 - name: genesis
