@@ -21,6 +21,23 @@ need_command() {
 	fi
 }
 
+# Targets may be named <concourse>/<team> or <concourse>@<team>; use
+# whichever spelling is a defined fly target, preferring the one given.
+resolve_target() {
+	local t=$1 alt c
+	case $t in
+		*/*) alt=${t/\//@} ;;
+		*@*) alt=${t/@//} ;;
+	esac
+	for c in "$t" ${alt:+"$alt"}; do
+		if $fly_cmd targets 2>/dev/null | awk '{print $1}' | grep -qxF "$c"; then
+			echo "$c"
+			return
+		fi
+	done
+	echo "$t"
+}
+
 cd $(dirname $BASH_SOURCE[0])
 echo "Working in $(pwd)"
 need_command spruce
@@ -47,7 +64,7 @@ fi
 TARGET_FROM_SETTINGS=$(spruce json .deploy.yml | jq -r '.meta.target // ""')
 if [[ -z ${CONCOURSE_TARGET} ]]; then
   TARGET=${TARGET_FROM_SETTINGS}
-elif [[ "$CONCOURSE_TARGET" != "$TARGET_FROM_SETTINGS" ]]
+elif [[ "${CONCOURSE_TARGET/\//@}" != "${TARGET_FROM_SETTINGS/\//@}" ]]
 then
   echo >&2 "Target in {$settings_file} differs from target in \$CONCOURSE_TARGET"
   echo >&2 "  \$CONCOURSE_TARGET: $CONCOURSE_TARGET"
@@ -63,6 +80,7 @@ if [[ -z ${TARGET} ]]; then
 fi
 
 fly_cmd="${FLY_CMD:-fly}"
+TARGET=$(resolve_target "$TARGET")
 
 set +x
 $fly_cmd --target ${TARGET} set-pipeline     --pipeline ${PIPELINE} --config .deploy.yml $@
