@@ -18,7 +18,6 @@ Current software offered:
 
 | Package | Description | Author | Source |
 | ------- | ----------- | ------ | ------ |
-eden      | CLI tool to interact with any Open Service Broker API                | Stark & Wayne     | [starkandwayne/eden][eden]
 genesis   | BOSH Deployment Paradigm                                             | FiveTwenty.io     | [genesis-community/genesis][genesis]
 govc      | vSphere CLI built on top of govmomi                                  | VMWare            | [vmware/govmomi][govmomi]
 kafka-service-broker | CLI tool to interact with Kafka/ZooKeeper OSB             | Stark & Wayne     | [starkandwayne/kafka-service-broker][kafka_svc_bkr]
@@ -29,7 +28,6 @@ shield    | CLI tool to interact with SHIELD, a data protection offering        
 spruce    | General purpose YAML & JSON merging tool                             | geoffranks et al. | [geoffranks/spruce][spruce]
 uaa-cli   | Experimental CLI for UAA written in Golang                           | Cloud Foundry     | [cloudfoundry-community/uaa-cli][uaa_cli]
 
-[eden]: https://github.com/starkandwayne/eden
 [genesis]: https://github.com/genesis-community/genesis
 [govmomi]: https://github.com/vmware/govmomi
 [kafka_svc_bkr]: https://github.com/starkandwayne/kafka-service-broker
@@ -84,7 +82,6 @@ The following packages are provided by the APT repository:
 | --------- | ----------- | ------ | ------ |
 bosh-cli    | CLI tool to interact with a BOSH director                                   | Cloudfoundry  | [cloudfoundry/bosh-cli][bosh_cli]
 bosh-bootloader | CLI tool for standing up a BOSH director                                | Cloudfoundry  | [cloudfoundry/bosh-bootloader][bbl]
-eden        | CLI tool to interact with any Open Service Broker API                       | Stark & Wayne | [starkandwayne/eden][eden]
 certstrap   | Tools to bootstrap CAs, certificate requests, and signed certificates.      | Square        | [square/certstrap][certstrap]
 cf-cli      | [currently v6, PRs welcome] CLI tool to interact with the Cloudfoundry API  | Cloudfoundry  | [cloudfoundry/cli][cf_cli]
 cf6-cli     | legacy v6 CLI tool to interact with the Cloudfoundry API                    | Cloudfoundry  | [cloudfoundry/cli][cf_cli]
