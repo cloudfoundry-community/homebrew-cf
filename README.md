@@ -20,7 +20,6 @@ Current software offered:
 | ------- | ----------- | ------ | ------ |
 eden      | CLI tool to interact with any Open Service Broker API                | Stark & Wayne     | [starkandwayne/eden][eden]
 genesis   | BOSH Deployment Paradigm                                             | FiveTwenty.io     | [genesis-community/genesis][genesis]
-gotcha    | Small HTTP/HTTPS MITM proxy, to troubleshoot encrypted HTTP traffic  | Stark & Wayne     | [starkandwayne/gotcha][gotcha]
 govc      | vSphere CLI built on top of govmomi                                  | VMWare            | [vmware/govmomi][govmomi]
 kafka-service-broker | CLI tool to interact with Kafka/ZooKeeper OSB             | Stark & Wayne     | [starkandwayne/kafka-service-broker][kafka_svc_bkr]
 quaa      | Tool to quickly deploy/run the Cloud Foundry UAA locally, or to a remote platform/cloud | Stark & Wayne | [starkandwayne/quaa][quaa]
@@ -32,7 +31,6 @@ uaa-cli   | Experimental CLI for UAA written in Golang                          
 
 [eden]: https://github.com/starkandwayne/eden
 [genesis]: https://github.com/genesis-community/genesis
-[gotcha]: https://github.com/starkandwayne/gotcha
 [govmomi]: https://github.com/vmware/govmomi
 [kafka_svc_bkr]: https://github.com/starkandwayne/kafka-service-broker
 [quaa]: https://github.com/starkandwayne/quaa
@@ -95,7 +93,6 @@ cf8-cli     | v8 CLI tool to interact with the Cloudfoundry API                 
 credhub-cli | CLI tool to interact with a CredHub server                                  | Cloudfoundry  | [cloudfoundry-community/credhub-cli][credhub_cli]
 direnv      | Environment switcher for the shell                                          | direnv        | [direnv/direnv][direnv]
 genesis     | BOSH Deployment Paradigm                                                    | FiveTwenty.io | [genesis-community/genesis][genesis]
-gotcha      | Small HTTP/HTTPS MITM proxy, to troubleshoot encrypted HTTP traffic         | Stark & Wayne | [starkandwayne/gotcha][gotcha]
 govc        | vSphere CLI built on top of govmomi                                         | VMWare        | [vmware/govmomi][govmomi]
 hub         | CLI tool that wraps git in order to extend it with extra features           | GitHub        | [github/hub][hub]
 install-debs-in-order | Install Debian packages in order                                  | Stark & Wayne | [starkandwayne/install-debs-in-order][debs_in_order]
