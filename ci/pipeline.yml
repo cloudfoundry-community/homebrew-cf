@@ -1011,7 +1011,7 @@ jobs:
     - get: jq
       resource: jq
       trigger: true
-      params: {globs: [jq-linux64]}
+      params: {globs: [jq-linux-amd64]}
     - task: create-debian
       config:
         platform: linux
@@ -1026,14 +1026,14 @@ jobs:
           DEBUG: 1
           REPO_ROOT: homebrew
           REPO_OUT: pushme
-          IN_BINARY: jq-linux64
+          IN_BINARY: jq-linux-amd64
           OUT_BINARY: jq
           NAME: jq
           LICENSE: MIT
           DESCRIPTION: lightweight and flexible command-line JSON processor
-          URL: https://stedolan.github.io/jq/
-          MAINTAINERS: https://github.com/stedolan/jq/graphs/contributors
-          VENDOR: Stephen Dolan
+          URL: https://jqlang.org/
+          MAINTAINERS: https://github.com/jqlang/jq/graphs/contributors
+          VENDOR: jqlang
           RELEASE_BUCKET: (( grab meta.debian.s3_bucket ))
           AWS_ACCESS_KEY: (( grab meta.debian.aws_access_key ))
           AWS_SECRET_KEY: (( grab meta.debian.aws_secret_key ))
