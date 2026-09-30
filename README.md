@@ -80,8 +80,6 @@ bosh-cli    | CLI tool to interact with a BOSH director                         
 bosh-bootloader | CLI tool for standing up a BOSH director                                | Cloudfoundry  | [cloudfoundry/bosh-bootloader][bbl]
 certstrap   | Tools to bootstrap CAs, certificate requests, and signed certificates.      | Square        | [square/certstrap][certstrap]
 cf-cli      | [currently v8] CLI tool to interact with the Cloudfoundry API               | Cloudfoundry  | [cloudfoundry/cli][cf_cli]
-cf6-cli     | legacy v6 CLI tool to interact with the Cloudfoundry API                    | Cloudfoundry  | [cloudfoundry/cli][cf_cli]
-cf7-cli     | v7 CLI tool to interact with the Cloudfoundry API                           | Cloudfoundry  | [cloudfoundry/cli][cf_cli]
 cf8-cli     | v8 CLI tool to interact with the Cloudfoundry API                           | Cloudfoundry  | [cloudfoundry/cli][cf_cli]
 credhub-cli | CLI tool to interact with a CredHub server                                  | Cloudfoundry  | [cloudfoundry-community/credhub-cli][credhub_cli]
 direnv      | Environment switcher for the shell                                          | direnv        | [direnv/direnv][direnv]
