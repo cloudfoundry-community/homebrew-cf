@@ -79,7 +79,7 @@ The following packages are provided by the APT repository:
 bosh-cli    | CLI tool to interact with a BOSH director                                   | Cloudfoundry  | [cloudfoundry/bosh-cli][bosh_cli]
 bosh-bootloader | CLI tool for standing up a BOSH director                                | Cloudfoundry  | [cloudfoundry/bosh-bootloader][bbl]
 certstrap   | Tools to bootstrap CAs, certificate requests, and signed certificates.      | Square        | [square/certstrap][certstrap]
-cf-cli      | [currently v6, PRs welcome] CLI tool to interact with the Cloudfoundry API  | Cloudfoundry  | [cloudfoundry/cli][cf_cli]
+cf-cli      | [currently v8] CLI tool to interact with the Cloudfoundry API               | Cloudfoundry  | [cloudfoundry/cli][cf_cli]
 cf6-cli     | legacy v6 CLI tool to interact with the Cloudfoundry API                    | Cloudfoundry  | [cloudfoundry/cli][cf_cli]
 cf7-cli     | v7 CLI tool to interact with the Cloudfoundry API                           | Cloudfoundry  | [cloudfoundry/cli][cf_cli]
 cf8-cli     | v8 CLI tool to interact with the Cloudfoundry API                           | Cloudfoundry  | [cloudfoundry/cli][cf_cli]
