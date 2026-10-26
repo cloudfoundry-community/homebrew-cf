@@ -1,15 +1,15 @@
 class Govc < Formula
   homepage "https://github.com/vmware/govmomi"
 
-  v = "v0.56.1" # CI Managed
+  v = "v0.56.2" # CI Managed
   version v
 
   if Hardware::CPU.arm?
     url "https://github.com/vmware/govmomi/releases/download/#{v}/govc_Darwin_arm64.tar.gz"
-    sha256 "3ec42dde25a14f559e95538de0aacb71a7bca983eed47bbc495f4f7d9f82e569" # CI Managed arm64
+    sha256 "d5b85abf6e2d8ef602aedb35110567d58016edf5bc4ce13f25fb1a4af31957c3" # CI Managed arm64
   else
     url "https://github.com/vmware/govmomi/releases/download/#{v}/govc_Darwin_x86_64.tar.gz"
-    sha256 "1b7ccc4a84516a01ed2b56efb8d4aca6e33de2c4aa50b7313527e7428286eaa5" # CI Managed
+    sha256 "665233e84940a659596c84e3ce8bb79ec7e1e142f55cb696974b37db45b2a188" # CI Managed
   end
 
   def install
