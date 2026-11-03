@@ -3,15 +3,15 @@ require "fileutils"
 class Spruce < Formula
   homepage "https://github.com/geofffranks/spruce"
 
-  v = "v1.35.24" # CI Managed
+  v = "v1.35.25" # CI Managed
   version v
 
   if Hardware::CPU.arm?
     url "https://github.com/geofffranks/spruce/releases/download/#{v}/spruce-darwin-arm64"
-    sha256 "9fb908fcd2059bc613180cea9bd1a82df931cb65574bcd6e74d4aad13c730d73" # CI Managed arm64
+    sha256 "d5f8e18108dd4c08a7d271a5f716ded24d7dbc20517c1df2c6d1f95477955b73" # CI Managed arm64
   else
     url "https://github.com/geofffranks/spruce/releases/download/#{v}/spruce-darwin-amd64"
-    sha256 "b2ca799f3cc9baa56679af9fc8a1f7176b583ae7f00541cdc9bd9fe540ae418a" # CI Managed
+    sha256 "34bb09e9a7b38869b0447ee1a21cf321893919afb98360772e9e2b798a14dfff" # CI Managed
   end
 
   def install
